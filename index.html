@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="https://gamberine.com.br/wp-content/uploads/gamberine_favicon.png">
+<title>Gamberine - Quina : Análise/Apostas (30/09/2025)</title>
+<link rel="stylesheet" href="https://gamberine.com.br/arquivos_publicos/gamb_variables_geral.css">
+<meta name="description" content="Análise prévia, tabela de apostas e marcador automático do resultado da Quina.">
+<style>
+  :root {
+    --bg:#0b1020; --card:#111832; --accent:#36b37e; --muted:#c7cedf; --text:#f1f5ff; --hit:#ffe08a; --drawn:#3b82f6;
+    --danger:#ef4444; --ok:#22c55e;
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial; background:var(--bg); color:var(--text);}
+  header {
+    padding: 20px;
+    background: linear-gradient(90deg, #18233f, #0f172a);
+    border-bottom: 1px solid #223;
+    text-align: center;
+  }
+  h1 { margin:0 0 6px; font-size:20px; }
+  .sub { opacity:.8; font-size:13px; }
+  main { max-width:1100px; margin:24px auto; padding:0 16px; }
+  .card { background:var(--card); border:1px solid #223; border-radius:14px; padding:16px; margin-bottom:16px; }
+  .grid { display:grid; gap:16px; grid-template-columns: 1fr; }
+  @media (min-width:900px) { .grid { grid-template-columns: 1fr 1fr; } }
+  .badge { display:inline-block; padding:2px 8px; border-radius:999px; background:#1f2937; color:#e5e7eb; font-size:12px; margin-right:6px; }
+  .accent { color:var(--accent); }
+  table { width:100%; border-collapse:collapse; }
+  th, td { border:1px solid #2a355d; padding:8px; text-align:center; font-variant-numeric: tabular-nums; }
+  th { background:#0f1a36; position:sticky; top:0; z-index:1; }
+  tbody tr:nth-child(odd) { background:#0e1530; }
+  .num { display:inline-flex; width:34px; height:34px; align-items:center; justify-content:center; border-radius:8px; background:#0b1228; border:1px solid #2a355d; margin:2px; }
+  .num.drawn { background:var(--drawn); color:#fff; border-color:#1e3a8a; }
+  .num.hit { background: var(--primaryColor); color: #111; border-color: var(--primaryColorHover); font-weight: 700; }
+  .controls { display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+  input[type=text] { padding:10px 12px; background:#0b1228; color:#e5e7eb; border:1px solid #2a355d; border-radius:10px; width:280px; }
+  button { padding:10px 14px; border:1px solid #2a355d; background:#0b1228; color:#e5e7eb; border-radius:10px; cursor:pointer; }
+  button:hover { border-color:#3b82f6; }
+  .note { font-size:12px; opacity:.8; }
+  .warn { color: #fca5a5; }
+  .ok { color: #86efac; }
+  footer { padding:20px; text-align:center; opacity:.7; }
+
+  /* Accordion styles */
+  details.accordion{background:var(--card);border:1px solid #223;border-radius:14px;margin-bottom:16px;padding:0 16px;}
+  details.accordion summary{list-style:none;cursor:pointer;padding:16px 0;user-select:none;display:flex;align-items:center;gap:8px;}
+  details.accordion summary::-webkit-details-marker{display:none;}
+  details.accordion summary h2{margin:0;font-size:18px;}
+  details.accordion .accordion-content{padding:0 0 16px 0;}
+  details.accordion summary::after{content:"▸";margin-left:auto;opacity:.7;}
+  details.accordion[open] summary::after{content:"▾";}
+
+  /* Responsivo pedido */
+  @media (max-width: 1280px) {
+    .card {
+      background: var(--card);
+      border: 1px solid #223;
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+    .controls {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>Gamberine - Quina:Análise/Apostas</h1>
+  <div class="sub">Data do sorteio: <strong>30/09/2025</strong></div>
+</header>
+<main>
+  <details class="card accordion">
+    <summary><h2>Parte 1 — Análise prévia</h2></summary>
+    <div class="accordion-content">
+      <p>
+        Universo (01–80). Combinações possíveis C(80,5)=<strong>24.040.016</strong>.
+        Probabilidades por jogo: quina 1/24.040.016 • quadra 1/64.106 • terno 1/866 • duque 1/36.
+      </p>
+      <p>
+        Apostas informadas: <span class="badge">40 de 46 recebidas</span>
+        <span class="badge">faltam: 37, 38, 39, 40, 41, 42</span>
+      </p>
+      <ul>
+        <li>Concentração nas dezenas: 31, 32, 35, 37 e na faixa 70–78.</li>
+        <li>Com 46 jogos, chance agregada teórica de quina ≈ 46/24.040.016 (≈ 1 em 522.000).</li>
+        <li>Expectativa realista: ao menos um <strong>terno</strong>; <em>quadra</em> rara porém possível.</li>
+      </ul>
+      <div class="note">Observação: este arquivo funciona offline. Quando o resultado sair, digite as 5 dezenas sorteadas abaixo para destacar acertos e somar pontos automaticamente.</div>
+    </div>
+  </details>
+
+  <section class="card">
+    <h2>Marcar resultado</h2>
+    <div class="controls">
+      <label for="drawn">Insira aqui os 05 números sorteados para analisar o resultado</label>
+      <input id="drawn" type="text" placeholder="ex.: 02,16,31,54,78">
+      <button class="btn btnPrimary" onclick="applyDrawn()">Aplicar</button>
+      <button onclick="clearDrawn()" class="btn btnSecondary">Limpar</button>
+      <button onclick="copyResultLink()">Gerar & copiar link com resultado</button>
+      <span id="summary" class="badge">Aguardando...</span>
+    </div>
+    <div class="note">Dica: após aplicar, o link com parâmetro <code>?d=</code> abrirá a página já marcada em qualquer navegador.</div>
+  </section>
+
+  <section class="card">
+    <h2>Tabela de apostas</h2>
+    <div class="note">Bloco 1: recebi até #36. Linhas #37–#42 ausentes (marcadas abaixo). Bloco 2: 4 apostas extras (A#01–A#04).</div>
+    <table id="bets">
+      <thead>
+        <tr><th>#</th><th>Dezenas</th><th>Acertos</th></tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="card">
+    <h2>Como publicar</h2>
+    <ol>
+      <li>Crie um repositório no GitHub (ex.: <code>quina-2025-09-30</code>).</li>
+      <li>Envie este <code>index.html</code> para a branch <code>main</code>.</li>
+      <li>Em <em>Settings → Pages</em>: <strong>Build and deployment → Source: Deploy from a branch</strong>; Branch: <code>main</code>; Folder: <code>/ (root)</code>. Salve.</li>
+      <li>O seu site ficará disponível em: <code>https://&lt;seu-usuario&gt;.github.io/quina-2025-09-30/</code></li>
+    </ol>
+  </section>
+</main>
+
+<footer>© 2025 — Gamberine</footer>
+
+<script>
+// === Dados das apostas ===
+const bets = {
+  primeiro: {
+    1:[31,32,34,35,37],2:[2,4,5,9,31],3:[8,16,18,19,31],4:[31,71,72,77,78],5:[31,52,54,56,76],6:[31,43,45,46,60],
+    7:[31,49,50,63,68],8:[27,29,31,67,69],9:[1,10,23,25,31],10:[2,8,32,72,76],11:[5,16,32,52,71],12:[4,18,32,56,78],
+    13:[9,19,32,54,77],14:[25,32,50,60,69],15:[23,32,46,49,67],16:[1,27,32,45,63],17:[10,29,32,43,68],18:[2,16,37,54,78],
+    19:[5,8,37,56,77],20:[4,19,37,52,72],21:[9,18,37,71,76],22:[10,27,37,49,60],23:[1,29,37,46,50],24:[23,37,45,68,69],
+    25:[25,37,43,63,67],26:[2,18,35,52,77],27:[5,19,35,76,78],28:[4,8,35,54,71],29:[9,16,35,56,72],30:[23,29,35,60,63],
+    31:[25,27,35,46,68],32:[10,35,45,50,67],33:[1,35,43,49,69],34:[2,19,34,56,71],35:[5,18,34,54,72],36:[4,16,34,76,77]
+  },
+  segundo: {
+    1:[8,14,33,49,55],2:[21,47,56,58,80],3:[2,36,41,68,75],4:[1,5,24,52,54]
+  }
+};
+
+const missingFirstBatch = [37,38,39,40,41,42];
+
+function pad(n) { return String(n).padStart(2,'0'); }
+
+function renderRows(drawnSet) {
+  const tbody = document.querySelector('#bets tbody');
+  tbody.innerHTML = '';
+
+  function addRow(idx, arr, labelPrefix) {
+    const tr = document.createElement('tr');
+    const tdIdx = document.createElement('td');
+    tdIdx.textContent = labelPrefix + pad(idx);
+    const tdNums = document.createElement('td');
+    const tdHits = document.createElement('td');
+
+    let hits = 0;
+    arr.forEach(n => {
+      const span = document.createElement('span');
+      span.className = 'num' + (drawnSet ? (drawnSet.has(n) ? ' hit drawn' : '') : '');
+      if (drawnSet && drawnSet.has(n)) hits++;
+      span.textContent = pad(n);
+      tdNums.appendChild(span);
+    });
+    tdHits.textContent = hits;
+    tr.appendChild(tdIdx); tr.appendChild(tdNums); tr.appendChild(tdHits);
+    tbody.appendChild(tr);
+  }
+
+  Object.keys(bets.primeiro).map(k => parseInt(k)).sort((a,b)=>a-b).forEach(i => addRow(i, bets.primeiro[i], '#'));
+  missingFirstBatch.forEach(i => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>#${pad(i)}</td><td class="warn">— não recebido —</td><td>0</td>`;
+    tbody.appendChild(tr);
+  });
+  Object.keys(bets.segundo).map(k => parseInt(k)).sort((a,b)=>a-b).forEach(i => addRow(i, bets.segundo[i], 'A#'));
+}
+
+function parseDrawn(input) {
+  const nums = input.split(/[,\s;]+/).filter(Boolean).map(v => parseInt(v,10)).filter(n => n>=1 && n<=80);
+  return new Set(nums.slice(0,5));
+}
+
+function applyDrawn() {
+  const drawn = parseDrawn(document.getElementById('drawn').value);
+  if (drawn.size !== 5) {
+    document.getElementById('summary').textContent = 'Informe exatamente 5 dezenas válidas.';
+    document.getElementById('summary').className = 'badge warn';
+    return;
+  }
+  localStorage.setItem('quina_drawn', JSON.stringify(Array.from(drawn)));
+  renderRows(drawn);
+
+  const rows = Array.from(document.querySelectorAll('#bets tbody tr'));
+  let t2=0,t3=0,t4=0,t5=0;
+  rows.forEach(r => {
+    const c = parseInt(r.lastChild.textContent||'0',10);
+    if (r.children[1].textContent.includes('não recebido')) return;
+    if (c===2) t2++; else if (c===3) t3++; else if (c===4) t4++; else if (c===5) t5++;
+  });
+  const sum = `Duques: ${t2} • Ternos: ${t3} • Quadras: ${t4} • Quinas: ${t5}`;
+  document.getElementById('summary').textContent = sum;
+  document.getElementById('summary').className = 'badge ok';
+}
+
+function clearDrawn() {
+  document.getElementById('drawn').value='';
+  localStorage.removeItem('quina_drawn');
+  document.getElementById('summary').textContent='Aguardando...';
+  document.getElementById('summary').className='badge';
+  renderRows(null);
+}
+
+function copyResultLink() {
+  const input = document.getElementById('drawn').value.trim();
+  const nums = input.split(/[,\s;]+/).filter(Boolean);
+  if (nums.length !== 5) {
+    document.getElementById('summary').textContent = 'Preencha 5 dezenas para gerar o link.';
+    document.getElementById('summary').className = 'badge warn';
+    return;
+  }
+  const url = new URL(window.location.href);
+  url.searchParams.set('d', nums.join(','));
+  navigator.clipboard.writeText(url.toString()).then(() => {
+    document.getElementById('summary').textContent = 'Link copiado!';
+    document.getElementById('summary').className = 'badge ok';
+  });
+}
+
+// Auto-aplicar: query ?d= e/ou localStorage
+(function init() {
+  renderRows(null);
+  const url = new URL(window.location.href);
+  const d = url.searchParams.get('d');
+  const stored = localStorage.getItem('quina_drawn');
+  if (d) {
+    document.getElementById('drawn').value = d;
+    applyDrawn();
+  } else if (stored) {
+    try {
+      const arr = JSON.parse(stored);
+      if (Array.isArray(arr) && arr.length === 5) {
+        document.getElementById('drawn').value = arr.join(',');
+        applyDrawn();
+      }
+    } catch(e){}
+  }
+})();
+</script>
+</body>
+</html>
