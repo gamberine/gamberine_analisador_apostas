@@ -1,0 +1,52 @@
+inserir classes btn e btnPrimary no botão processInputs() e ele fica oculto até o campo date ser preenchido.
+
+campo data sorteio é o primeiro item, um card separado com legenda "Preencha a data do sorteio" e o imput ao lado. 
+
+ao lado, um select com campo de pesquisa com o auto preenchimento ao digitar, nele constara a relação de todos os tipos de loterias (no link constam loterias da caixa: https://loterias.caixa.gov.br/Paginas/Federal.aspx)
+Não obrigatorio e com um icone i (info) contendo tooltip com mensagem (criar - "com essa informação e o número do concuros, você terá a experiência completa e poderá receber detalhes futuramente")
+ 
+
+abaixo, um novo campo "Deseja inserir o número Concurso?" e um check na frente, 
+se marcado, exibe um input para digitar, com auto complet, 
+
+*baseada na informação anterior do concurso e a data do sorteio, fazer uma pesquisa buscando a informação do número do sorteio **verificar melhor forma de conexão e mais simples
+
+Após concluir etapa acima, exibe o Accordion seguinte.
+ativa a div "<oculto-ate-preencher>"  no header.
+Insere abaixo do título (atual linha 80) os dados preenchidos na etapa anterior (Nome-loteria, numero-concurso e data sorteio).
+
+
+Parte 1- Analise prévia passa para depois de:
+
+ 1. Insira os dados. (Renomear campo para 1. Números apostados)
+exibido a direita. (50% da largura acima de 1280)
+
+após preencher, exibe ao lado um botão "analisar aposta(s) - plural dinâmico, se inserido mais de uma sequencia. botão btn btnSecundario, com ícone de análise de dados
+
+Análise dados fica oculto e caso click no btn, 
+vamos criar uma função básica que irá analisar a probabilidade de acerto. basear a função conforme modelo preenchido atualmente.
+*essa função será aprimorada futuramente buscando integração com alguma api de Ia.
+*Avaliar complexidade, caso simples, efetuar integração completa.
+
+** campo não obrigatório
+  
+abaixo do accordion acima, exibe na direita um botão "Prosseguir". classe btn btnBorder (criar) 1px solid corPrimary, background transparent color corPrimary, ícone a direita arrow moderno e animado no mesmo color. integrar biblioteca necessária via cdn
+
+preparar hover para inverter cores e aplicar background color com transitions animado com efeito carregando a mudança de cor da esquerda para a direita, inclusive com texto e ícone seguindo o mesmo efeito.
+
+após clique, fechar acordion anterior e esmaecer 10% e aplicar um ícone check colorido no canto esquerdo. no direito segue arrow com efeito de substituindo a posição do ícone ao abrir e fechar
+
+a seguir exibe o novo accordion com a tabela de apostas. na mesma linha, alinhada flex-end, exibe o botão "Inserir resultado". btn btnPrimary com ícone a esquerda (icon-concluido.svg - pasta)
+
+ao click, fecha o accordion tabela de apostas e adiciona acima dele o ccordion "2. Inserir Resultado do Sorteio" com input (prossegue com com enter ou tab ou click fora se conteúdo atender ao requisito. )
+btn limpar ao lado o aplicar depois.
+em seguida, inserir outro botão "buscar resultado",  desativado por enquanto e com tooltip "em breve"
+
+após preencher o resultado,  fecha o accordion atual, roda o preenchimento da tabela,  e gera uma div acima do título da tabela com os números do resultado em h2 corWarm e ao lado "badge ok", sendo acrescida de um ícone antes de cada item da badge. dar maior destaque.
+
+após o resultado exibe um toast com um ícone de estrela para conquista
+"Duques: 0 • Ternos: 0 • Quadras: 0 • Quinas: 1"
+
+abaixo exibirá dois botões: abrir link (_blank) e copiar link (auto copy). Ambos com ícone.
+
+ ao gerar o link com o click no resultado, registrar o link em um arquivo de log protegido na raiz do projeto
