@@ -1,0 +1,1 @@
+Registro de links gerados - protegido. As entradas serao gravadas via sendBeacon/localStorage.

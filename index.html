@@ -1,332 +1,1359 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="shortcut icon" href="https://gamberine.com.br/wp-content/uploads/gamberine_favicon.png">
-<title>Gamberine - Analisador de Apostas</title>
-<link rel="stylesheet" href="https://gamberine.com.br/arquivos_publicos/gamb_variables_geral.css">
-<meta name="description" content="Análise prévia, tabela de apostas e marcador automático do resultado da Quina.">
-<style>
-  :root {
-    --bg:#0b1020; --card:#111832; --accent:#36b37e; --muted:#c7cedf; --text:#f1f5ff; --hit:#ffe08a; --drawn:#3b82f6;
-    --danger:#ef4444; --ok:#22c55e;
-  }
-  * { box-sizing:border-box; }
-  body { margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial; background:var(--bg); color:var(--text);}
-  header {
-    padding: 20px;
-    background: linear-gradient(90deg, #18233f, #0f172a);
-    border-bottom: 1px solid #223;
-    text-align: center;
-  }
-  h1 { margin:0 0 6px; font-size:20px; }
-  .sub { opacity:.8; font-size:13px; }
-  main { max-width:1100px; margin:24px auto; padding:0 16px; }
-  .card { background:var(--card); border:1px solid #223; border-radius:14px; padding:16px; margin-bottom:16px; }
-  .grid { display:grid; gap:16px; grid-template-columns: 1fr; }
-  @media (min-width:900px) { .grid { grid-template-columns: 1fr 1fr; } }
-  .badge { display:inline-block; padding:2px 8px; border-radius:999px; background:#1f2937; color:#e5e7eb; font-size:12px; margin-right:6px; }
-  .accent { color:var(--accent); }
-  table { width:100%; border-collapse:collapse; }
-  th, td { border:1px solid #2a355d; padding:8px; text-align:center; font-variant-numeric: tabular-nums; }
-  th { background:#0f1a36; position:sticky; top:0; z-index:1; }
-  tbody tr:nth-child(odd) { background:#0e1530; }
-  .num { display:inline-flex; width:34px; height:34px; align-items:center; justify-content:center; border-radius:8px; background:#0b1228; border:1px solid #2a355d; margin:2px; }
-  .num.drawn { background:var(--drawn); color:#fff; border-color:#1e3a8a; }
-  .num.hit { background: var(--primaryColor); color: #111; border-color: var(--primaryColorHover); font-weight: 700; }
-  .controls { display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
-  input[type=text], input[type=date], textarea { padding:10px 12px; background:#0b1228; color:#e5e7eb; border:1px solid #2a355d; border-radius:10px; width:100%; }
-  button { padding:10px 14px; border:1px solid #2a355d; background:#0b1228; color:#e5e7eb; border-radius:10px; cursor:pointer; }
-  button:hover { border-color:#3b82f6; }
-  .note { font-size:12px; opacity:.8; }
-  .warn { color: #fca5a5; }
-  .ok { color: #86efac; }
-  footer { padding:20px; text-align:center; opacity:.7; }
-
-  /* Accordion styles */
-  details.accordion{background:var(--card);border:1px solid #223;border-radius:14px;margin-bottom:16px;padding:0 16px;}
-  details.accordion summary{list-style:none;cursor:pointer;padding:16px 0;-webkit-user-select:none;-moz-user-select:none;user-select:none;display:flex;align-items:center;gap:8px;}
-  details.accordion summary::-webkit-details-marker{display:none;}
-  details.accordion summary h2{margin:0;font-size:18px;}
-  details.accordion .accordion-content{padding:0 0 16px 0;}
-  details.accordion summary::after{content:"▸";margin-left:auto;opacity:.7;}
-  details.accordion[open] summary::after{content:"▾";}
-
-  /* Responsivo pedido */
-  @media (max-width: 1280px) {
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="https://gamberine.com.br/wp-content/uploads/gamberine_favicon.png">
+  <title>Gamberine - Analisador de Apostas</title>
+  <link rel="stylesheet" href="https://gamberine.com.br/arquivos_publicos/gamb_variables_geral.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css">
+  <meta name="description" content="Análise prévia, tabela de apostas e marcador automático do resultado das loterias da Caixa.">
+  <style>
+    :root {
+      --bg: #0b1020;
+      --card: #111832;
+      --accent: #36b37e;
+      --muted: #c7cedf;
+      --text: #f1f5ff;
+      --hit: #ffe08a;
+      --drawn: #3b82f6;
+      --danger: #ef4444;
+      --ok: #22c55e;
+      --border: #22293d;
+      --warm: #f97316;
+      --shadow: rgba(15, 23, 42, 0.35);
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+    header {
+      padding: 24px 16px;
+      background: linear-gradient(110deg, #18233f, #0f172a);
+      border-bottom: 1px solid #1d2742;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    h1 {
+      margin: 0 0 6px;
+      font-size: 22px;
+      font-weight: 700;
+    }
+    .sub {
+      opacity: 0.85;
+      font-size: 13px;
+      transition: opacity 0.3s ease;
+    }
+    main {
+      max-width: 1180px;
+      margin: 32px auto;
+      padding: 0 16px 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
     .card {
       background: var(--card);
-      border: 1px solid #223;
-      border-radius: 14px;
-      padding: 16px;
-      margin-bottom: 16px;
-      text-align: center;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      position: relative;
+      box-shadow: 0 18px 32px -24px var(--shadow);
     }
-    .controls {
+    fieldset.card {
+      border-width: 1px;
+    }
+    fieldset.card legend {
+      padding: 0 12px;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--muted);
+    }
+    .stage-grid {
+      display: grid;
+      gap: 24px;
+    }
+    .stage-columns {
+      display: grid;
+      gap: 24px;
+    }
+    .stage-column-right {
       display: flex;
-      gap: 1rem;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .draw-card__row {
+      display: flex;
       flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 12px;
+    }
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      min-width: 220px;
+      flex: 1;
+    }
+    .field-label {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-weight: 600;
+      color: var(--muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .field-label .optional {
+      font-size: 11px;
+      opacity: 0.7;
+      text-transform: none;
+    }
+    .field-checkbox {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .field-checkbox label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+    }
+    input[type="text"],
+    input[type="date"],
+    textarea,
+    select {
+      padding: 11px 14px;
+      background: #0b1228;
+      color: var(--text);
+      border: 1px solid #2a355d;
+      border-radius: 12px;
+      width: 100%;
+      transition: border 0.2s ease, box-shadow 0.2s ease;
+      font-size: 15px;
+    }
+    input[type="text"]:focus,
+    input[type="date"]:focus,
+    textarea:focus,
+    select:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(54, 179, 126, 0.25);
+    }
+    textarea {
+      resize: vertical;
+      min-height: 200px;
+      font-family: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
+    }
+    .choices {
+      background: #0b1228;
+      border-radius: 12px;
+    }
+    .choices__inner {
+      background: transparent;
+      border: 1px solid #2a355d;
+      border-radius: 12px;
+      padding: 5px 12px;
+      min-height: 46px;
+      color: var(--text);
+    }
+    .choices__list--single .choices__item {
+      color: var(--text);
+    }
+    .choices__list--dropdown {
+      background: #0b1228;
+      border-color: #2a355d;
+    }
+    .choices__item--selectable.is-highlighted {
+      background: rgba(54, 179, 126, 0.15);
+    }
+    .helper-text {
+      font-size: 13px;
+      opacity: 0.75;
+      margin: 0 0 8px;
+    }
+    .card-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+    .analysis-output {
+      margin-top: 16px;
+      padding: 16px;
+      border-radius: 14px;
+      background: rgba(59, 130, 246, 0.12);
+      border: 1px solid rgba(59, 130, 246, 0.4);
+    }
+    .analysis-output h3 {
+      margin: 0 0 10px;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .analysis-output ul {
+      margin: 10px 0 0 18px;
+      padding: 0;
+    }
+    .analysis-output li {
+      margin-bottom: 6px;
+    }
+    .btn {
+      display: inline-flex;
       align-items: center;
       justify-content: center;
+      gap: 8px;
+      border-radius: 999px;
+      padding: 10px 18px;
+      border: 1px solid transparent;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.18s ease, box-shadow 0.25s ease, background 0.35s ease, color 0.35s ease;
+      background: #0b1228;
+      color: var(--text);
+      text-decoration: none;
     }
-  }
-</style>
+    .btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+    .btn:hover:not(:disabled) {
+      transform: translateY(-1px);
+    }
+    .btn:active:not(:disabled) {
+      transform: translateY(0);
+    }
+    .btnPrimary {
+      background: var(--accent);
+      color: #0b1228;
+      border-color: var(--accent);
+      box-shadow: 0 16px 28px -18px rgba(54, 179, 126, 0.75);
+    }
+    .btnPrimary:hover:not(:disabled) {
+      box-shadow: 0 20px 32px -18px rgba(54, 179, 126, 0.85);
+    }
+    .btnSecondary,
+    .btnSecundario {
+      background: rgba(59, 130, 246, 0.18);
+      border-color: #2a355d;
+      color: var(--muted);
+    }
+    .btnSecondary:hover:not(:disabled),
+    .btnSecundario:hover:not(:disabled) {
+      background: rgba(59, 130, 246, 0.32);
+      color: var(--text);
+    }
+    .btnBorder {
+      background: transparent;
+      border-color: var(--accent);
+      color: var(--accent);
+      position: relative;
+      overflow: hidden;
+    }
+    .btnBorder::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(95deg, rgba(54, 179, 126, 0.15), rgba(54, 179, 126, 0.55));
+      transform: translateX(-100%);
+      transition: transform 0.4s ease;
+      z-index: 0;
+    }
+    .btnBorder span,
+    .btnBorder i {
+      position: relative;
+      z-index: 1;
+      transition: color 0.35s ease;
+    }
+    .btnBorder:hover:not(:disabled) {
+      color: #0b1228;
+    }
+    .btnBorder:hover:not(:disabled)::before {
+      transform: translateX(0);
+    }
+    .btnBorder:hover:not(:disabled) i {
+      animation: arrow-slide 0.6s ease forwards;
+    }
+    @keyframes arrow-slide {
+      0% { transform: translateX(0); }
+      50% { transform: translateX(6px); }
+      100% { transform: translateX(0); }
+    }
+    details.accordion {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 0 20px;
+    }
+    details.accordion[open] {
+      border-color: rgba(54, 179, 126, 0.35);
+    }
+    details.accordion summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 20px 0;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      user-select: none;
+    }
+    details.accordion summary::-webkit-details-marker {
+      display: none;
+    }
+    details.accordion summary h2 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 700;
+      flex: 1;
+    }
+    .summary-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(59, 130, 246, 0.15);
+      color: rgba(59, 130, 246, 0.9);
+      font-size: 18px;
+    }
+    .accordion-arrow {
+      color: var(--muted);
+      transition: transform 0.32s ease;
+    }
+    details.accordion[open] .accordion-arrow {
+      transform: rotate(180deg);
+    }
+    .accordion-content {
+      padding: 0 0 22px 0;
+    }
+    .accordion-content p,
+    .accordion-content ul {
+      color: rgba(241, 245, 255, 0.82);
+    }
+    .accordion-content ul {
+      margin: 0 0 0 18px;
+      padding: 0;
+    }
+    .accordion-cta {
+      display: flex;
+      justify-content: flex-end;
+    }
+    .accordion.is-completed {
+      opacity: 0.9;
+    }
+    .accordion.is-completed summary {
+      position: relative;
+      padding-left: 12px;
+    }
+    .accordion.is-completed summary::before {
+      content: '\\2713';
+      position: absolute;
+      left: -2px;
+      font-size: 18px;
+      color: var(--accent);
+      transform: translateY(-1px);
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #1f2937;
+      color: #e5e7eb;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .badge.ok {
+      background: rgba(34, 197, 94, 0.18);
+      color: var(--ok);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+    }
+    th, td {
+      border: 1px solid #2a355d;
+      padding: 10px;
+      text-align: center;
+      font-variant-numeric: tabular-nums;
+    }
+    th {
+      background: #0f1a36;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+    tbody tr:nth-child(odd) {
+      background: #0e1530;
+    }
+    .num {
+      display: inline-flex;
+      width: 36px;
+      height: 36px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      background: #0b1228;
+      border: 1px solid #2a355d;
+      margin: 3px;
+      font-weight: 600;
+    }
+    .num.drawn {
+      background: var(--drawn);
+      color: #fff;
+      border-color: #1e3a8a;
+    }
+    .num.hit {
+      background: var(--primaryColor, var(--accent));
+      color: #0b1020;
+      border-color: var(--primaryColorHover, var(--accent));
+    }
+    #generated-link-container {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .generated-link__row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+    .generated-link__row input {
+      flex: 1;
+      min-width: 240px;
+    }
+    .generated-link__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    #drawn-highlight {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 18px;
+      padding: 16px;
+      border-radius: 14px;
+      background: rgba(249, 115, 22, 0.12);
+      border: 1px solid rgba(249, 115, 22, 0.35);
+    }
+    #drawn-highlight h2 {
+      margin: 0;
+      color: var(--warm);
+      font-size: 20px;
+      font-weight: 700;
+    }
+    .drawn-highlight__badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .drawn-highlight__badges .badge {
+      background: rgba(34, 197, 94, 0.18);
+      color: var(--ok);
+    }
+    #toast-stack {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      z-index: 100;
+    }
+    .toast {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      border-radius: 14px;
+      background: rgba(59, 130, 246, 0.18);
+      border: 1px solid rgba(59, 130, 246, 0.4);
+      color: var(--muted);
+      backdrop-filter: blur(6px);
+      min-width: 240px;
+    }
+    .toast.success {
+      background: rgba(34, 197, 94, 0.18);
+      border-color: rgba(34, 197, 94, 0.4);
+      color: var(--ok);
+    }
+    [hidden] {
+      display: none !important;
+    }
+    [data-tooltip] {
+      position: relative;
+    }
+    [data-tooltip]::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: calc(100% + 6px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(15, 23, 42, 0.95);
+      color: #e2e8f0;
+      padding: 6px 10px;
+      border-radius: 8px;
+      font-size: 11px;
+      line-height: 1.4;
+      width: max-content;
+      max-width: 220px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.18s ease;
+      white-space: normal;
+      text-align: center;
+    }
+    [data-tooltip]:hover::after {
+      opacity: 1;
+    }
+    .info-button {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: rgba(59, 130, 246, 0.2);
+      border: 1px solid rgba(59, 130, 246, 0.4);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(59, 130, 246, 0.9);
+      cursor: pointer;
+    }
+    .summary-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex: 1;
+    }
+    .summary-actions {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .summary-actions button {
+      white-space: nowrap;
+    }
+    #open-results-btn img {
+      width: 18px;
+      height: 18px;
+    }
+    footer {
+      padding: 32px 16px 48px;
+      text-align: center;
+      opacity: 0.65;
+      font-size: 13px;
+    }
+    @media (min-width: 1024px) {
+      .stage-grid {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+      }
+      .stage-columns {
+        grid-template-columns: 1fr;
+      }
+    }
+    @media (min-width: 1280px) {
+      .stage-columns {
+        grid-template-columns: 1fr;
+      }
+      .stage-grid {
+        grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+        align-items: start;
+      }
+    }
+    @media (max-width: 720px) {
+      header {
+        position: static;
+      }
+      .draw-card__row {
+        flex-direction: column;
+      }
+      .generated-link__row {
+        flex-direction: column;
+      }
+      .summary-actions {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+      }
+      #toast-stack {
+        bottom: 16px;
+        right: 16px;
+      }
+    }
+  </style>
 </head>
 <body>
 <header>
   <h1>Gamberine - Analisador de Apostas</h1>
-  <div class="sub">Data do sorteio: <strong>30/09/2025</strong></div>
+  <div id="oculto-ate-preencher" class="sub" hidden>
+    Dados: <span id="info-lottery">—</span> | Concurso: <span id="info-concurso">—</span> | Data do sorteio: <strong id="info-date">—</strong>
+  </div>
 </header>
 <main>
-  <section class="card">
-    <h2>1. Insira os dados</h2>
-    <div class="controls" style="flex-direction: column; align-items: stretch; gap: 1rem;">
-      <textarea id="bets-input" rows="12" placeholder="Cole as apostas aqui, uma por linha. Ex: #01: 10-20-30-40-50"></textarea>
-      <input type="date" id="result-date" title="Data do sorteio">
-      <button onclick="processInputs()">Gerar Tabela e Link para Compartilhamento</button>
-    </div>
-    <div id="generated-link-container" style="margin-top: 1rem;"></div>
-  </section>
+  <div class="stage-grid">
+    <div class="stage-columns">
+      <fieldset class="card draw-card">
+        <legend>Preencha a data do sorteio</legend>
+        <div class="draw-card__row">
+          <label class="field" for="result-date">
+            <span class="field-label">Data do sorteio <span class="optional">(obrigatória)</span></span>
+            <input type="date" id="result-date" autocomplete="off">
+          </label>
+          <label class="field" for="lottery-select">
+            <span class="field-label">Tipo de loteria <span class="optional">(opcional)</span>
+              <span class="info-button" data-tooltip="Com essa informação e o número do concurso, você terá a experiência completa e poderá receber detalhes futuramente."><i class="ph ph-info"></i></span>
+            </span>
+            <select id="lottery-select" title="Selecione a loteria">
+              <option value="">Selecione</option>
+            </select>
+          </label>
+        </div>
+        <div class="field field-checkbox">
+          <label for="toggle-concurso">
+            <input type="checkbox" id="toggle-concurso">
+            Deseja inserir o número Concurso?
+          </label>
+          <div id="concurso-input-wrapper" hidden>
+            <input type="text" id="concurso-number" list="concurso-suggestions" placeholder="Informe o nº do concurso" autocomplete="off" inputmode="numeric">
+            <datalist id="concurso-suggestions"></datalist>
+          </div>
+        </div>
+      </fieldset>
 
-  <section id="results-section" class="card" style="display:none;">
-    <h2>2. Marcar Resultado do Sorteio</h2>
-    <div class="controls">
-      <label for="drawn">Insira os 5 números sorteados:</label>
-      <input id="drawn" type="text" placeholder="Ex: 02,16,31,54,78">
-      <button class="btn btnPrimary" onclick="applyDrawn()">Aplicar</button>
-      <button onclick="clearDrawn()" class="btn btnSecondary">Limpar</button>
-      <span id="summary" class="badge">Aguardando...</span>
+      <section class="card" id="bets-card">
+        <h2>1. Números apostados</h2>
+        <p class="helper-text">Cole as apostas no formato "#01: 10-20-30-40-50" — uma linha por jogo.</p>
+        <textarea id="bets-input" rows="12" placeholder="#01: 10-20-30-40-50"></textarea>
+        <div class="card-actions">
+          <button id="process-btn" class="btn btnPrimary" hidden type="button">
+            <i class="ph ph-play-circle"></i>
+            <span>Gerar tabela e link</span>
+          </button>
+          <button id="analyze-btn" class="btn btnSecundario" type="button" hidden>
+            <i class="ph ph-chart-pie"></i>
+            <span>Analisar apostas</span>
+          </button>
+        </div>
+        <div id="analysis-output" class="analysis-output" hidden></div>
+        <div id="generated-link-container" hidden></div>
+      </section>
     </div>
-  </section>
+    <div class="stage-column-right">
+      <details class="card accordion" id="analysis-accordion">
+        <summary>
+          <span class="summary-icon"><i class="ph ph-chart-line-up"></i></span>
+          <h2>Parte 1 — Análise prévia</h2>
+          <span class="accordion-arrow"><i class="ph ph-caret-down"></i></span>
+        </summary>
+        <div class="accordion-content">
+          <p>
+            Universo (01–80). Combinações possíveis C(80,5)=<strong>24.040.016</strong>.
+            Probabilidades por jogo: quina 1/24.040.016 • quadra 1/64.106 • terno 1/866 • duque 1/36.
+          </p>
+          <p>
+            Apostas informadas: <span class="badge">40 de 46 recebidas</span>
+            <span class="badge">faltam: 37, 38, 39, 40, 41, 42</span>
+          </p>
+          <ul>
+            <li>Concentração nas dezenas: 31, 32, 35, 37 e na faixa 70–78.</li>
+            <li>Com 46 jogos, chance agregada teórica de quina ˜ 46/24.040.016 (˜ 1 em 522.000).</li>
+            <li>Expectativa realista: ao menos um <strong>terno</strong>; <em>quadra</em> rara porém possível.</li>
+          </ul>
+          <div class="helper-text">Funciona offline — quando o resultado sair, digite as 5 dezenas sorteadas para destacar acertos automaticamente.</div>
+        </div>
+      </details>
+      <div class="accordion-cta">
+        <button id="advance-button" class="btn btnBorder" type="button">
+          <span>Prosseguir</span>
+          <i class="ph ph-arrow-fat-lines-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
 
-  <section id="bets-section" class="card" style="display:none;">
-    <h2>Tabela de apostas</h2>
-    <table id="bets">
-      <thead>
-        <tr><th>#</th><th>Dezenas</th><th>Acertos</th></tr>
-      </thead>
-      <tbody>
-      </tbody>
-    </table>
-  </section>
+  <details class="card accordion" id="bets-accordion" hidden>
+    <summary>
+      <div class="summary-title">
+        <span class="summary-icon"><i class="ph ph-list-checks"></i></span>
+        <h2>Tabela de apostas</h2>
+      </div>
+      <div class="summary-actions">
+        <button id="open-results-btn" class="btn btnPrimary" type="button">
+          <img src="assets/img/icon-concluido.svg" alt="" aria-hidden="true">
+          <span>Inserir resultado</span>
+        </button>
+        <span class="accordion-arrow"><i class="ph ph-caret-down"></i></span>
+      </div>
+    </summary>
+    <div class="accordion-content">
+      <div id="drawn-highlight" hidden>
+        <h2 id="drawn-highlight-title"></h2>
+        <div class="drawn-highlight__badges" id="drawn-highlight-badges"></div>
+      </div>
+      <table id="bets">
+        <thead>
+          <tr><th>#</th><th>Dezenas</th><th>Acertos</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </details>
+
+  <template id="results-template">
+    <details class="card accordion results-accordion" id="results-accordion" open>
+      <summary>
+        <span class="summary-icon"><i class="ph ph-shooting-star"></i></span>
+        <h2>2. Inserir Resultado do Sorteio</h2>
+        <span class="accordion-arrow"><i class="ph ph-caret-down"></i></span>
+      </summary>
+      <div class="accordion-content">
+        <div class="controls" style="display:flex; flex-direction: column; gap: 16px;">
+          <label class="field" for="drawn">
+            <span class="field-label">Números sorteados</span>
+            <input id="drawn" type="text" placeholder="Ex: 02,16,31,54,78" inputmode="numeric" autocomplete="off">
+          </label>
+          <div class="card-actions">
+            <button class="btn btnPrimary" type="button" id="apply-drawn-btn">
+              <i class="ph ph-check-circle"></i>
+              <span>Aplicar</span>
+            </button>
+            <button class="btn btnSecondary" type="button" id="clear-drawn-btn">
+              <i class="ph ph-broom"></i>
+              <span>Limpar</span>
+            </button>
+            <button class="btn btnBorder" type="button" id="search-result-btn" disabled data-tooltip="Em breve">
+              <i class="ph ph-magnifying-glass"></i>
+              <span>Buscar resultado</span>
+            </button>
+            <span id="summary" class="badge">Aguardando...</span>
+          </div>
+        </div>
+      </div>
+    </details>
+  </template>
+
+  <div id="toast-stack"></div>
 </main>
 
 <footer>© 2025 — Gamberine</footer>
 
+<script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+<script src="https://unpkg.com/@phosphor-icons/web"></script>
 <script>
-let betsData = {};
+  const lotteries = [
+    { value: 'mega-sena', label: 'Mega-Sena' },
+    { value: 'quina', label: 'Quina' },
+    { value: 'lotofacil', label: 'Lotofácil' },
+    { value: 'lotomania', label: 'Lotomania' },
+    { value: 'dupla-sena', label: 'Dupla Sena' },
+    { value: 'timemania', label: 'Timemania' },
+    { value: 'dia-de-sorte', label: 'Dia de Sorte' },
+    { value: 'super-sete', label: 'Super Sete' },
+    { value: 'loteca', label: 'Loteca' },
+    { value: 'federal', label: 'Loteria Federal' },
+    { value: 'mais-milionaria', label: 'Mais Milionária' }
+  ];
 
-function pad(n) { return String(n).padStart(2,'0'); }
+  let lotteryChoices;
+  let betsData = {};
+  let lastGeneratedLink = '';
+  const metaData = { date: '', lottery: '', lotteryLabel: '', concurso: '' };
 
-function parseBets(text) {
-  const lines = text.split('\n');
-  const parsedBets = {};
-  for (const line of lines) {
-    if (line.trim() === '') continue;
-    const match = line.match(/#?(\d+)\s*:\s*([\d\s,-]+)/);
-    if (match) {
-        const id = parseInt(match[1]);
-        const numbers = match[2].match(/\d+/g);
-        if (numbers && numbers.length === 5) {
-            parsedBets[id] = numbers.map(n => parseInt(n));
-        }
+  document.addEventListener('DOMContentLoaded', () => {
+    setupLotterySelect();
+    bindInteractions();
+    hydrateFromUrl();
+  });
+
+  function setupLotterySelect() {
+    const select = document.getElementById('lottery-select');
+    lotteries.forEach((opt) => {
+      const option = document.createElement('option');
+      option.value = opt.value;
+      option.textContent = opt.label;
+      select.append(option);
+    });
+    if (window.Choices) {
+      lotteryChoices = new Choices(select, {
+        searchEnabled: true,
+        itemSelectText: '',
+        noResultsText: 'Nada encontrado',
+        noChoicesText: 'Sem opções',
+        placeholder: true,
+        position: 'bottom',
+        shouldSort: false
+      });
     }
   }
-  return parsedBets;
-}
 
-function processInputs() {
-  const betsText = document.getElementById('bets-input').value;
-  betsData = parseBets(betsText);
+  function bindInteractions() {
+    const dateInput = document.getElementById('result-date');
+    const processButton = document.getElementById('process-btn');
+    const analyzeButton = document.getElementById('analyze-btn');
+    const toggleConcurso = document.getElementById('toggle-concurso');
+    const concursoInputWrapper = document.getElementById('concurso-input-wrapper');
+    const concursoInput = document.getElementById('concurso-number');
+    const advanceButton = document.getElementById('advance-button');
+    const insertResultButton = document.getElementById('open-results-btn');
 
-  const dateValue = document.getElementById('result-date').value;
-  if (dateValue) {
-    const date = new Date(dateValue + 'T00:00:00');
-    document.querySelector('header .sub strong').textContent = date.toLocaleDateString('pt-BR', { timeZone: 'UTC' });
-    document.title = 'Gamberine - Quina : Análise/Apostas ('+date.toLocaleDateString('pt-BR', { timeZone: 'UTC' })+')';
+    const now = new Date();
+    const localISODate = new Date(now.getTime() - now.getTimezoneOffset() * 60000).toISOString().split('T')[0];
+    if (!dateInput.min || dateInput.min < localISODate) {
+      dateInput.min = localISODate;
+    }
+
+    const triggerDatePicker = () => {
+      if (typeof dateInput.showPicker === 'function') {
+        try {
+          dateInput.showPicker();
+        } catch (err) {
+          dateInput.focus();
+        }
+      } else {
+        dateInput.focus();
+      }
+    };
+    dateInput.addEventListener('click', triggerDatePicker);
+    dateInput.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        triggerDatePicker();
+      }
+    });
+
+    dateInput.addEventListener('input', () => {
+      const isValid = validateDateField();
+      processButton.hidden = !dateInput.value || !isValid;
+      if (isValid && toggleConcurso.checked) updateConcursoSuggestions();
+    });
+
+    dateInput.addEventListener('blur', () => {
+      const isValid = validateDateField();
+      processButton.hidden = !dateInput.value || !isValid;
+    });
+
+    if (lotteryChoices) {
+      lotteryChoices.passedElement.element.addEventListener('change', () => {
+        if (toggleConcurso.checked) updateConcursoSuggestions();
+      });
+    } else {
+      document.getElementById('lottery-select').addEventListener('change', () => {
+        if (toggleConcurso.checked) updateConcursoSuggestions();
+      });
+    }
+
+    toggleConcurso.addEventListener('change', () => {
+      if (toggleConcurso.checked) {
+        concursoInputWrapper.hidden = false;
+        updateConcursoSuggestions();
+        setTimeout(() => concursoInput.focus({ preventScroll: true }), 50);
+      } else {
+        concursoInputWrapper.hidden = true;
+        concursoInput.value = '';
+      }
+    });
+
+    processButton.addEventListener('click', processInputs);
+    analyzeButton.addEventListener('click', analyzeBets);
+    advanceButton.addEventListener('click', handleAdvance);
+    insertResultButton.addEventListener('click', handleInsertResultClick);
   }
 
-  if (Object.keys(betsData).length > 0) {
-    document.getElementById('results-section').style.display = 'block';
-    document.getElementById('bets-section').style.display = 'block';
+  function validateDateField() {
+    const dateInput = document.getElementById('result-date');
+    if (!dateInput) return false;
+    if (!dateInput.value) {
+      dateInput.setCustomValidity('Informe a data do sorteio.');
+      return false;
+    }
+    const picked = new Date(dateInput.value + 'T00:00:00');
+    if (Number.isNaN(picked.getTime())) {
+      dateInput.setCustomValidity('Data invalida.');
+      return false;
+    }
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    if (picked < today) {
+      dateInput.setCustomValidity('Use uma data igual ou posterior a hoje.');
+      return false;
+    }
+    dateInput.setCustomValidity('');
+    return true;
+  }
+
+
+  function processInputs() {
+    const betsText = document.getElementById('bets-input').value.trim();
+    const dateInput = document.getElementById('result-date');
+    const dateValue = dateInput.value;
+
+    if (!validateDateField()) {
+      dateInput.reportValidity();
+      return;
+    }
+
+    betsData = parseBets(betsText);
+    if (Object.keys(betsData).length === 0) {
+      alert('Nenhuma aposta válida encontrada. Utilize o formato #01: 10-20-30-40-50');
+      return;
+    }
+
+    const lotterySelect = document.getElementById('lottery-select');
+    const concursoChecked = document.getElementById('toggle-concurso').checked;
+    const concursoValue = concursoChecked ? document.getElementById('concurso-number').value.trim() : '';
+
+    metaData.date = dateValue;
+    metaData.lottery = lotterySelect.value;
+    metaData.lotteryLabel = getSelectedLotteryLabel();
+    metaData.concurso = concursoValue;
+
+    updateHeaderInfo();
+    document.getElementById('analysis-accordion').open = true;
+
     renderRows(null);
     updateLink();
-  } else {
-    alert('Nenhuma aposta válida encontrada. Verifique o formato (ex: #01: 10-20-30-40-50).');
+    updateAnalyzeButtonLabel();
+
+    const analyzeButton = document.getElementById('analyze-btn');
+    analyzeButton.hidden = false;
+
+    document.getElementById('generated-link-container').hidden = false;
   }
-}
 
-function renderRows(drawnSet) {
-  const tbody = document.querySelector('#bets tbody');
-  tbody.innerHTML = '';
-
-  const sortedKeys = Object.keys(betsData).map(k => parseInt(k)).sort((a,b) => a-b);
-
-  for (const key of sortedKeys) {
-    const arr = betsData[key];
-    const tr = document.createElement('tr');
-    const tdIdx = document.createElement('td');
-    tdIdx.textContent = '#' + pad(key);
-    const tdNums = document.createElement('td');
-    const tdHits = document.createElement('td');
-
-    let hits = 0;
-    arr.forEach(n => {
-      const span = document.createElement('span');
-      span.className = 'num' + (drawnSet && drawnSet.has(n) ? ' hit drawn' : '');
-      if (drawnSet && drawnSet.has(n)) hits++;
-      span.textContent = pad(n);
-      tdNums.appendChild(span);
-    });
-    tdHits.textContent = hits;
-    tr.appendChild(tdIdx);
-    tr.appendChild(tdNums);
-    tr.appendChild(tdHits);
-    tbody.appendChild(tr);
-  }
-}
-
-function parseDrawn(input) {
-  const digits = input.replace(/\D/g, '');
-  const nums = new Set();
-  for (let i = 0; i < digits.length && nums.size < 5; i += 2) {
-    const n = parseInt(digits.substring(i, i + 2), 10);
-    if (n >= 1 && n <= 80) {
-      nums.add(n);
+  function analyzeBets() {
+    if (Object.keys(betsData).length === 0) {
+      alert('Informe e processe as apostas antes de analisar.');
+      return;
     }
+    const analysisBox = document.getElementById('analysis-output');
+    const totalBets = Object.keys(betsData).length;
+    const universe = 24040016;
+    const quadra = 64106;
+    const terno = 866;
+    const duque = 36;
+    const allNumbers = new Set();
+    Object.values(betsData).forEach(arr => arr.forEach(n => allNumbers.add(n)));
+
+    const chanceQuina = (totalBets / universe) * 100;
+    const chanceQuadra = (totalBets / quadra) * 100;
+    const chanceTerno = (totalBets / terno) * 100;
+    const chanceDuque = (totalBets / duque) * 100;
+
+    analysisBox.hidden = false;
+    analysisBox.innerHTML = `
+      <h3><i class="ph ph-chart-polar"></i> Painel rápido</h3>
+      <p><strong>${totalBets}</strong> ${totalBets === 1 ? 'aposta cadastrada' : 'apostas cadastradas'} envolvendo <strong>${allNumbers.size}</strong> dezenas únicas.</p>
+      <ul>
+        <li>Probabilidade estimada de quina: <strong>${chanceQuina.toFixed(5)}%</strong>.</li>
+        <li>Quadra: ~<strong>${chanceQuadra.toFixed(3)}%</strong> • Terno: <strong>${chanceTerno.toFixed(2)}%</strong> • Duque: <strong>${chanceDuque.toFixed(1)}%</strong>.</li>
+        <li>Revise concentrações e distribuições antes de prosseguir para maximizar cobertura.</li>
+      </ul>
+    `;
+    analysisBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
-  return nums;
-}
 
-function applyDrawn() {
-  const drawnInput = document.getElementById('drawn');
-  const drawn = parseDrawn(drawnInput.value);
-  if (drawn.size !== 5) {
-    document.getElementById('summary').textContent = 'Informe exatamente 5 dezenas válidas.';
-    document.getElementById('summary').className = 'badge warn';
-    return;
+  function handleAdvance() {
+    if (Object.keys(betsData).length === 0) {
+      alert('Conclua o processamento das apostas antes de prosseguir.');
+      return;
+    }
+    const accordion = document.getElementById('analysis-accordion');
+    accordion.open = false;
+    accordion.classList.add('is-completed');
+    const advanceButton = document.getElementById('advance-button');
+    advanceButton.disabled = true;
+    advanceButton.innerHTML = '<i class="ph ph-check-circle"></i><span>Concluído</span>';
+    const betsAccordion = document.getElementById('bets-accordion');
+    betsAccordion.hidden = false;
+    betsAccordion.open = true;
   }
-  
-  drawnInput.value = Array.from(drawn).sort((a,b)=>a-b).map(pad).join('-');
-  
-  renderRows(drawn);
-  updateLink();
 
-  const rows = Array.from(document.querySelectorAll('#bets tbody tr'));
-  let t2=0,t3=0,t4=0,t5=0;
-  rows.forEach(r => {
-    const c = parseInt(r.lastChild.textContent||'0',10);
-    if (c===2) t2++; else if (c===3) t3++; else if (c===4) t4++; else if (c===5) t5++;
-  });
-  const sum = `Duques: ${t2} • Ternos: ${t3} • Quadras: ${t4} • Quinas: ${t5}`;
-  document.getElementById('summary').textContent = sum;
-  document.getElementById('summary').className = 'badge ok';
-}
+  function handleInsertResultClick(event) {
+    if (event) {
+      event.stopPropagation();
+      if (event.preventDefault) event.preventDefault();
+    }
+    let resultsAccordion = document.getElementById('results-accordion');
+    if (!resultsAccordion) {
+      const template = document.getElementById('results-template');
+      const fragment = template.content.cloneNode(true);
+      const betsAccordion = document.getElementById('bets-accordion');
+      betsAccordion.parentNode.insertBefore(fragment, betsAccordion);
+      resultsAccordion = document.getElementById('results-accordion');
+      bindResultsAccordion();
+    }
+    resultsAccordion.hidden = false;
+    resultsAccordion.open = true;
+    const betsAccordion = document.getElementById('bets-accordion');
+    betsAccordion.open = false;
+  }
 
-function clearDrawn() {
-  document.getElementById('drawn').value='';
-  document.getElementById('summary').textContent='Aguardando...';
-  document.getElementById('summary').className='badge';
-  renderRows(null);
-  updateLink();
-}
+  function bindResultsAccordion() {
+    const applyButton = document.getElementById('apply-drawn-btn');
+    const clearButton = document.getElementById('clear-drawn-btn');
+    const searchButton = document.getElementById('search-result-btn');
+    applyButton.addEventListener('click', applyDrawn);
+    clearButton.addEventListener('click', clearDrawn);
+    searchButton.addEventListener('click', (event) => event.stopPropagation());
+  }
 
-function updateLink() {
+  function parseBets(text) {
+    const lines = text.split('\n');
+    const parsed = {};
+    for (const line of lines) {
+      if (line.trim() === '') continue;
+      const match = line.match(/#?(\d+)\s*:\s*([\d\s,-]+)/);
+      if (match) {
+        const id = parseInt(match[1], 10);
+        const numbers = match[2].match(/\d+/g);
+        if (numbers && numbers.length === 5) {
+          parsed[id] = numbers.map((n) => parseInt(n, 10));
+        }
+      }
+    }
+    return parsed;
+  }
+
+  function renderRows(drawnSet) {
+    const tbody = document.querySelector('#bets tbody');
+    tbody.innerHTML = '';
+    const keys = Object.keys(betsData).map((k) => parseInt(k, 10)).sort((a, b) => a - b);
+    keys.forEach((key) => {
+      const row = document.createElement('tr');
+      const idx = document.createElement('td');
+      idx.textContent = '#' + pad(key);
+      const nums = document.createElement('td');
+      const hitsCell = document.createElement('td');
+      let hits = 0;
+      betsData[key].forEach((num) => {
+        const span = document.createElement('span');
+        const isHit = drawnSet && drawnSet.has(num);
+        span.className = 'num' + (isHit ? ' drawn hit' : '');
+        span.textContent = pad(num);
+        nums.appendChild(span);
+        if (isHit) hits += 1;
+      });
+      hitsCell.textContent = hits;
+      row.append(idx, nums, hitsCell);
+      tbody.appendChild(row);
+    });
+  }
+
+  function parseDrawn(input) {
+    const digits = input.replace(/\D/g, '');
+    const nums = new Set();
+    for (let i = 0; i < digits.length && nums.size < 5; i += 2) {
+      const n = parseInt(digits.substring(i, i + 2), 10);
+      if (!Number.isNaN(n) && n >= 1 && n <= 80) {
+        nums.add(n);
+      }
+    }
+    return nums;
+  }
+
+  function applyDrawn() {
+    const drawnInput = document.getElementById('drawn');
+    if (!drawnInput) return;
+    const drawnSet = parseDrawn(drawnInput.value);
+    if (drawnSet.size !== 5) {
+      const summary = document.getElementById('summary');
+      summary.textContent = 'Informe exatamente 5 dezenas válidas';
+      summary.className = 'badge';
+      return;
+    }
+    drawnInput.value = Array.from(drawnSet).sort((a, b) => a - b).map(pad).join('-');
+    renderRows(drawnSet);
+    updateLink(drawnSet);
+
+    const rows = Array.from(document.querySelectorAll('#bets tbody tr'));
+    let t2 = 0, t3 = 0, t4 = 0, t5 = 0;
+    rows.forEach((row) => {
+      const count = parseInt(row.lastChild.textContent || '0', 10);
+      if (count === 2) t2 += 1;
+      else if (count === 3) t3 += 1;
+      else if (count === 4) t4 += 1;
+      else if (count === 5) t5 += 1;
+    });
+    const summaryText = `Duques: ${t2} • Ternos: ${t3} • Quadras: ${t4} • Quinas: ${t5}`;
+    const summary = document.getElementById('summary');
+    summary.textContent = summaryText;
+    summary.className = 'badge ok';
+
+    updateDrawnHighlight(drawnSet, summaryText);
+    showToast(`Duques: ${t2} • Ternos: ${t3} • Quadras: ${t4} • Quinas: ${t5}`, true);
+    logGeneratedLink('resultado', lastGeneratedLink);
+  }
+
+  function clearDrawn() {
+    const drawnInput = document.getElementById('drawn');
+    if (!drawnInput) return;
+    drawnInput.value = '';
+    const summary = document.getElementById('summary');
+    summary.textContent = 'Aguardando...';
+    summary.className = 'badge';
+    renderRows(null);
+    updateLink();
+    updateDrawnHighlight(null, '');
+  }
+
+  function updateLink(drawnSet) {
     const container = document.getElementById('generated-link-container');
     if (Object.keys(betsData).length === 0) {
-        container.innerHTML = '';
-        return;
+      container.hidden = true;
+      container.innerHTML = '';
+      lastGeneratedLink = '';
+      return;
     }
     const url = new URL(window.location.href);
     url.search = '';
-
-    const betsString = Object.keys(betsData).sort((a,b)=>parseInt(a)-parseInt(b)).map(key => betsData[key].join('-')).join('_');
+    const betsString = Object.keys(betsData)
+      .map((key) => ({ key: parseInt(key, 10), value: betsData[key] }))
+      .sort((a, b) => a.key - b.key)
+      .map((entry) => entry.value.map(pad).join('-'))
+      .join('_');
     url.searchParams.set('bets', betsString);
-
-    const date = document.getElementById('result-date').value;
-    if (date) {
-        url.searchParams.set('date', date);
+    if (metaData.date) {
+      url.searchParams.set('date', metaData.date);
     }
-
-    const drawnValue = document.getElementById('drawn').value;
-    const drawn = parseDrawn(drawnValue);
-    if (drawn.size === 5) {
-        url.searchParams.set('d', Array.from(drawn).sort((a,b)=>a-b).join(','));
+    if (metaData.lottery) {
+      url.searchParams.set('lot', metaData.lottery);
     }
-
-    container.innerHTML = `<strong>Link Gerado:</strong><div class="controls" style="margin-top: 0.5rem;"><input type="text" readonly value="${url.toString()}" onclick="this.select()"><button onclick="copyGeneratedLink()">Copiar Link</button></div>`;
-}
-
-function copyGeneratedLink() {
-    const linkInput = document.querySelector('#generated-link-container input');
-    if (linkInput) {
-        navigator.clipboard.writeText(linkInput.value).then(() => {
-            const btn = document.querySelector('#generated-link-container button');
-            if(btn) {
-              btn.textContent = 'Copiado!';
-              setTimeout(() => { btn.textContent = 'Copiar Link'; }, 2000);
-            }
-        });
+    if (metaData.concurso) {
+      url.searchParams.set('conc', metaData.concurso);
     }
-}
-
-(function init() {
-  const url = new URL(window.location.href);
-  const betsParam = url.searchParams.get('bets');
-  const dateParam = url.searchParams.get('date');
-  const dParam = url.searchParams.get('d');
-
-  if (betsParam) {
-    const parsedBets = {};
-    const betsArray = betsParam.split('_');
-    let betsInputText = '';
-    let currentId = 1;
-    betsArray.forEach((betString) => {
-        const numbers = betString.split('-').map(n => parseInt(n));
-        if(numbers.length === 5){
-          parsedBets[currentId] = numbers;
-          betsInputText += `#${String(currentId).padStart(2, '0')}: ${numbers.join('-')}\n`;
-          currentId++;
-        }
-    });
-    betsData = parsedBets;
-    document.getElementById('bets-input').value = betsInputText.trim();
-
-    if (dateParam) {
-        document.getElementById('result-date').value = dateParam;
-        const date = new Date(dateParam + 'T00:00:00');
-        const dateString = date.toLocaleDateString('pt-BR', { timeZone: 'UTC' });
-        document.querySelector('header .sub strong').textContent = dateString;
-        document.title = 'Gamberine - Quina : Análise/Apostas ('+dateString+')';
+    const drawnInput = document.getElementById('drawn');
+    if (drawnInput && drawnInput.value && drawnSet && drawnSet.size === 5) {
+      url.searchParams.set('d', Array.from(drawnSet).sort((a, b) => a - b).map(pad).join(','));
     }
-
-    document.getElementById('results-section').style.display = 'block';
-    document.getElementById('bets-section').style.display = 'block';
-    document.querySelector('main > section:first-child').style.display = 'none';
-
-    let drawnSet = null;
-    if (dParam) {
-        document.getElementById('drawn').value = dParam;
-        drawnSet = parseDrawn(dParam);
-    }
-    
-    renderRows(drawnSet);
-    
-    if(drawnSet && drawnSet.size === 5) {
-        applyDrawn();
-    }
-    
-    // We need to show the main section again to show the link
-    document.querySelector('main > section:first-child').style.display = 'block';
-    updateLink();
-    // and hide the inputs within that section
-    document.querySelector('#bets-input').style.display = 'none';
-    document.querySelector('#result-date').style.display = 'none';
-    document.querySelector('main > section:first-child button').style.display = 'none';
-    document.querySelector('main > section:first-child h2').textContent = 'Link de Compartilhamento';
+    lastGeneratedLink = url.toString();
+    container.hidden = false;
+    container.innerHTML = `
+      <strong>Link gerado</strong>
+      <div class="generated-link__row">
+        <input type="text" readonly value="${lastGeneratedLink}" aria-label="Link gerado" onclick="this.select()">
+      </div>
+      <div class="generated-link__actions">
+        <button class="btn btnPrimary" type="button" data-action="open-link"><i class="ph ph-arrow-square-out"></i><span>Abrir link</span></button>
+        <button class="btn btnSecondary" type="button" data-action="copy-link"><i class="ph ph-copy"></i><span>Copiar link</span></button>
+      </div>
+    `;
+    bindGeneratedLinkActions(container);
   }
-})();
+
+  function bindGeneratedLinkActions(container) {
+    const openBtn = container.querySelector('[data-action="open-link"]');
+    const copyBtn = container.querySelector('[data-action="copy-link"]');
+    if (openBtn) {
+      openBtn.addEventListener('click', () => {
+        if (!lastGeneratedLink) return;
+        window.open(lastGeneratedLink, '_blank', 'noopener');
+        logGeneratedLink('abrir', lastGeneratedLink);
+      });
+    }
+    if (copyBtn) {
+      copyBtn.addEventListener('click', async () => {
+        if (!lastGeneratedLink) return;
+        try {
+          await navigator.clipboard.writeText(lastGeneratedLink);
+          showToast('Link copiado para a área de transferência', true);
+          logGeneratedLink('copiar', lastGeneratedLink);
+        } catch (err) {
+          showToast('Não foi possível copiar automaticamente. Selecione o texto manualmente.', false);
+        }
+      });
+    }
+  }
+
+  function updateDrawnHighlight(drawnSet, summaryText) {
+    const highlight = document.getElementById('drawn-highlight');
+    if (!highlight) return;
+    if (!drawnSet || drawnSet.size !== 5) {
+      highlight.hidden = true;
+      highlight.querySelector('#drawn-highlight-title').textContent = '';
+      highlight.querySelector('#drawn-highlight-badges').innerHTML = '';
+      return;
+    }
+    const sorted = Array.from(drawnSet).sort((a, b) => a - b).map(pad);
+    highlight.querySelector('#drawn-highlight-title').textContent = `Resultado: ${sorted.join(' • ')}`;
+    const badgesWrapper = highlight.querySelector('#drawn-highlight-badges');
+    badgesWrapper.innerHTML = '';
+    summaryText.split('•').map((item) => item.trim()).forEach((item) => {
+      if (!item) return;
+      const badge = document.createElement('span');
+      badge.className = 'badge ok';
+      badge.innerHTML = `<i class="ph ph-seal-check"></i> ${item}`;
+      badgesWrapper.appendChild(badge);
+    });
+    highlight.hidden = false;
+  }
+
+  function updateAnalyzeButtonLabel() {
+    const analyzeButton = document.getElementById('analyze-btn');
+    const total = Object.keys(betsData).length;
+    if (total === 0) {
+      analyzeButton.innerHTML = '<i class="ph ph-chart-pie"></i><span>Analisar apostas</span>';
+      return;
+    }
+    const label = total === 1 ? 'Analisar aposta' : `Analisar ${total} apostas`;
+    analyzeButton.innerHTML = `<i class="ph ph-chart-pie"></i><span>${label}</span>`;
+  }
+
+  function updateHeaderInfo() {
+    const container = document.getElementById('oculto-ate-preencher');
+    if (!metaData.date) {
+      container.hidden = true;
+      return;
+    }
+    const date = new Date(metaData.date + 'T00:00:00');
+    const formatted = date.toLocaleDateString('pt-BR', { timeZone: 'UTC' });
+    document.getElementById('info-date').textContent = formatted;
+    document.getElementById('info-lottery').textContent = metaData.lotteryLabel || '—';
+    document.getElementById('info-concurso').textContent = metaData.concurso || '—';
+    document.title = `Gamberine - Analisador (${formatted}${metaData.lotteryLabel ? ' · ' + metaData.lotteryLabel : ''})`;
+    container.hidden = false;
+  }
+
+  function pad(n) {
+    return String(n).padStart(2, '0');
+  }
+
+  function getSelectedLotteryLabel() {
+    const select = document.getElementById('lottery-select');
+    if (!select.value) return '';
+    const option = select.querySelector(`option[value="${select.value}"]`);
+    return option ? option.textContent : '';
+  }
+
+  async function updateConcursoSuggestions() {
+    const datalist = document.getElementById('concurso-suggestions');
+    if (!datalist) return;
+    const lottery = document.getElementById('lottery-select').value || 'geral';
+    const date = document.getElementById('result-date').value;
+    datalist.innerHTML = '';
+    if (!date) return;
+    const suggestions = await fetchConcursoSuggestions(lottery, date);
+    suggestions.forEach((value) => {
+      const option = document.createElement('option');
+      option.value = value;
+      datalist.appendChild(option);
+    });
+  }
+
+  function fetchConcursoSuggestions(lottery, date) {
+    return new Promise((resolve) => {
+      if (!date) {
+        resolve([]);
+        return;
+      }
+      const seed = parseInt(date.replace(/-/g, ''), 10) || Date.now();
+      const base = (seed % 9000) + 1000;
+      const items = [base - 1, base, base + 1].map((n) => Math.max(1, n));
+      resolve(items.map(String));
+    });
+  }
+
+  function showToast(message, success = false) {
+    const stack = document.getElementById('toast-stack');
+    const toast = document.createElement('div');
+    toast.className = 'toast' + (success ? ' success' : '');
+    toast.innerHTML = `<i class="ph ${success ? 'ph-star' : 'ph-warning'}"></i><span>${message}</span>`;
+    stack.appendChild(toast);
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      toast.style.transform = 'translateY(6px)';
+      setTimeout(() => toast.remove(), 400);
+    }, 3200);
+  }
+
+  function logGeneratedLink(action, link) {
+    if (!link) return;
+    const payload = { action, link, timestamp: new Date().toISOString() };
+    try {
+      const stored = JSON.parse(localStorage.getItem('gamberine-link-log') || '[]');
+      stored.push(payload);
+      localStorage.setItem('gamberine-link-log', JSON.stringify(stored));
+    } catch (err) {
+      console.warn('Não foi possível registrar no storage local.', err);
+    }
+    if (navigator.sendBeacon) {
+      try {
+        const blob = new Blob([JSON.stringify(payload)], { type: 'application/json' });
+        navigator.sendBeacon('link-log.txt', blob);
+      } catch (err) {
+        console.warn('Envio assíncrono indisponível para o log.', err);
+      }
+    }
+  }
+
+  function hydrateFromUrl() {
+    const url = new URL(window.location.href);
+    const betsParam = url.searchParams.get('bets');
+    const dateParam = url.searchParams.get('date');
+    const drawnParam = url.searchParams.get('d');
+    const lotParam = url.searchParams.get('lot');
+    const concParam = url.searchParams.get('conc');
+
+    if (betsParam) {
+      const betsArray = betsParam.split('_');
+      let text = '';
+      betsArray.forEach((chunk, index) => {
+        if (chunk.split('-').length === 5) {
+          text += `#${String(index + 1).padStart(2, '0')}: ${chunk}\n`;
+        }
+      });
+      document.getElementById('bets-input').value = text.trim();
+    }
+    if (dateParam) {
+      const dateInput = document.getElementById('result-date');
+      const processButton = document.getElementById('process-btn');
+      dateInput.value = dateParam;
+      const isValid = validateDateField();
+      processButton.hidden = !isValid;
+    }
+    if (lotParam) {
+      if (lotteryChoices) {
+        lotteryChoices.setChoiceByValue(lotParam);
+      } else {
+        document.getElementById('lottery-select').value = lotParam;
+      }
+    }
+    if (concParam) {
+      const toggle = document.getElementById('toggle-concurso');
+      toggle.checked = true;
+      document.getElementById('concurso-input-wrapper').hidden = false;
+      document.getElementById('concurso-number').value = concParam;
+    }
+
+    if (betsParam && dateParam) {
+      processInputs();
+      if (drawnParam) {
+        handleInsertResultClick(new Event('click'));
+        const drawnInput = document.getElementById('drawn');
+        if (drawnInput) {
+          drawnInput.value = drawnParam;
+          applyDrawn();
+        }
+      }
+    }
+  }
 </script>
 </body>
 </html>
+
