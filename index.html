@@ -1,374 +1,389 @@
 ﻿<!doctype html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" href="allerto_favicon.png">
   <title>Gamberine - Analisador de Apostas</title>
+  <link rel="stylesheet" href="https://gamberine.com.br/arquivos_publicos/gamb_variables_geral.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css">
   <link rel="stylesheet" href="style.css">
-  <meta name="description" content="Análise prévia, tabela de apostas e marcador automático do resultado das loterias da Caixa.">
+  <meta name="description"
+    content="Análise prévia, tabela de apostas e marcador automático do resultado das loterias da Caixa.">
 
+  <meta name="description"
+    content="Análise prévia, tabela de apostas e marcador automático do resultado das loterias da Caixa.">
 </head>
-<body>
-<header>
-  <h1>Gamberine - Analisador de Apostas</h1>
-  <div id="oculto-ate-preencher" class="sub" hidden>
-    Dados: <span id="info-lottery">—</span> | Concurso: <span id="info-concurso">—</span> | Data do sorteio: <strong id="info-date">—</strong>
-  </div>
-</header>
-<main>
-  <div class="stage-grid">
-    <div class="stage-columns">
-      <fieldset class="card draw-card">
-        <legend>Preencha a data do sorteio</legend>
-        <div class="draw-card__row">
-          <label class="field" for="result-date">
-            <span class="field-label">Data do sorteio <span class="optional">(obrigatória)</span></span>
-            <input type="date" id="result-date" autocomplete="off">
-          </label>
-          <label class="field" for="lottery-select">
-            <span class="field-label">Tipo de loteria <span class="optional">(opcional)</span>
-              <span class="info-button" data-tooltip="Com essa informação e o número do concurso, você terá a experiência completa e poderá receber detalhes futuramente."><i class="ph ph-info"></i></span>
-            </span>
-            <select id="lottery-select" title="Selecione a loteria">
-              <option value="">Selecione</option>
-            </select>
-          </label>
-        </div>
-        <div class="field field-checkbox">
-          <label for="toggle-concurso">
-            <input type="checkbox" id="toggle-concurso">
-            Deseja inserir o número Concurso?
-          </label>
-          <div id="concurso-input-wrapper" hidden>
-            <input type="text" id="concurso-number" list="concurso-suggestions" placeholder="Informe o nº do concurso" autocomplete="off" inputmode="numeric">
-            <datalist id="concurso-suggestions"></datalist>
-          </div>
-        </div>
-      </fieldset>
 
-      <section class="card" id="bets-card">
-        <h2>1. Números apostados</h2>
-        <p class="helper-text">Cole as apostas no formato "#01: 10-20-30-40-50" — uma linha por jogo.</p>
-        <textarea id="bets-input" rows="12" placeholder="#01: 10-20-30-40-50"></textarea>
-        <div class="card-actions">
-          <button id="process-btn" class="btn btnPrimary" hidden type="button">
-            <i class="ph ph-play-circle"></i>
-            <span>Gerar tabela e link</span>
-          </button>
-          <button id="analyze-btn" class="btn btnSecundario" type="button" hidden>
-            <i class="ph ph-chart-pie"></i>
-            <span>Analisar apostas</span>
+<body>
+  <header>
+    <h1>Gamberine - Analisador de Apostas</h1>
+    <div id="oculto-ate-preencher" class="sub" hidden>
+      Dados: <span id="info-lottery">—</span> | Concurso: <span id="info-concurso">—</span> | Data do sorteio: <strong
+        id="info-date">—</strong>
+    </div>
+  </header>
+  <main>
+    <div class="stage-grid">
+      <div class="stage-columns">
+        <fieldset class="card draw-card">
+          <legend>Preencha a data do sorteio</legend>
+          <div class="draw-card__row">
+            <label class="field" for="result-date">
+              <span class="field-label">Data do sorteio <span class="optional">(obrigatória)</span></span>
+              <input type="date" id="result-date" autocomplete="off">
+            </label>
+            <label class="field" for="lottery-select">
+              <span class="field-label">Tipo de loteria <span class="optional">(opcional)</span>
+                <span class="info-button"
+                  data-tooltip="Com essa informação e o número do concurso, você terá a experiência completa e poderá receber detalhes futuramente."><i
+                    class="ph ph-info"></i></span>
+              </span>
+              <select id="lottery-select" title="Selecione a loteria">
+                <option value="">Selecione</option>
+              </select>
+            </label>
+          </div>
+          <div class="field field-checkbox">
+            <label for="toggle-concurso">
+              <input type="checkbox" id="toggle-concurso">
+              Deseja inserir o número Concurso?
+            </label>
+            <div id="concurso-input-wrapper" hidden>
+              <input type="text" id="concurso-number" list="concurso-suggestions" placeholder="Informe o nº do concurso"
+                autocomplete="off" inputmode="numeric">
+              <datalist id="concurso-suggestions"></datalist>
+            </div>
+          </div>
+        </fieldset>
+
+        <section class="card" id="bets-card">
+          <h2>1. Números apostados</h2>
+          <p class="helper-text">Cole as apostas no formato "#01: 10-20-30-40-50" — uma linha por jogo.</p>
+          <textarea id="bets-input" rows="12" placeholder="#01: 10-20-30-40-50"></textarea>
+          <div class="card-actions">
+            <button id="process-btn" class="btn btnPrimary" hidden type="button">
+              <i class="ph ph-play-circle"></i>
+              <span>Gerar tabela e link</span>
+            </button>
+            <button id="analyze-btn" class="btn btnSecundario" type="button" hidden>
+              <i class="ph ph-chart-pie"></i>
+              <span>Analisar apostas</span>
+            </button>
+          </div>
+          <div id="analysis-output" class="analysis-output" hidden></div>
+          <div id="generated-link-container" hidden></div>
+        </section>
+      </div>
+      <div class="stage-column-right">
+        <details class="card accordion" id="analysis-accordion">
+          <summary>
+            <span class="summary-icon"><i class="ph ph-chart-line-up"></i></span>
+            <h2>Parte 1 — Análise prévia</h2>
+            <span class="accordion-arrow"><i class="ph ph-caret-down"></i></span>
+          </summary>
+          <div class="accordion-content">
+            <p>
+              Universo (01–80). Combinações possíveis C(80,5)=<strong>24.040.016</strong>.
+              Probabilidades por jogo: quina 1/24.040.016 • quadra 1/64.106 • terno 1/866 • duque 1/36.
+            </p>
+            <p>
+              Apostas informadas: <span class="badge">40 de 46 recebidas</span>
+              <span class="badge">faltam: 37, 38, 39, 40, 41, 42</span>
+            </p>
+            <ul>
+              <li>Concentração nas dezenas: 31, 32, 35, 37 e na faixa 70–78.</li>
+              <li>Com 46 jogos, chance agregada teórica de quina ˜ 46/24.040.016 (˜ 1 em 522.000).</li>
+              <li>Expectativa realista: ao menos um <strong>terno</strong>; <em>quadra</em> rara porém possível.</li>
+            </ul>
+            <div class="helper-text">Funciona offline — quando o resultado sair, digite as 5 dezenas sorteadas para
+              destacar acertos automaticamente.</div>
+          </div>
+        </details>
+        <div class="accordion-cta">
+          <button id="advance-button" class="btn btnBorder" type="button">
+            <span>Prosseguir</span>
+            <i class="ph ph-arrow-fat-lines-right"></i>
           </button>
         </div>
-        <div id="analysis-output" class="analysis-output" hidden></div>
-        <div id="generated-link-container" hidden></div>
-      </section>
+      </div>
     </div>
-    <div class="stage-column-right">
-      <details class="card accordion" id="analysis-accordion">
+
+    <details class="card accordion" id="bets-accordion" hidden>
+      <summary>
+        <div class="summary-title">
+          <span class="summary-icon"><i class="ph ph-list-checks"></i></span>
+          <h2>Tabela de apostas</h2>
+        </div>
+        <div class="summary-actions">
+          <button id="open-results-btn" class="btn btnPrimary" type="button">
+            <img src="assets/img/icon-concluido.svg" alt="" aria-hidden="true">
+            <span>Inserir resultado</span>
+          </button>
+          <span class="accordion-arrow"><i class="ph ph-caret-down"></i></span>
+        </div>
+      </summary>
+      <div class="accordion-content">
+        <div id="drawn-highlight" hidden>
+          <h2 id="drawn-highlight-title"></h2>
+          <div class="drawn-highlight__badges" id="drawn-highlight-badges"></div>
+        </div>
+        <table id="bets">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Dezenas</th>
+              <th>Acertos</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </details>
+
+    <template id="results-template">
+      <details class="card accordion results-accordion" id="results-accordion" open>
         <summary>
-          <span class="summary-icon"><i class="ph ph-chart-line-up"></i></span>
-          <h2>Parte 1 — Análise prévia</h2>
+          <span class="summary-icon"><i class="ph ph-shooting-star"></i></span>
+          <h2>2. Inserir Resultado do Sorteio</h2>
           <span class="accordion-arrow"><i class="ph ph-caret-down"></i></span>
         </summary>
         <div class="accordion-content">
-          <p>
-            Universo (01–80). Combinações possíveis C(80,5)=<strong>24.040.016</strong>.
-            Probabilidades por jogo: quina 1/24.040.016 • quadra 1/64.106 • terno 1/866 • duque 1/36.
-          </p>
-          <p>
-            Apostas informadas: <span class="badge">40 de 46 recebidas</span>
-            <span class="badge">faltam: 37, 38, 39, 40, 41, 42</span>
-          </p>
-          <ul>
-            <li>Concentração nas dezenas: 31, 32, 35, 37 e na faixa 70–78.</li>
-            <li>Com 46 jogos, chance agregada teórica de quina ˜ 46/24.040.016 (˜ 1 em 522.000).</li>
-            <li>Expectativa realista: ao menos um <strong>terno</strong>; <em>quadra</em> rara porém possível.</li>
-          </ul>
-          <div class="helper-text">Funciona offline — quando o resultado sair, digite as 5 dezenas sorteadas para destacar acertos automaticamente.</div>
-        </div>
-      </details>
-      <div class="accordion-cta">
-        <button id="advance-button" class="btn btnBorder" type="button">
-          <span>Prosseguir</span>
-          <i class="ph ph-arrow-fat-lines-right"></i>
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <details class="card accordion" id="bets-accordion" hidden>
-    <summary>
-      <div class="summary-title">
-        <span class="summary-icon"><i class="ph ph-list-checks"></i></span>
-        <h2>Tabela de apostas</h2>
-      </div>
-      <div class="summary-actions">
-        <button id="open-results-btn" class="btn btnPrimary" type="button">
-          <img src="assets/img/icon-concluido.svg" alt="" aria-hidden="true">
-          <span>Inserir resultado</span>
-        </button>
-        <span class="accordion-arrow"><i class="ph ph-caret-down"></i></span>
-      </div>
-    </summary>
-    <div class="accordion-content">
-      <div id="drawn-highlight" hidden>
-        <h2 id="drawn-highlight-title"></h2>
-        <div class="drawn-highlight__badges" id="drawn-highlight-badges"></div>
-      </div>
-      <table id="bets">
-        <thead>
-          <tr><th>#</th><th>Dezenas</th><th>Acertos</th></tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </div>
-  </details>
-
-  <template id="results-template">
-    <details class="card accordion results-accordion" id="results-accordion" open>
-      <summary>
-        <span class="summary-icon"><i class="ph ph-shooting-star"></i></span>
-        <h2>2. Inserir Resultado do Sorteio</h2>
-        <span class="accordion-arrow"><i class="ph ph-caret-down"></i></span>
-      </summary>
-      <div class="accordion-content">
-        <div class="controls" style="display:flex; flex-direction: column; gap: 16px;">
-          <label class="field" for="drawn">
-            <span class="field-label">Números sorteados</span>
-            <input id="drawn" type="text" placeholder="Ex: 02,16,31,54,78" inputmode="numeric" autocomplete="off">
-          </label>
-          <div class="card-actions">
-            <button class="btn btnPrimary" type="button" id="apply-drawn-btn">
-              <i class="ph ph-check-circle"></i>
-              <span>Aplicar</span>
-            </button>
-            <button class="btn btnSecondary" type="button" id="clear-drawn-btn">
-              <i class="ph ph-broom"></i>
-              <span>Limpar</span>
-            </button>
-            <button class="btn btnBorder" type="button" id="search-result-btn" disabled data-tooltip="Em breve">
-              <i class="ph ph-magnifying-glass"></i>
-              <span>Buscar resultado</span>
-            </button>
-            <span id="summary" class="badge">Aguardando...</span>
+          <div class="controls" style="display:flex; flex-direction: column; gap: 16px;">
+            <label class="field" for="drawn">
+              <span class="field-label">Números sorteados</span>
+              <input id="drawn" type="text" placeholder="Ex: 02,16,31,54,78" inputmode="numeric" autocomplete="off">
+            </label>
+            <div class="card-actions">
+              <button class="btn btnPrimary" type="button" id="apply-drawn-btn">
+                <i class="ph ph-check-circle"></i>
+                <span>Aplicar</span>
+              </button>
+              <button class="btn btnSecondary" type="button" id="clear-drawn-btn">
+                <i class="ph ph-broom"></i>
+                <span>Limpar</span>
+              </button>
+              <button class="btn btnBorder" type="button" id="search-result-btn" disabled data-tooltip="Em breve">
+                <i class="ph ph-magnifying-glass"></i>
+                <span>Buscar resultado</span>
+              </button>
+              <span id="summary" class="badge">Aguardando...</span>
+            </div>
           </div>
         </div>
-      </div>
-    </details>
-  </template>
+      </details>
+    </template>
 
-  <div id="toast-stack"></div>
-</main>
+    <div id="toast-stack"></div>
+  </main>
 
-<footer>© 2025 — Gamberine</footer>
+  <footer>© 2025 — Gamberine</footer>
 
-<script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
-<script src="https://unpkg.com/@phosphor-icons/web"></script>
-<script>
-  const lotteries = [
-    { value: 'mega-sena', label: 'Mega-Sena' },
-    { value: 'quina', label: 'Quina' },
-    { value: 'lotofacil', label: 'Lotofácil' },
-    { value: 'lotomania', label: 'Lotomania' },
-    { value: 'dupla-sena', label: 'Dupla Sena' },
-    { value: 'timemania', label: 'Timemania' },
-    { value: 'dia-de-sorte', label: 'Dia de Sorte' },
-    { value: 'super-sete', label: 'Super Sete' },
-    { value: 'loteca', label: 'Loteca' },
-    { value: 'federal', label: 'Loteria Federal' },
-    { value: 'mais-milionaria', label: 'Mais Milionária' }
-  ];
+  <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <script>
+    const lotteries = [
+      { value: 'mega-sena', label: 'Mega-Sena' },
+      { value: 'quina', label: 'Quina' },
+      { value: 'lotofacil', label: 'Lotofácil' },
+      { value: 'lotomania', label: 'Lotomania' },
+      { value: 'dupla-sena', label: 'Dupla Sena' },
+      { value: 'timemania', label: 'Timemania' },
+      { value: 'dia-de-sorte', label: 'Dia de Sorte' },
+      { value: 'super-sete', label: 'Super Sete' },
+      { value: 'loteca', label: 'Loteca' },
+      { value: 'federal', label: 'Loteria Federal' },
+      { value: 'mais-milionaria', label: 'Mais Milionária' }
+    ];
 
-  let lotteryChoices;
-  let betsData = {};
-  let lastGeneratedLink = '';
-  const metaData = { date: '', lottery: '', lotteryLabel: '', concurso: '' };
+    let lotteryChoices;
+    let betsData = {};
+    let lastGeneratedLink = '';
+    const metaData = { date: '', lottery: '', lotteryLabel: '', concurso: '' };
 
-  document.addEventListener('DOMContentLoaded', () => {
-    setupLotterySelect();
-    bindInteractions();
-    hydrateFromUrl();
-  });
-
-  function setupLotterySelect() {
-    const select = document.getElementById('lottery-select');
-    lotteries.forEach((opt) => {
-      const option = document.createElement('option');
-      option.value = opt.value;
-      option.textContent = opt.label;
-      select.append(option);
+    document.addEventListener('DOMContentLoaded', () => {
+      setupLotterySelect();
+      bindInteractions();
+      hydrateFromUrl();
     });
-    if (window.Choices) {
-      lotteryChoices = new Choices(select, {
-        searchEnabled: true,
-        itemSelectText: '',
-        noResultsText: 'Nada encontrado',
-        noChoicesText: 'Sem opções',
-        placeholder: true,
-        position: 'bottom',
-        shouldSort: false
+
+    function setupLotterySelect() {
+      const select = document.getElementById('lottery-select');
+      lotteries.forEach((opt) => {
+        const option = document.createElement('option');
+        option.value = opt.value;
+        option.textContent = opt.label;
+        select.append(option);
       });
-    }
-  }
-
-  function bindInteractions() {
-    const dateInput = document.getElementById('result-date');
-    const processButton = document.getElementById('process-btn');
-    const analyzeButton = document.getElementById('analyze-btn');
-    const toggleConcurso = document.getElementById('toggle-concurso');
-    const concursoInputWrapper = document.getElementById('concurso-input-wrapper');
-    const concursoInput = document.getElementById('concurso-number');
-    const advanceButton = document.getElementById('advance-button');
-    const insertResultButton = document.getElementById('open-results-btn');
-
-    const now = new Date();
-    const localISODate = new Date(now.getTime() - now.getTimezoneOffset() * 60000).toISOString().split('T')[0];
-    if (!dateInput.min || dateInput.min < localISODate) {
-      dateInput.min = localISODate;
+      if (window.Choices) {
+        lotteryChoices = new Choices(select, {
+          searchEnabled: true,
+          itemSelectText: '',
+          noResultsText: 'Nada encontrado',
+          noChoicesText: 'Sem opções',
+          placeholder: true,
+          position: 'bottom',
+          shouldSort: false
+        });
+      }
     }
 
-    const triggerDatePicker = () => {
-      if (typeof dateInput.showPicker === 'function') {
-        try {
-          dateInput.showPicker();
-        } catch (err) {
+    function bindInteractions() {
+      const dateInput = document.getElementById('result-date');
+      const processButton = document.getElementById('process-btn');
+      const analyzeButton = document.getElementById('analyze-btn');
+      const toggleConcurso = document.getElementById('toggle-concurso');
+      const concursoInputWrapper = document.getElementById('concurso-input-wrapper');
+      const concursoInput = document.getElementById('concurso-number');
+      const advanceButton = document.getElementById('advance-button');
+      const insertResultButton = document.getElementById('open-results-btn');
+
+      const now = new Date();
+      const localISODate = new Date(now.getTime() - now.getTimezoneOffset() * 60000).toISOString().split('T')[0];
+      if (!dateInput.min || dateInput.min < localISODate) {
+        dateInput.min = localISODate;
+      }
+
+      const triggerDatePicker = () => {
+        if (typeof dateInput.showPicker === 'function') {
+          try {
+            dateInput.showPicker();
+          } catch (err) {
+            dateInput.focus();
+          }
+        } else {
           dateInput.focus();
         }
-      } else {
-        dateInput.focus();
-      }
-    };
-    dateInput.addEventListener('click', triggerDatePicker);
-    dateInput.addEventListener('keydown', (event) => {
-      if (event.key === 'Enter' || event.key === ' ') {
-        event.preventDefault();
-        triggerDatePicker();
-      }
-    });
-
-    dateInput.addEventListener('input', () => {
-      const isValid = validateDateField();
-      processButton.hidden = !dateInput.value || !isValid;
-      if (isValid && toggleConcurso.checked) updateConcursoSuggestions();
-    });
-
-    dateInput.addEventListener('blur', () => {
-      const isValid = validateDateField();
-      processButton.hidden = !dateInput.value || !isValid;
-    });
-
-    if (lotteryChoices) {
-      lotteryChoices.passedElement.element.addEventListener('change', () => {
-        if (toggleConcurso.checked) updateConcursoSuggestions();
+      };
+      dateInput.addEventListener('click', triggerDatePicker);
+      dateInput.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          triggerDatePicker();
+        }
       });
-    } else {
-      document.getElementById('lottery-select').addEventListener('change', () => {
-        if (toggleConcurso.checked) updateConcursoSuggestions();
+
+      dateInput.addEventListener('input', () => {
+        const isValid = validateDateField();
+        processButton.hidden = !dateInput.value || !isValid;
+        if (isValid && toggleConcurso.checked) updateConcursoSuggestions();
       });
-    }
 
-    toggleConcurso.addEventListener('change', () => {
-      if (toggleConcurso.checked) {
-        concursoInputWrapper.hidden = false;
-        updateConcursoSuggestions();
-        setTimeout(() => concursoInput.focus({ preventScroll: true }), 50);
+      dateInput.addEventListener('blur', () => {
+        const isValid = validateDateField();
+        processButton.hidden = !dateInput.value || !isValid;
+      });
+
+      if (lotteryChoices) {
+        lotteryChoices.passedElement.element.addEventListener('change', () => {
+          if (toggleConcurso.checked) updateConcursoSuggestions();
+        });
       } else {
-        concursoInputWrapper.hidden = true;
-        concursoInput.value = '';
+        document.getElementById('lottery-select').addEventListener('change', () => {
+          if (toggleConcurso.checked) updateConcursoSuggestions();
+        });
       }
-    });
 
-    processButton.addEventListener('click', processInputs);
-    analyzeButton.addEventListener('click', analyzeBets);
-    advanceButton.addEventListener('click', handleAdvance);
-    insertResultButton.addEventListener('click', handleInsertResultClick);
-  }
+      toggleConcurso.addEventListener('change', () => {
+        if (toggleConcurso.checked) {
+          concursoInputWrapper.hidden = false;
+          updateConcursoSuggestions();
+          setTimeout(() => concursoInput.focus({ preventScroll: true }), 50);
+        } else {
+          concursoInputWrapper.hidden = true;
+          concursoInput.value = '';
+        }
+      });
 
-  function validateDateField() {
-    const dateInput = document.getElementById('result-date');
-    if (!dateInput) return false;
-    if (!dateInput.value) {
-      dateInput.setCustomValidity('Informe a data do sorteio.');
-      return false;
-    }
-    const picked = new Date(dateInput.value + 'T00:00:00');
-    if (Number.isNaN(picked.getTime())) {
-      dateInput.setCustomValidity('Data invalida.');
-      return false;
-    }
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    if (picked < today) {
-      dateInput.setCustomValidity('Use uma data igual ou posterior a hoje.');
-      return false;
-    }
-    dateInput.setCustomValidity('');
-    return true;
-  }
-
-
-  function processInputs() {
-    const betsText = document.getElementById('bets-input').value.trim();
-    const dateInput = document.getElementById('result-date');
-    const dateValue = dateInput.value;
-
-    if (!validateDateField()) {
-      dateInput.reportValidity();
-      return;
+      processButton.addEventListener('click', processInputs);
+      analyzeButton.addEventListener('click', analyzeBets);
+      advanceButton.addEventListener('click', handleAdvance);
+      insertResultButton.addEventListener('click', handleInsertResultClick);
     }
 
-    betsData = parseBets(betsText);
-    if (Object.keys(betsData).length === 0) {
-      alert('Nenhuma aposta válida encontrada. Utilize o formato #01: 10-20-30-40-50');
-      return;
+    function validateDateField() {
+      const dateInput = document.getElementById('result-date');
+      if (!dateInput) return false;
+      if (!dateInput.value) {
+        dateInput.setCustomValidity('Informe a data do sorteio.');
+        return false;
+      }
+      const picked = new Date(dateInput.value + 'T00:00:00');
+      if (Number.isNaN(picked.getTime())) {
+        dateInput.setCustomValidity('Data invalida.');
+        return false;
+      }
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      if (picked < today) {
+        dateInput.setCustomValidity('Use uma data igual ou posterior a hoje.');
+        return false;
+      }
+      dateInput.setCustomValidity('');
+      return true;
     }
 
-    const lotterySelect = document.getElementById('lottery-select');
-    const concursoChecked = document.getElementById('toggle-concurso').checked;
-    const concursoValue = concursoChecked ? document.getElementById('concurso-number').value.trim() : '';
 
-    metaData.date = dateValue;
-    metaData.lottery = lotterySelect.value;
-    metaData.lotteryLabel = getSelectedLotteryLabel();
-    metaData.concurso = concursoValue;
+    function processInputs() {
+      const betsText = document.getElementById('bets-input').value.trim();
+      const dateInput = document.getElementById('result-date');
+      const dateValue = dateInput.value;
 
-    updateHeaderInfo();
-    document.getElementById('analysis-accordion').open = true;
+      if (!validateDateField()) {
+        dateInput.reportValidity();
+        return;
+      }
 
-    renderRows(null);
-    updateLink();
-    updateAnalyzeButtonLabel();
+      betsData = parseBets(betsText);
+      if (Object.keys(betsData).length === 0) {
+        alert('Nenhuma aposta válida encontrada. Utilize o formato #01: 10-20-30-40-50');
+        return;
+      }
 
-    const analyzeButton = document.getElementById('analyze-btn');
-    analyzeButton.hidden = false;
+      const lotterySelect = document.getElementById('lottery-select');
+      const concursoChecked = document.getElementById('toggle-concurso').checked;
+      const concursoValue = concursoChecked ? document.getElementById('concurso-number').value.trim() : '';
 
-    document.getElementById('generated-link-container').hidden = false;
-  }
+      metaData.date = dateValue;
+      metaData.lottery = lotterySelect.value;
+      metaData.lotteryLabel = getSelectedLotteryLabel();
+      metaData.concurso = concursoValue;
 
-  function analyzeBets() {
-    if (Object.keys(betsData).length === 0) {
-      alert('Informe e processe as apostas antes de analisar.');
-      return;
+      updateHeaderInfo();
+      document.getElementById('analysis-accordion').open = true;
+
+      renderRows(null);
+      updateLink();
+      updateAnalyzeButtonLabel();
+
+      const analyzeButton = document.getElementById('analyze-btn');
+      analyzeButton.hidden = false;
+
+      document.getElementById('generated-link-container').hidden = false;
     }
-    const analysisBox = document.getElementById('analysis-output');
-    const totalBets = Object.keys(betsData).length;
-    const universe = 24040016;
-    const quadra = 64106;
-    const terno = 866;
-    const duque = 36;
-    const allNumbers = new Set();
-    Object.values(betsData).forEach(arr => arr.forEach(n => allNumbers.add(n)));
 
-    const chanceQuina = (totalBets / universe) * 100;
-    const chanceQuadra = (totalBets / quadra) * 100;
-    const chanceTerno = (totalBets / terno) * 100;
-    const chanceDuque = (totalBets / duque) * 100;
+    function analyzeBets() {
+      if (Object.keys(betsData).length === 0) {
+        alert('Informe e processe as apostas antes de analisar.');
+        return;
+      }
+      const analysisBox = document.getElementById('analysis-output');
+      const totalBets = Object.keys(betsData).length;
+      const universe = 24040016;
+      const quadra = 64106;
+      const terno = 866;
+      const duque = 36;
+      const allNumbers = new Set();
+      Object.values(betsData).forEach(arr => arr.forEach(n => allNumbers.add(n)));
 
-    analysisBox.hidden = false;
-    analysisBox.innerHTML = `
+      const chanceQuina = (totalBets / universe) * 100;
+      const chanceQuadra = (totalBets / quadra) * 100;
+      const chanceTerno = (totalBets / terno) * 100;
+      const chanceDuque = (totalBets / duque) * 100;
+
+      analysisBox.hidden = false;
+      analysisBox.innerHTML = `
       <h3><i class="ph ph-chart-polar"></i> Painel rápido</h3>
       <p><strong>${totalBets}</strong> ${totalBets === 1 ? 'aposta cadastrada' : 'apostas cadastradas'} envolvendo <strong>${allNumbers.size}</strong> dezenas únicas.</p>
       <ul>
@@ -377,185 +392,185 @@
         <li>Revise concentrações e distribuições antes de prosseguir para maximizar cobertura.</li>
       </ul>
     `;
-    analysisBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  }
-
-  function handleAdvance() {
-    if (Object.keys(betsData).length === 0) {
-      alert('Conclua o processamento das apostas antes de prosseguir.');
-      return;
+      analysisBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
-    const accordion = document.getElementById('analysis-accordion');
-    accordion.open = false;
-    accordion.classList.add('is-completed');
-    const advanceButton = document.getElementById('advance-button');
-    advanceButton.disabled = true;
-    advanceButton.innerHTML = '<i class="ph ph-check-circle"></i><span>Concluído</span>';
-    const betsAccordion = document.getElementById('bets-accordion');
-    betsAccordion.hidden = false;
-    betsAccordion.open = true;
-  }
 
-  function handleInsertResultClick(event) {
-    if (event) {
-      event.stopPropagation();
-      if (event.preventDefault) event.preventDefault();
-    }
-    let resultsAccordion = document.getElementById('results-accordion');
-    if (!resultsAccordion) {
-      const template = document.getElementById('results-template');
-      const fragment = template.content.cloneNode(true);
+    function handleAdvance() {
+      if (Object.keys(betsData).length === 0) {
+        alert('Conclua o processamento das apostas antes de prosseguir.');
+        return;
+      }
+      const accordion = document.getElementById('analysis-accordion');
+      accordion.open = false;
+      accordion.classList.add('is-completed');
+      const advanceButton = document.getElementById('advance-button');
+      advanceButton.disabled = true;
+      advanceButton.innerHTML = '<i class="ph ph-check-circle"></i><span>Concluído</span>';
       const betsAccordion = document.getElementById('bets-accordion');
-      betsAccordion.parentNode.insertBefore(fragment, betsAccordion);
-      resultsAccordion = document.getElementById('results-accordion');
-      bindResultsAccordion();
+      betsAccordion.hidden = false;
+      betsAccordion.open = true;
     }
-    resultsAccordion.hidden = false;
-    resultsAccordion.open = true;
-    const betsAccordion = document.getElementById('bets-accordion');
-    betsAccordion.open = false;
-  }
 
-  function bindResultsAccordion() {
-    const applyButton = document.getElementById('apply-drawn-btn');
-    const clearButton = document.getElementById('clear-drawn-btn');
-    const searchButton = document.getElementById('search-result-btn');
-    applyButton.addEventListener('click', applyDrawn);
-    clearButton.addEventListener('click', clearDrawn);
-    searchButton.addEventListener('click', (event) => event.stopPropagation());
-  }
+    function handleInsertResultClick(event) {
+      if (event) {
+        event.stopPropagation();
+        if (event.preventDefault) event.preventDefault();
+      }
+      let resultsAccordion = document.getElementById('results-accordion');
+      if (!resultsAccordion) {
+        const template = document.getElementById('results-template');
+        const fragment = template.content.cloneNode(true);
+        const betsAccordion = document.getElementById('bets-accordion');
+        betsAccordion.parentNode.insertBefore(fragment, betsAccordion);
+        resultsAccordion = document.getElementById('results-accordion');
+        bindResultsAccordion();
+      }
+      resultsAccordion.hidden = false;
+      resultsAccordion.open = true;
+      const betsAccordion = document.getElementById('bets-accordion');
+      betsAccordion.open = false;
+    }
 
-  function parseBets(text) {
-    const lines = text.split('\n');
-    const parsed = {};
-    for (const line of lines) {
-      if (line.trim() === '') continue;
-      const match = line.match(/#?(\d+)\s*:\s*([\d\s,-]+)/);
-      if (match) {
-        const id = parseInt(match[1], 10);
-        const numbers = match[2].match(/\d+/g);
-        if (numbers && numbers.length === 5) {
-          parsed[id] = numbers.map((n) => parseInt(n, 10));
+    function bindResultsAccordion() {
+      const applyButton = document.getElementById('apply-drawn-btn');
+      const clearButton = document.getElementById('clear-drawn-btn');
+      const searchButton = document.getElementById('search-result-btn');
+      applyButton.addEventListener('click', applyDrawn);
+      clearButton.addEventListener('click', clearDrawn);
+      searchButton.addEventListener('click', (event) => event.stopPropagation());
+    }
+
+    function parseBets(text) {
+      const lines = text.split('\n');
+      const parsed = {};
+      for (const line of lines) {
+        if (line.trim() === '') continue;
+        const match = line.match(/#?(\d+)\s*:\s*([\d\s,-]+)/);
+        if (match) {
+          const id = parseInt(match[1], 10);
+          const numbers = match[2].match(/\d+/g);
+          if (numbers && numbers.length === 5) {
+            parsed[id] = numbers.map((n) => parseInt(n, 10));
+          }
         }
       }
+      return parsed;
     }
-    return parsed;
-  }
 
-  function renderRows(drawnSet) {
-    const tbody = document.querySelector('#bets tbody');
-    tbody.innerHTML = '';
-    const keys = Object.keys(betsData).map((k) => parseInt(k, 10)).sort((a, b) => a - b);
-    keys.forEach((key) => {
-      const row = document.createElement('tr');
-      const idx = document.createElement('td');
-      idx.textContent = '#' + pad(key);
-      const nums = document.createElement('td');
-      const hitsCell = document.createElement('td');
-      let hits = 0;
-      betsData[key].forEach((num) => {
-        const span = document.createElement('span');
-        const isHit = drawnSet && drawnSet.has(num);
-        span.className = 'num' + (isHit ? ' drawn hit' : '');
-        span.textContent = pad(num);
-        nums.appendChild(span);
-        if (isHit) hits += 1;
+    function renderRows(drawnSet) {
+      const tbody = document.querySelector('#bets tbody');
+      tbody.innerHTML = '';
+      const keys = Object.keys(betsData).map((k) => parseInt(k, 10)).sort((a, b) => a - b);
+      keys.forEach((key) => {
+        const row = document.createElement('tr');
+        const idx = document.createElement('td');
+        idx.textContent = '#' + pad(key);
+        const nums = document.createElement('td');
+        const hitsCell = document.createElement('td');
+        let hits = 0;
+        betsData[key].forEach((num) => {
+          const span = document.createElement('span');
+          const isHit = drawnSet && drawnSet.has(num);
+          span.className = 'num' + (isHit ? ' drawn hit' : '');
+          span.textContent = pad(num);
+          nums.appendChild(span);
+          if (isHit) hits += 1;
+        });
+        hitsCell.textContent = hits;
+        row.append(idx, nums, hitsCell);
+        tbody.appendChild(row);
       });
-      hitsCell.textContent = hits;
-      row.append(idx, nums, hitsCell);
-      tbody.appendChild(row);
-    });
-  }
+    }
 
-  function parseDrawn(input) {
-    const digits = input.replace(/\D/g, '');
-    const nums = new Set();
-    for (let i = 0; i < digits.length && nums.size < 5; i += 2) {
-      const n = parseInt(digits.substring(i, i + 2), 10);
-      if (!Number.isNaN(n) && n >= 1 && n <= 80) {
-        nums.add(n);
+    function parseDrawn(input) {
+      const digits = input.replace(/\D/g, '');
+      const nums = new Set();
+      for (let i = 0; i < digits.length && nums.size < 5; i += 2) {
+        const n = parseInt(digits.substring(i, i + 2), 10);
+        if (!Number.isNaN(n) && n >= 1 && n <= 80) {
+          nums.add(n);
+        }
       }
+      return nums;
     }
-    return nums;
-  }
 
-  function applyDrawn() {
-    const drawnInput = document.getElementById('drawn');
-    if (!drawnInput) return;
-    const drawnSet = parseDrawn(drawnInput.value);
-    if (drawnSet.size !== 5) {
+    function applyDrawn() {
+      const drawnInput = document.getElementById('drawn');
+      if (!drawnInput) return;
+      const drawnSet = parseDrawn(drawnInput.value);
+      if (drawnSet.size !== 5) {
+        const summary = document.getElementById('summary');
+        summary.textContent = 'Informe exatamente 5 dezenas válidas';
+        summary.className = 'badge';
+        return;
+      }
+      drawnInput.value = Array.from(drawnSet).sort((a, b) => a - b).map(pad).join('-');
+      renderRows(drawnSet);
+      updateLink(drawnSet);
+
+      const rows = Array.from(document.querySelectorAll('#bets tbody tr'));
+      let t2 = 0, t3 = 0, t4 = 0, t5 = 0;
+      rows.forEach((row) => {
+        const count = parseInt(row.lastChild.textContent || '0', 10);
+        if (count === 2) t2 += 1;
+        else if (count === 3) t3 += 1;
+        else if (count === 4) t4 += 1;
+        else if (count === 5) t5 += 1;
+      });
+      const summaryText = `Duques: ${t2} • Ternos: ${t3} • Quadras: ${t4} • Quinas: ${t5}`;
       const summary = document.getElementById('summary');
-      summary.textContent = 'Informe exatamente 5 dezenas válidas';
+      summary.textContent = summaryText;
+      summary.className = 'badge ok';
+
+      updateDrawnHighlight(drawnSet, summaryText);
+      showToast(`Duques: ${t2} • Ternos: ${t3} • Quadras: ${t4} • Quinas: ${t5}`, true);
+      logGeneratedLink('resultado', lastGeneratedLink);
+    }
+
+    function clearDrawn() {
+      const drawnInput = document.getElementById('drawn');
+      if (!drawnInput) return;
+      drawnInput.value = '';
+      const summary = document.getElementById('summary');
+      summary.textContent = 'Aguardando...';
       summary.className = 'badge';
-      return;
+      renderRows(null);
+      updateLink();
+      updateDrawnHighlight(null, '');
     }
-    drawnInput.value = Array.from(drawnSet).sort((a, b) => a - b).map(pad).join('-');
-    renderRows(drawnSet);
-    updateLink(drawnSet);
 
-    const rows = Array.from(document.querySelectorAll('#bets tbody tr'));
-    let t2 = 0, t3 = 0, t4 = 0, t5 = 0;
-    rows.forEach((row) => {
-      const count = parseInt(row.lastChild.textContent || '0', 10);
-      if (count === 2) t2 += 1;
-      else if (count === 3) t3 += 1;
-      else if (count === 4) t4 += 1;
-      else if (count === 5) t5 += 1;
-    });
-    const summaryText = `Duques: ${t2} • Ternos: ${t3} • Quadras: ${t4} • Quinas: ${t5}`;
-    const summary = document.getElementById('summary');
-    summary.textContent = summaryText;
-    summary.className = 'badge ok';
-
-    updateDrawnHighlight(drawnSet, summaryText);
-    showToast(`Duques: ${t2} • Ternos: ${t3} • Quadras: ${t4} • Quinas: ${t5}`, true);
-    logGeneratedLink('resultado', lastGeneratedLink);
-  }
-
-  function clearDrawn() {
-    const drawnInput = document.getElementById('drawn');
-    if (!drawnInput) return;
-    drawnInput.value = '';
-    const summary = document.getElementById('summary');
-    summary.textContent = 'Aguardando...';
-    summary.className = 'badge';
-    renderRows(null);
-    updateLink();
-    updateDrawnHighlight(null, '');
-  }
-
-  function updateLink(drawnSet) {
-    const container = document.getElementById('generated-link-container');
-    if (Object.keys(betsData).length === 0) {
-      container.hidden = true;
-      container.innerHTML = '';
-      lastGeneratedLink = '';
-      return;
-    }
-    const url = new URL(window.location.href);
-    url.search = '';
-    const betsString = Object.keys(betsData)
-      .map((key) => ({ key: parseInt(key, 10), value: betsData[key] }))
-      .sort((a, b) => a.key - b.key)
-      .map((entry) => entry.value.map(pad).join('-'))
-      .join('_');
-    url.searchParams.set('bets', betsString);
-    if (metaData.date) {
-      url.searchParams.set('date', metaData.date);
-    }
-    if (metaData.lottery) {
-      url.searchParams.set('lot', metaData.lottery);
-    }
-    if (metaData.concurso) {
-      url.searchParams.set('conc', metaData.concurso);
-    }
-    const drawnInput = document.getElementById('drawn');
-    if (drawnInput && drawnInput.value && drawnSet && drawnSet.size === 5) {
-      url.searchParams.set('d', Array.from(drawnSet).sort((a, b) => a - b).map(pad).join(','));
-    }
-    lastGeneratedLink = url.toString();
-    container.hidden = false;
-    container.innerHTML = `
+    function updateLink(drawnSet) {
+      const container = document.getElementById('generated-link-container');
+      if (Object.keys(betsData).length === 0) {
+        container.hidden = true;
+        container.innerHTML = '';
+        lastGeneratedLink = '';
+        return;
+      }
+      const url = new URL(window.location.href);
+      url.search = '';
+      const betsString = Object.keys(betsData)
+        .map((key) => ({ key: parseInt(key, 10), value: betsData[key] }))
+        .sort((a, b) => a.key - b.key)
+        .map((entry) => entry.value.map(pad).join('-'))
+        .join('_');
+      url.searchParams.set('bets', betsString);
+      if (metaData.date) {
+        url.searchParams.set('date', metaData.date);
+      }
+      if (metaData.lottery) {
+        url.searchParams.set('lot', metaData.lottery);
+      }
+      if (metaData.concurso) {
+        url.searchParams.set('conc', metaData.concurso);
+      }
+      const drawnInput = document.getElementById('drawn');
+      if (drawnInput && drawnInput.value && drawnSet && drawnSet.size === 5) {
+        url.searchParams.set('d', Array.from(drawnSet).sort((a, b) => a - b).map(pad).join(','));
+      }
+      lastGeneratedLink = url.toString();
+      container.hidden = false;
+      container.innerHTML = `
       <strong>Link gerado</strong>
       <div class="generated-link__row">
         <input type="text" readonly value="${lastGeneratedLink}" aria-label="Link gerado" onclick="this.select()">
@@ -565,206 +580,206 @@
         <button class="btn btnSecondary" type="button" data-action="copy-link"><i class="ph ph-copy"></i><span>Copiar link</span></button>
       </div>
     `;
-    bindGeneratedLinkActions(container);
-  }
-
-  function bindGeneratedLinkActions(container) {
-    const openBtn = container.querySelector('[data-action="open-link"]');
-    const copyBtn = container.querySelector('[data-action="copy-link"]');
-    if (openBtn) {
-      openBtn.addEventListener('click', () => {
-        if (!lastGeneratedLink) return;
-        window.open(lastGeneratedLink, '_blank', 'noopener');
-        logGeneratedLink('abrir', lastGeneratedLink);
-      });
+      bindGeneratedLinkActions(container);
     }
-    if (copyBtn) {
-      copyBtn.addEventListener('click', async () => {
-        if (!lastGeneratedLink) return;
-        try {
-          await navigator.clipboard.writeText(lastGeneratedLink);
-          showToast('Link copiado para a área de transferência', true);
-          logGeneratedLink('copiar', lastGeneratedLink);
-        } catch (err) {
-          showToast('Não foi possível copiar automaticamente. Selecione o texto manualmente.', false);
-        }
-      });
+
+    function bindGeneratedLinkActions(container) {
+      const openBtn = container.querySelector('[data-action="open-link"]');
+      const copyBtn = container.querySelector('[data-action="copy-link"]');
+      if (openBtn) {
+        openBtn.addEventListener('click', () => {
+          if (!lastGeneratedLink) return;
+          window.open(lastGeneratedLink, '_blank', 'noopener');
+          logGeneratedLink('abrir', lastGeneratedLink);
+        });
+      }
+      if (copyBtn) {
+        copyBtn.addEventListener('click', async () => {
+          if (!lastGeneratedLink) return;
+          try {
+            await navigator.clipboard.writeText(lastGeneratedLink);
+            showToast('Link copiado para a área de transferência', true);
+            logGeneratedLink('copiar', lastGeneratedLink);
+          } catch (err) {
+            showToast('Não foi possível copiar automaticamente. Selecione o texto manualmente.', false);
+          }
+        });
+      }
     }
-  }
 
-  function updateDrawnHighlight(drawnSet, summaryText) {
-    const highlight = document.getElementById('drawn-highlight');
-    if (!highlight) return;
-    if (!drawnSet || drawnSet.size !== 5) {
-      highlight.hidden = true;
-      highlight.querySelector('#drawn-highlight-title').textContent = '';
-      highlight.querySelector('#drawn-highlight-badges').innerHTML = '';
-      return;
-    }
-    const sorted = Array.from(drawnSet).sort((a, b) => a - b).map(pad);
-    highlight.querySelector('#drawn-highlight-title').textContent = `Resultado: ${sorted.join(' • ')}`;
-    const badgesWrapper = highlight.querySelector('#drawn-highlight-badges');
-    badgesWrapper.innerHTML = '';
-    summaryText.split('•').map((item) => item.trim()).forEach((item) => {
-      if (!item) return;
-      const badge = document.createElement('span');
-      badge.className = 'badge ok';
-      badge.innerHTML = `<i class="ph ph-seal-check"></i> ${item}`;
-      badgesWrapper.appendChild(badge);
-    });
-    highlight.hidden = false;
-  }
-
-  function updateAnalyzeButtonLabel() {
-    const analyzeButton = document.getElementById('analyze-btn');
-    const total = Object.keys(betsData).length;
-    if (total === 0) {
-      analyzeButton.innerHTML = '<i class="ph ph-chart-pie"></i><span>Analisar apostas</span>';
-      return;
-    }
-    const label = total === 1 ? 'Analisar aposta' : `Analisar ${total} apostas`;
-    analyzeButton.innerHTML = `<i class="ph ph-chart-pie"></i><span>${label}</span>`;
-  }
-
-  function updateHeaderInfo() {
-    const container = document.getElementById('oculto-ate-preencher');
-    if (!metaData.date) {
-      container.hidden = true;
-      return;
-    }
-    const date = new Date(metaData.date + 'T00:00:00');
-    const formatted = date.toLocaleDateString('pt-BR', { timeZone: 'UTC' });
-    document.getElementById('info-date').textContent = formatted;
-    document.getElementById('info-lottery').textContent = metaData.lotteryLabel || '—';
-    document.getElementById('info-concurso').textContent = metaData.concurso || '—';
-    document.title = `Gamberine - Analisador (${formatted}${metaData.lotteryLabel ? ' · ' + metaData.lotteryLabel : ''})`;
-    container.hidden = false;
-  }
-
-  function pad(n) {
-    return String(n).padStart(2, '0');
-  }
-
-  function getSelectedLotteryLabel() {
-    const select = document.getElementById('lottery-select');
-    if (!select.value) return '';
-    const option = select.querySelector(`option[value="${select.value}"]`);
-    return option ? option.textContent : '';
-  }
-
-  async function updateConcursoSuggestions() {
-    const datalist = document.getElementById('concurso-suggestions');
-    if (!datalist) return;
-    const lottery = document.getElementById('lottery-select').value || 'geral';
-    const date = document.getElementById('result-date').value;
-    datalist.innerHTML = '';
-    if (!date) return;
-    const suggestions = await fetchConcursoSuggestions(lottery, date);
-    suggestions.forEach((value) => {
-      const option = document.createElement('option');
-      option.value = value;
-      datalist.appendChild(option);
-    });
-  }
-
-  function fetchConcursoSuggestions(lottery, date) {
-    return new Promise((resolve) => {
-      if (!date) {
-        resolve([]);
+    function updateDrawnHighlight(drawnSet, summaryText) {
+      const highlight = document.getElementById('drawn-highlight');
+      if (!highlight) return;
+      if (!drawnSet || drawnSet.size !== 5) {
+        highlight.hidden = true;
+        highlight.querySelector('#drawn-highlight-title').textContent = '';
+        highlight.querySelector('#drawn-highlight-badges').innerHTML = '';
         return;
       }
-      const seed = parseInt(date.replace(/-/g, ''), 10) || Date.now();
-      const base = (seed % 9000) + 1000;
-      const items = [base - 1, base, base + 1].map((n) => Math.max(1, n));
-      resolve(items.map(String));
-    });
-  }
-
-  function showToast(message, success = false) {
-    const stack = document.getElementById('toast-stack');
-    const toast = document.createElement('div');
-    toast.className = 'toast' + (success ? ' success' : '');
-    toast.innerHTML = `<i class="ph ${success ? 'ph-star' : 'ph-warning'}"></i><span>${message}</span>`;
-    stack.appendChild(toast);
-    setTimeout(() => {
-      toast.style.opacity = '0';
-      toast.style.transform = 'translateY(6px)';
-      setTimeout(() => toast.remove(), 400);
-    }, 3200);
-  }
-
-  function logGeneratedLink(action, link) {
-    if (!link) return;
-    const payload = { action, link, timestamp: new Date().toISOString() };
-    try {
-      const stored = JSON.parse(localStorage.getItem('gamberine-link-log') || '[]');
-      stored.push(payload);
-      localStorage.setItem('gamberine-link-log', JSON.stringify(stored));
-    } catch (err) {
-      console.warn('Não foi possível registrar no storage local.', err);
-    }
-    if (navigator.sendBeacon) {
-      try {
-        const blob = new Blob([JSON.stringify(payload)], { type: 'application/json' });
-        navigator.sendBeacon('link-log.txt', blob);
-      } catch (err) {
-        console.warn('Envio assíncrono indisponível para o log.', err);
-      }
-    }
-  }
-
-  function hydrateFromUrl() {
-    const url = new URL(window.location.href);
-    const betsParam = url.searchParams.get('bets');
-    const dateParam = url.searchParams.get('date');
-    const drawnParam = url.searchParams.get('d');
-    const lotParam = url.searchParams.get('lot');
-    const concParam = url.searchParams.get('conc');
-
-    if (betsParam) {
-      const betsArray = betsParam.split('_');
-      let text = '';
-      betsArray.forEach((chunk, index) => {
-        if (chunk.split('-').length === 5) {
-          text += `#${String(index + 1).padStart(2, '0')}: ${chunk}\n`;
-        }
+      const sorted = Array.from(drawnSet).sort((a, b) => a - b).map(pad);
+      highlight.querySelector('#drawn-highlight-title').textContent = `Resultado: ${sorted.join(' • ')}`;
+      const badgesWrapper = highlight.querySelector('#drawn-highlight-badges');
+      badgesWrapper.innerHTML = '';
+      summaryText.split('•').map((item) => item.trim()).forEach((item) => {
+        if (!item) return;
+        const badge = document.createElement('span');
+        badge.className = 'badge ok';
+        badge.innerHTML = `<i class="ph ph-seal-check"></i> ${item}`;
+        badgesWrapper.appendChild(badge);
       });
-      document.getElementById('bets-input').value = text.trim();
-    }
-    if (dateParam) {
-      const dateInput = document.getElementById('result-date');
-      const processButton = document.getElementById('process-btn');
-      dateInput.value = dateParam;
-      const isValid = validateDateField();
-      processButton.hidden = !isValid;
-    }
-    if (lotParam) {
-      if (lotteryChoices) {
-        lotteryChoices.setChoiceByValue(lotParam);
-      } else {
-        document.getElementById('lottery-select').value = lotParam;
-      }
-    }
-    if (concParam) {
-      const toggle = document.getElementById('toggle-concurso');
-      toggle.checked = true;
-      document.getElementById('concurso-input-wrapper').hidden = false;
-      document.getElementById('concurso-number').value = concParam;
+      highlight.hidden = false;
     }
 
-    if (betsParam && dateParam) {
-      processInputs();
-      if (drawnParam) {
-        handleInsertResultClick(new Event('click'));
-        const drawnInput = document.getElementById('drawn');
-        if (drawnInput) {
-          drawnInput.value = drawnParam;
-          applyDrawn();
+    function updateAnalyzeButtonLabel() {
+      const analyzeButton = document.getElementById('analyze-btn');
+      const total = Object.keys(betsData).length;
+      if (total === 0) {
+        analyzeButton.innerHTML = '<i class="ph ph-chart-pie"></i><span>Analisar apostas</span>';
+        return;
+      }
+      const label = total === 1 ? 'Analisar aposta' : `Analisar ${total} apostas`;
+      analyzeButton.innerHTML = `<i class="ph ph-chart-pie"></i><span>${label}</span>`;
+    }
+
+    function updateHeaderInfo() {
+      const container = document.getElementById('oculto-ate-preencher');
+      if (!metaData.date) {
+        container.hidden = true;
+        return;
+      }
+      const date = new Date(metaData.date + 'T00:00:00');
+      const formatted = date.toLocaleDateString('pt-BR', { timeZone: 'UTC' });
+      document.getElementById('info-date').textContent = formatted;
+      document.getElementById('info-lottery').textContent = metaData.lotteryLabel || '—';
+      document.getElementById('info-concurso').textContent = metaData.concurso || '—';
+      document.title = `Gamberine - Analisador (${formatted}${metaData.lotteryLabel ? ' · ' + metaData.lotteryLabel : ''})`;
+      container.hidden = false;
+    }
+
+    function pad(n) {
+      return String(n).padStart(2, '0');
+    }
+
+    function getSelectedLotteryLabel() {
+      const select = document.getElementById('lottery-select');
+      if (!select.value) return '';
+      const option = select.querySelector(`option[value="${select.value}"]`);
+      return option ? option.textContent : '';
+    }
+
+    async function updateConcursoSuggestions() {
+      const datalist = document.getElementById('concurso-suggestions');
+      if (!datalist) return;
+      const lottery = document.getElementById('lottery-select').value || 'geral';
+      const date = document.getElementById('result-date').value;
+      datalist.innerHTML = '';
+      if (!date) return;
+      const suggestions = await fetchConcursoSuggestions(lottery, date);
+      suggestions.forEach((value) => {
+        const option = document.createElement('option');
+        option.value = value;
+        datalist.appendChild(option);
+      });
+    }
+
+    function fetchConcursoSuggestions(lottery, date) {
+      return new Promise((resolve) => {
+        if (!date) {
+          resolve([]);
+          return;
+        }
+        const seed = parseInt(date.replace(/-/g, ''), 10) || Date.now();
+        const base = (seed % 9000) + 1000;
+        const items = [base - 1, base, base + 1].map((n) => Math.max(1, n));
+        resolve(items.map(String));
+      });
+    }
+
+    function showToast(message, success = false) {
+      const stack = document.getElementById('toast-stack');
+      const toast = document.createElement('div');
+      toast.className = 'toast' + (success ? ' success' : '');
+      toast.innerHTML = `<i class="ph ${success ? 'ph-star' : 'ph-warning'}"></i><span>${message}</span>`;
+      stack.appendChild(toast);
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(6px)';
+        setTimeout(() => toast.remove(), 400);
+      }, 3200);
+    }
+
+    function logGeneratedLink(action, link) {
+      if (!link) return;
+      const payload = { action, link, timestamp: new Date().toISOString() };
+      try {
+        const stored = JSON.parse(localStorage.getItem('gamberine-link-log') || '[]');
+        stored.push(payload);
+        localStorage.setItem('gamberine-link-log', JSON.stringify(stored));
+      } catch (err) {
+        console.warn('Não foi possível registrar no storage local.', err);
+      }
+      if (navigator.sendBeacon) {
+        try {
+          const blob = new Blob([JSON.stringify(payload)], { type: 'application/json' });
+          navigator.sendBeacon('link-log.txt', blob);
+        } catch (err) {
+          console.warn('Envio assíncrono indisponível para o log.', err);
         }
       }
     }
-  }
-</script>
-</body>
-</html>
 
+    function hydrateFromUrl() {
+      const url = new URL(window.location.href);
+      const betsParam = url.searchParams.get('bets');
+      const dateParam = url.searchParams.get('date');
+      const drawnParam = url.searchParams.get('d');
+      const lotParam = url.searchParams.get('lot');
+      const concParam = url.searchParams.get('conc');
+
+      if (betsParam) {
+        const betsArray = betsParam.split('_');
+        let text = '';
+        betsArray.forEach((chunk, index) => {
+          if (chunk.split('-').length === 5) {
+            text += `#${String(index + 1).padStart(2, '0')}: ${chunk}\n`;
+          }
+        });
+        document.getElementById('bets-input').value = text.trim();
+      }
+      if (dateParam) {
+        const dateInput = document.getElementById('result-date');
+        const processButton = document.getElementById('process-btn');
+        dateInput.value = dateParam;
+        const isValid = validateDateField();
+        processButton.hidden = !isValid;
+      }
+      if (lotParam) {
+        if (lotteryChoices) {
+          lotteryChoices.setChoiceByValue(lotParam);
+        } else {
+          document.getElementById('lottery-select').value = lotParam;
+        }
+      }
+      if (concParam) {
+        const toggle = document.getElementById('toggle-concurso');
+        toggle.checked = true;
+        document.getElementById('concurso-input-wrapper').hidden = false;
+        document.getElementById('concurso-number').value = concParam;
+      }
+
+      if (betsParam && dateParam) {
+        processInputs();
+        if (drawnParam) {
+          handleInsertResultClick(new Event('click'));
+          const drawnInput = document.getElementById('drawn');
+          if (drawnInput) {
+            drawnInput.value = drawnParam;
+            applyDrawn();
+          }
+        }
+      }
+    }
+  </script>
+</body>
+
+</html>
