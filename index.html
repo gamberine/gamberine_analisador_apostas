@@ -6,183 +6,318 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" href="allerto_favicon.png">
   <title>Gamberine - Analisador de Apostas</title>
-  <link rel="stylesheet" href="https://gamberine.com.br/arquivos_publicos/gamb_variables_geral.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css">
-  <link rel="stylesheet" href="style.css">
   <meta name="description"
     content="Análise prévia, tabela de apostas e marcador automático do resultado das loterias da Caixa.">
 
-  <meta name="description"
-    content="Análise prévia, tabela de apostas e marcador automático do resultado das loterias da Caixa.">
+  <link rel="stylesheet" href="variables.css">
+  <script>
+    tailwind = {
+      config: {
+        theme: {
+          extend: {
+            colors: {
+              base: 'var(--bg)',
+              surface: 'var(--card)',
+              'surface-muted': 'var(--bgSecundario)',
+              border: 'var(--border)',
+              text: 'var(--text)',
+              muted: 'var(--muted)',
+              branca: 'var(--branca)',
+              accent: 'var(--accent)',
+              highlight: 'var(--destaque)',
+              success: 'var(--ok)',
+              danger: 'var(--danger)',
+              info: 'var(--drawn)',
+              warm: 'var(--warm)',
+              primary: 'var(--primaryColor)',
+              'primary-hover': 'var(--primaryColorHover)'
+            },
+            fontFamily: {
+              sans: ['var(--fontConteudo)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+              display: ['var(--fontTitulos)', 'var(--fontConteudo)', 'ui-sans-serif', 'system-ui', 'sans-serif']
+            },
+            boxShadow: {
+              card: '0 18px 32px -24px var(--shadow)'
+            },
+            backgroundImage: {
+              header: 'var(--gradientHeader)'
+            }
+          }
+        }
+      }
+    };
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
-  <header>
-    <h1>Gamberine - Analisador de Apostas</h1>
-    <div id="oculto-ate-preencher" class="sub" hidden>
-      Dados: <span id="info-lottery">—</span> | Concurso: <span id="info-concurso">—</span> | Data do sorteio: <strong
-        id="info-date">—</strong>
+<body class="min-h-screen bg-base font-sans text-text antialiased">
+  <header class="sticky top-0 z-20 bg-header bg-cover bg-center">
+    <div class="mx-auto flex w-full max-w-6xl flex-col gap-2 px-4 py-6">
+      <h1 class="font-display text-2xl font-semibold text-branca">Gamberine - Analisador de Apostas</h1>
+      <div id="oculto-ate-preencher" class="hidden text-sm text-muted" hidden>
+        Dados:
+        <span class="font-medium text-branca" id="info-lottery">-</span>
+        <span class="text-muted">|</span>
+        Concurso:
+        <span class="font-medium text-branca" id="info-concurso">-</span>
+        <span class="text-muted">|</span>
+        Data do sorteio:
+        <strong class="font-semibold text-branca" id="info-date">-</strong>
+      </div>
     </div>
   </header>
-  <main>
-    <div class="stage-grid">
-      <div class="stage-columns">
-        <fieldset class="card draw-card">
-          <legend>Preencha a data do sorteio</legend>
-          <div class="draw-card__row">
-            <label class="field" for="result-date">
-              <span class="field-label">Data do sorteio <span class="optional">(obrigatória)</span></span>
-              <input type="date" id="result-date" autocomplete="off">
-            </label>
-            <label class="field" for="lottery-select">
-              <span class="field-label">Tipo de loteria <span class="optional">(opcional)</span>
-                <span class="info-button"
-                  data-tooltip="Com essa informação e o número do concurso, você terá a experiência completa e poderá receber detalhes futuramente."><i
-                    class="ph ph-info"></i></span>
+
+  <main class="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-10">
+    <fieldset class="rounded-2xl bg-surface shadow-card" data-accordion data-open>
+      <legend
+        class="flex items-center justify-between gap-2 px-6 py-4 text-sm font-semibold uppercase tracking-wide text-muted">
+        <span class="flex items-center gap-2">
+          <i class="ph ph-calendar-blank text-accent"></i>
+          Dados do sorteio
+        </span>
+        <button type="button" class="accordion-toggle text-muted transition hover:text-branca" aria-expanded="true">
+          <span class="sr-only">Alternar exibição</span>
+          <i class="ph ph-caret-up text-lg"></i>
+        </button>
+      </legend>
+      <div class="space-y-6 px-6 py-6" data-accordion-panel>
+        <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+          <label class="flex flex-col gap-2 text-sm" for="result-date">
+            <span class="text-xs font-semibold uppercase tracking-wide text-muted">Data do sorteio <span
+                class="text-danger">*</span></span>
+            <input type="date" id="result-date"
+              class="w-full rounded-xl bg-surface-muted/60 px-4 py-3 text-sm text-branca shadow-inner-sm outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/40">
+          </label>
+          <label class="flex flex-col gap-2 text-sm" for="lottery-select">
+            <span class="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-muted">
+              Modalidade da aposta
+              <span class="relative"
+                data-tooltip="Com essa informação e o número do concurso, você terá a experiência completa e poderá receber detalhes futuramente.">
+                <i class="ph ph-info text-muted"></i>
               </span>
-              <select id="lottery-select" title="Selecione a loteria">
-                <option value="">Selecione</option>
-              </select>
+            </span>
+            <select id="lottery-select"
+              class="w-full appearance-none rounded-xl bg-surface-muted/60 px-4 py-3 text-sm text-branca outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/40">
+              <option value="">Selecione</option>
+            </select>
+          </label>
+          <div class="flex flex-col text-sm">
+            <label class="flex items-startrounded-xl bg-surface-muted/40 px-4">
+              <input type="checkbox" id="toggle-concurso" class="mt-1 h-4 w-4 rounded bg-surface accent-accent">
+              <span class="leading-relaxed text-muted">Deseja inserir o número do concurso?</span>
             </label>
-          </div>
-          <div class="field field-checkbox">
-            <label for="toggle-concurso">
-              <input type="checkbox" id="toggle-concurso">
-              Deseja inserir o número Concurso?
-            </label>
-            <div id="concurso-input-wrapper" hidden>
+            <div id="concurso-input-wrapper" class="hidden">
               <input type="text" id="concurso-number" list="concurso-suggestions" placeholder="Informe o nº do concurso"
-                autocomplete="off" inputmode="numeric">
+                inputmode="numeric"
+                class="w-full rounded-xl bg-surface-muted/60 px-4 py-3 text-sm text-branca outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/40">
               <datalist id="concurso-suggestions"></datalist>
             </div>
           </div>
-        </fieldset>
-
-        <section class="card" id="bets-card">
-          <h2>1. Números apostados</h2>
-          <p class="helper-text">Cole as apostas no formato "#01: 10-20-30-40-50" — uma linha por jogo.</p>
-          <textarea id="bets-input" rows="12" placeholder="#01: 10-20-30-40-50"></textarea>
-          <div class="card-actions">
-            <button id="process-btn" class="btn btnPrimary" hidden type="button">
+        </div>
+        <p class="text-xs text-muted">Preencha a data e a modalidade para habilitar as próximas etapas automaticamente.
+        </p>
+      </div>
+    </fieldset>
+    <fieldset class="rounded-2xl bg-surface shadow-card" data-accordion data-open>
+      <legend
+        class="flex items-center justify-between gap-2 px-6 py-4 text-sm font-semibold uppercase tracking-wide text-muted">
+        <span class="flex items-center gap-2">
+          <i class="ph ph-number-circle-five text-accent"></i>
+          Dados da(s) aposta(s)
+        </span>
+        <button type="button" class="accordion-toggle text-muted transition hover:text-branca" aria-expanded="true">
+          <span class="sr-only">Alternar exibição</span>
+          <i class="ph ph-caret-up text-lg"></i>
+        </button>
+      </legend>
+      <div class="space-y-4 px-6 py-6" data-accordion-panel>
+        <label class="flex flex-col gap-3 text-sm" for="bets-input">
+          <span class="text-xs font-semibold uppercase tracking-wide text-muted">
+            Números apostados
+            <span class="text-muted" id="bets-input-format">Formato padrão "#01: 10-20-30-40-50"</span>
+          </span>
+          <textarea id="bets-input" rows="4" placeholder="Cole ou digite aqui suas apostas"
+            class="min-h-[112px] w-full resize-y rounded-xl bg-surface-muted/60 px-4 py-3 text-sm text-branca outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/40"></textarea>
+        </label>
+        <p class="text-xs leading-relaxed text-muted" id="bets-hint">Informe 5 dezenas (01-80) por aposta. Cole qualquer
+          formato e nós organizamos automaticamente.</p>
+      </div>
+    </fieldset>
+    <fieldset id="bets-card" class="hidden rounded-2xl bg-surface shadow-card" data-accordion>
+      <legend
+        class="flex items-center justify-between gap-2 px-6 py-4 text-sm font-semibold uppercase tracking-wide text-muted">
+        <span class="flex items-center gap-2">
+          <i class="ph ph-play text-accent"></i>
+          Ações e processamento
+        </span>
+        <button type="button" class="accordion-toggle text-muted transition hover:text-branca" aria-expanded="false">
+          <span class="sr-only">Alternar exibição</span>
+          <i class="ph ph-caret-down text-lg"></i>
+        </button>
+      </legend>
+      <div class="space-y-6 px-6 py-6" data-accordion-panel hidden>
+        <div class="flex flex-wrap items-end gap-4">
+          <div class="flex gap-3">
+            <button type="button" id="apply-drawn-btn"
+              class="inline-flex items-center gap-2 rounded-xl bg-primary px-4 py-2 text-sm font-medium text-branca transition hover:bg-primary-hover">
+              <i class="ph ph-check-circle"></i>
+              <span>Aplicar resultado</span>
+            </button>
+            <button type="button" id="clear-drawn-btn"
+              class="inline-flex items-center gap-2 rounded-xl border-muted/30 bg-transparent px-4 py-2 text-sm font-medium text-muted transition hover:border-muted hover:text-branca">
+              <i class="ph ph-broom"></i>
+              <span>Limpar</span>
+            </button>
+            <button type="button" id="search-result-btn"
+              class="inline-flex items-center gap-2 rounded-xl border-muted/30 bg-transparent px-4 py-2 text-sm font-medium text-muted opacity-60"
+              disabled data-tooltip="Em breve">
+              <i class="ph ph-magnifying-glass"></i>
+              <span>Buscar resultado</span>
+            </button>
+          </div>
+          <div class="ml-auto flex flex-wrap gap-3">
+            <button id="process-btn"
+              class="hidden inline-flex items-center gap-2 rounded-xl bg-primary px-4 py-2 text-sm font-medium text-branca transition hover:bg-primary-hover"
+              type="button">
               <i class="ph ph-play-circle"></i>
               <span>Gerar tabela e link</span>
             </button>
-            <button id="analyze-btn" class="btn btnSecundario" type="button" hidden>
+            <button id="analyze-btn"
+              class="hidden inline-flex items-center gap-2 rounded-xl border-muted/30 bg-transparent px-4 py-2 text-sm font-medium text-muted transition hover:border-muted hover:text-branca"
+              type="button">
               <i class="ph ph-chart-pie"></i>
               <span>Analisar apostas</span>
             </button>
+            <button id="open-results-btn"
+              class="hidden inline-flex items-center gap-2 rounded-xl border-muted/30 bg-transparent px-4 py-2 text-sm font-medium text-muted transition hover:border-muted hover:text-branca"
+              type="button">
+              <i class="ph ph-shooting-star"></i>
+              <span>Inserir resultado</span>
+            </button>
+            <button id="advance-button"
+              class="hidden inline-flex items-center gap-2 rounded-xl border-muted/50 bg-transparent px-4 py-2 text-sm font-medium text-muted transition hover:border-muted hover:text-branca"
+              type="button">
+              <span>Prosseguir</span>
+              <i class="ph ph-arrow-fat-lines-right"></i>
+            </button>
           </div>
-          <div id="analysis-output" class="analysis-output" hidden></div>
-          <div id="generated-link-container" hidden></div>
-        </section>
-      </div>
-      <div class="stage-column-right">
-        <details class="card accordion" id="analysis-accordion">
-          <summary>
-            <span class="summary-icon"><i class="ph ph-chart-line-up"></i></span>
-            <h2>Parte 1 — Análise prévia</h2>
-            <span class="accordion-arrow"><i class="ph ph-caret-down"></i></span>
-          </summary>
-          <div class="accordion-content">
-            <p>
-              Universo (01–80). Combinações possíveis C(80,5)=<strong>24.040.016</strong>.
-              Probabilidades por jogo: quina 1/24.040.016 • quadra 1/64.106 • terno 1/866 • duque 1/36.
-            </p>
-            <p>
-              Apostas informadas: <span class="badge">40 de 46 recebidas</span>
-              <span class="badge">faltam: 37, 38, 39, 40, 41, 42</span>
-            </p>
-            <ul>
-              <li>Concentração nas dezenas: 31, 32, 35, 37 e na faixa 70–78.</li>
-              <li>Com 46 jogos, chance agregada teórica de quina ˜ 46/24.040.016 (˜ 1 em 522.000).</li>
-              <li>Expectativa realista: ao menos um <strong>terno</strong>; <em>quadra</em> rara porém possível.</li>
-            </ul>
-            <div class="helper-text">Funciona offline — quando o resultado sair, digite as 5 dezenas sorteadas para
-              destacar acertos automaticamente.</div>
+        </div>
+        <div id="analysis-output" class="hidden rounded-xl bg-surface-muted/40 p-4 text-sm text-muted"></div>
+        <div id="generated-link-container" class="hidden space-y-3 rounded-xl bg-surface-muted/30 p-4">
+          <strong class="text-sm uppercase tracking-wide text-muted">Link gerado</strong>
+          <div class="flex flex-col gap-3 md:flex-row md:items-center">
+            <input type="text" readonly value="" aria-label="Link gerado"
+              class="flex-1 rounded-xl bg-surface px-4 py-2 text-sm text-branca outline-none">
+            <div class="flex gap-2">
+              <button
+                class="inline-flex items-center gap-2 rounded-xl bg-primary px-4 py-2 text-sm font-medium text-branca transition hover:bg-primary-hover"
+                type="button" data-action="open-link">
+                <i class="ph ph-arrow-square-out"></i>
+                <span>Abrir link</span>
+              </button>
+              <button
+                class="inline-flex items-center gap-2 rounded-xl border-muted/30 bg-transparent px-4 py-2 text-sm font-medium text-muted transition hover:border-muted hover:text-branca"
+                type="button" data-action="copy-link">
+                <i class="ph ph-copy"></i>
+                <span>Copiar link</span>
+              </button>
+            </div>
           </div>
-        </details>
-        <div class="accordion-cta">
-          <button id="advance-button" class="btn btnBorder" type="button">
-            <span>Prosseguir</span>
-            <i class="ph ph-arrow-fat-lines-right"></i>
-          </button>
         </div>
       </div>
-    </div>
+    </fieldset>
 
-    <details class="card accordion" id="bets-accordion" hidden>
-      <summary>
-        <div class="summary-title">
-          <span class="summary-icon"><i class="ph ph-list-checks"></i></span>
-          <h2>Tabela de apostas</h2>
-        </div>
-        <div class="summary-actions">
-          <button id="open-results-btn" class="btn btnPrimary" type="button">
-            <img src="assets/img/icon-concluido.svg" alt="" aria-hidden="true">
-            <span>Inserir resultado</span>
-          </button>
-          <span class="accordion-arrow"><i class="ph ph-caret-down"></i></span>
-        </div>
+    <details class="rounded-2xl bg-surface shadow-card" id="bets-accordion" hidden>
+      <summary
+        class="flex cursor-pointer items-center justify-between gap-4 px-6 py-4 text-sm font-semibold uppercase tracking-wide text-muted">
+        <span class="flex items-center gap-2"><i class="ph ph-list-checks text-accent"></i>Tabela de apostas</span>
+        <i class="ph ph-caret-down text-lg"></i>
       </summary>
-      <div class="accordion-content">
-        <div id="drawn-highlight" hidden>
-          <h2 id="drawn-highlight-title"></h2>
-          <div class="drawn-highlight__badges" id="drawn-highlight-badges"></div>
+      <div class="space-y-4 px-6 py-6">
+        <div id="drawn-highlight" class="hidden rounded-xl bg-accent/10 p-4 text-sm text-muted">
+          <h2 id="drawn-highlight-title" class="text-base font-semibold text-branca"></h2>
+          <div id="drawn-highlight-badges" class="mt-3 flex flex-wrap gap-2"></div>
         </div>
-        <table id="bets">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Dezenas</th>
-              <th>Acertos</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
+        <div class="overflow-x-auto">
+          <table id="bets" class="min-w-full overflow-hidden rounded-xl text-left text-sm">
+            <thead class="bg-surface-muted/50 text-xs uppercase tracking-wide text-muted">
+              <tr>
+                <th class="px-4 py-3">#</th>
+                <th class="px-4 py-3">Dezenas</th>
+                <th class="px-4 py-3">Acertos</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-border/30"></tbody>
+          </table>
+        </div>
       </div>
     </details>
 
     <template id="results-template">
-      <details class="card accordion results-accordion" id="results-accordion" open>
-        <summary>
-          <span class="summary-icon"><i class="ph ph-shooting-star"></i></span>
-          <h2>2. Inserir Resultado do Sorteio</h2>
-          <span class="accordion-arrow"><i class="ph ph-caret-down"></i></span>
+      <details class="rounded-2xl bg-surface shadow-card" id="results-accordion" open>
+        <summary
+          class="flex cursor-pointer items-center justify-between gap-4 px-6 py-4 text-sm font-semibold uppercase tracking-wide text-muted">
+          <span class="flex items-center gap-2"><i class="ph ph-shooting-star text-accent"></i>Inserir resultado do
+            sorteio</span>
+          <i class="ph ph-caret-down text-lg"></i>
         </summary>
-        <div class="accordion-content">
-          <div class="controls" style="display:flex; flex-direction: column; gap: 16px;">
-            <label class="field" for="drawn">
-              <span class="field-label">Números sorteados</span>
-              <input id="drawn" type="text" placeholder="Ex: 02,16,31,54,78" inputmode="numeric" autocomplete="off">
-            </label>
-            <div class="card-actions">
-              <button class="btn btnPrimary" type="button" id="apply-drawn-btn">
-                <i class="ph ph-check-circle"></i>
-                <span>Aplicar</span>
-              </button>
-              <button class="btn btnSecondary" type="button" id="clear-drawn-btn">
-                <i class="ph ph-broom"></i>
-                <span>Limpar</span>
-              </button>
-              <button class="btn btnBorder" type="button" id="search-result-btn" disabled data-tooltip="Em breve">
-                <i class="ph ph-magnifying-glass"></i>
-                <span>Buscar resultado</span>
-              </button>
-              <span id="summary" class="badge">Aguardando...</span>
-            </div>
+        <div class="space-y-4 px-6 py-6">
+          <label class="flex flex-col gap-2 text-sm" for="drawn">
+            <span class="text-xs font-semibold uppercase tracking-wide text-muted">Números sorteados</span>
+            <input id="drawn" type="text" placeholder="Ex: 02,16,31,54,78" inputmode="numeric" autocomplete="off"
+              class="w-full rounded-xl bg-surface-muted/60 px-4 py-3 text-sm text-branca outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/40">
+          </label>
+          <div class="flex flex-wrap gap-3">
+            <button
+              class="inline-flex items-center gap-2 rounded-xl bg-primary px-4 py-2 text-sm font-medium text-branca transition hover:bg-primary-hover"
+              type="button" id="apply-drawn-btn">
+              <i class="ph ph-check-circle"></i>
+              <span>Aplicar</span>
+            </button>
+            <button
+              class="inline-flex items-center gap-2 rounded-xl border-muted/30 bg-transparent px-4 py-2 text-sm font-medium text-muted transition hover:border-muted hover:text-branca"
+              type="button" id="clear-drawn-btn">
+              <i class="ph ph-broom"></i>
+              <span>Limpar</span>
+            </button>
+            <button
+              class="inline-flex items-center gap-2 rounded-xl border-muted/30 bg-transparent px-4 py-2 text-sm font-medium text-muted opacity-60"
+              type="button" id="search-result-btn" disabled data-tooltip="Em breve">
+              <i class="ph ph-magnifying-glass"></i>
+              <span>Buscar resultado</span>
+            </button>
+            <span id="summary"
+              class="inline-flex items-center gap-2 rounded-full border-accent/40 bg-accent/10 px-3 py-1 text-xs font-medium text-accent">Aguardando...</span>
           </div>
         </div>
       </details>
     </template>
-
-    <div id="toast-stack"></div>
   </main>
 
-  <footer>© 2025 — Gamberine</footer>
+  <footer class="border-t border-muted/10 bg-surface-muted/40 py-6 text-center text-xs text-muted">
+    <div class="mx-auto flex w-full max-w-6xl flex-col items-center gap-2 px-4">
+      <span>Gamberine © <span id="footer-year"></span>. Organize, acompanhe e compare seus jogos.</span>
+    </div>
+  </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
-  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <div id="toast-stack" class="pointer-events-none fixed bottom-6 right-6 z-50 flex max-w-xs flex-col gap-3"></div>
   <script>
+    const LOTTERY_RULES = {
+      default: { numbersPerBet: 5, min: 1, max: 80, pad: 2, label: '5 dezenas (01-80)' },
+      'mega-sena': { numbersPerBet: 6, min: 1, max: 60, pad: 2, label: '6 dezenas (01-60)' },
+      quina: { numbersPerBet: 5, min: 1, max: 80, pad: 2, label: '5 dezenas (01-80)' },
+      lotofacil: { numbersPerBet: 15, min: 1, max: 25, pad: 2, label: '15 dezenas (01-25)' },
+      lotomania: { numbersPerBet: 50, min: 0, max: 99, pad: 2, label: '50 dezenas (00-99)' },
+      'dupla-sena': { numbersPerBet: 6, min: 1, max: 50, pad: 2, label: '6 dezenas (01-50)' },
+      timemania: { numbersPerBet: 10, min: 1, max: 80, pad: 2, label: '10 dezenas (01-80)' },
+      'dia-de-sorte': { numbersPerBet: 7, min: 1, max: 31, pad: 2, label: '7 dezenas (01-31)' },
+      'super-sete': { numbersPerBet: 7, min: 0, max: 9, pad: 1, label: '7 dígitos (0-9)' },
+      loteca: { numbersPerBet: 14, min: 1, max: 3, pad: 1, label: '14 palpites (1-3)' },
+      federal: { numbersPerBet: 5, min: 0, max: 9, pad: 1, label: '5 dígitos (0-9)' },
+      'mais-milionaria': { numbersPerBet: 6, min: 1, max: 50, pad: 2, label: '6 dezenas (01-50)' }
+    };
+
     const lotteries = [
       { value: 'mega-sena', label: 'Mega-Sena' },
       { value: 'quina', label: 'Quina' },
@@ -197,15 +332,16 @@
       { value: 'mais-milionaria', label: 'Mais Milionária' }
     ];
 
-    let lotteryChoices;
     let betsData = {};
     let lastGeneratedLink = '';
     const metaData = { date: '', lottery: '', lotteryLabel: '', concurso: '' };
 
     document.addEventListener('DOMContentLoaded', () => {
       setupLotterySelect();
+      bindAccordion();
       bindInteractions();
       hydrateFromUrl();
+      updateFooterYear();
     });
 
     function setupLotterySelect() {
@@ -216,27 +352,46 @@
         option.textContent = opt.label;
         select.append(option);
       });
-      if (window.Choices) {
-        lotteryChoices = new Choices(select, {
-          searchEnabled: true,
-          itemSelectText: '',
-          noResultsText: 'Nada encontrado',
-          noChoicesText: 'Sem opções',
-          placeholder: true,
-          position: 'bottom',
-          shouldSort: false
+    }
+
+    function bindAccordion() {
+      document.querySelectorAll('[data-accordion]').forEach((fieldset) => {
+        const toggle = fieldset.querySelector('.accordion-toggle');
+        const panel = fieldset.querySelector('[data-accordion-panel]');
+        if (!toggle || !panel) return;
+        const initialOpen = fieldset.hasAttribute('data-open');
+        if (!initialOpen) {
+          panel.hidden = true;
+          toggle.setAttribute('aria-expanded', 'false');
+          const icon = toggle.querySelector('i');
+          if (icon) icon.classList.replace('ph-caret-up', 'ph-caret-down');
+        }
+        toggle.addEventListener('click', () => {
+          const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+          toggle.setAttribute('aria-expanded', String(!isOpen));
+          panel.hidden = isOpen;
+          const icon = toggle.querySelector('i');
+          if (icon) {
+            icon.classList.toggle('ph-caret-up', !isOpen);
+            icon.classList.toggle('ph-caret-down', isOpen);
+          }
         });
-      }
+      });
     }
 
     function bindInteractions() {
       const dateInput = document.getElementById('result-date');
-      const processButton = document.getElementById('process-btn');
-      const analyzeButton = document.getElementById('analyze-btn');
+      const lotterySelect = document.getElementById('lottery-select');
       const toggleConcurso = document.getElementById('toggle-concurso');
       const concursoInputWrapper = document.getElementById('concurso-input-wrapper');
       const concursoInput = document.getElementById('concurso-number');
+      const betsInput = document.getElementById('bets-input');
+      const processButton = document.getElementById('process-btn');
+      const analyzeButton = document.getElementById('analyze-btn');
       const advanceButton = document.getElementById('advance-button');
+      const applyButton = document.getElementById('apply-drawn-btn');
+      const clearButton = document.getElementById('clear-drawn-btn');
+      const searchButton = document.getElementById('search-result-btn');
       const insertResultButton = document.getElementById('open-results-btn');
 
       const now = new Date();
@@ -256,6 +411,7 @@
           dateInput.focus();
         }
       };
+
       dateInput.addEventListener('click', triggerDatePicker);
       dateInput.addEventListener('keydown', (event) => {
         if (event.key === 'Enter' || event.key === ' ') {
@@ -266,42 +422,75 @@
 
       dateInput.addEventListener('input', () => {
         const isValid = validateDateField();
-        processButton.hidden = !dateInput.value || !isValid;
-        if (isValid && toggleConcurso.checked) updateConcursoSuggestions();
+        if (isValid) {
+          metaData.date = dateInput.value;
+          updateHeaderInfo();
+        }
+        refreshActionVisibility();
       });
 
       dateInput.addEventListener('blur', () => {
-        const isValid = validateDateField();
-        processButton.hidden = !dateInput.value || !isValid;
+        if (validateDateField()) {
+          metaData.date = dateInput.value;
+          updateHeaderInfo();
+        }
+        refreshActionVisibility();
       });
 
-      if (lotteryChoices) {
-        lotteryChoices.passedElement.element.addEventListener('change', () => {
-          if (toggleConcurso.checked) updateConcursoSuggestions();
-        });
-      } else {
-        document.getElementById('lottery-select').addEventListener('change', () => {
-          if (toggleConcurso.checked) updateConcursoSuggestions();
-        });
-      }
+      lotterySelect.addEventListener('change', () => {
+        metaData.lottery = lotterySelect.value;
+        metaData.lotteryLabel = getSelectedLotteryLabel();
+        updateBetsHelper();
+        normalizeCurrentInput();
+        if (toggleConcurso.checked) updateConcursoSuggestions();
+        updateHeaderInfo();
+        refreshActionVisibility();
+      });
 
       toggleConcurso.addEventListener('change', () => {
         if (toggleConcurso.checked) {
-          concursoInputWrapper.hidden = false;
+          concursoInputWrapper.classList.remove('hidden');
           updateConcursoSuggestions();
           setTimeout(() => concursoInput.focus({ preventScroll: true }), 50);
         } else {
-          concursoInputWrapper.hidden = true;
+          concursoInputWrapper.classList.add('hidden');
           concursoInput.value = '';
+          metaData.concurso = '';
         }
+      });
+
+      concursoInput.addEventListener('input', () => {
+        metaData.concurso = concursoInput.value.trim();
+        updateHeaderInfo();
+      });
+
+      const normalizeCurrentInput = () => {
+        const value = betsInput.value;
+        const normalized = normalizeBetsInput(value);
+        if (normalized !== value) {
+          betsInput.value = normalized;
+        }
+      };
+
+      ['input', 'paste', 'blur'].forEach((eventName) => {
+        betsInput.addEventListener(eventName, () => {
+          normalizeCurrentInput();
+          refreshActionVisibility();
+        });
       });
 
       processButton.addEventListener('click', processInputs);
       analyzeButton.addEventListener('click', analyzeBets);
       advanceButton.addEventListener('click', handleAdvance);
-      insertResultButton.addEventListener('click', handleInsertResultClick);
-    }
 
+      applyButton.addEventListener('click', applyDrawn);
+      clearButton.addEventListener('click', clearDrawn);
+      searchButton.addEventListener('click', (event) => event.stopPropagation());
+
+      if (insertResultButton) {
+        insertResultButton.addEventListener('click', handleInsertResultClick);
+      }
+    }
     function validateDateField() {
       const dateInput = document.getElementById('result-date');
       if (!dateInput) return false;
@@ -311,7 +500,7 @@
       }
       const picked = new Date(dateInput.value + 'T00:00:00');
       if (Number.isNaN(picked.getTime())) {
-        dateInput.setCustomValidity('Data invalida.');
+        dateInput.setCustomValidity('Data inválida.');
         return false;
       }
       const today = new Date();
@@ -324,11 +513,42 @@
       return true;
     }
 
+    function getActiveLotteryRule() {
+      return LOTTERY_RULES[metaData.lottery] || LOTTERY_RULES.default;
+    }
+
+    function updateBetsHelper() {
+      const rule = getActiveLotteryRule();
+      const helper = document.getElementById('bets-hint');
+      const format = document.getElementById('bets-input-format');
+      if (helper) helper.textContent = `Informe ${rule.label}. Cole qualquer formato e nós organizamos automaticamente.`;
+      if (format) format.textContent = `Formato esperado "#01: ${Array.from({ length: rule.numbersPerBet }, (_, index) => String(index + 1).padStart(rule.pad, '0')).join('-')}"`;
+    }
+
+    function normalizeBetsInput(inputValue) {
+      const rule = getActiveLotteryRule();
+      const tokens = (inputValue.match(/\d+/g) || [])
+        .map((token) => parseInt(token, 10))
+        .filter((number) => !Number.isNaN(number) && number >= rule.min && number <= rule.max);
+      const lines = [];
+      let counter = 1;
+      let index = 0;
+      while (index < tokens.length) {
+        const slice = tokens.slice(index, index + rule.numbersPerBet);
+        if (slice.length === 0) break;
+        const formattedNumbers = slice.map((number) => pad(number, rule.pad));
+        lines.push(`#${String(counter).padStart(2, '0')}: ${formattedNumbers.join('-')}`);
+        if (slice.length < rule.numbersPerBet) break;
+        counter += 1;
+        index += rule.numbersPerBet;
+      }
+      return lines.join('\n');
+    }
 
     function processInputs() {
-      const betsText = document.getElementById('bets-input').value.trim();
+      const betsInput = document.getElementById('bets-input');
+      const betsText = betsInput.value.trim();
       const dateInput = document.getElementById('result-date');
-      const dateValue = dateInput.value;
 
       if (!validateDateField()) {
         dateInput.reportValidity();
@@ -337,91 +557,95 @@
 
       betsData = parseBets(betsText);
       if (Object.keys(betsData).length === 0) {
-        alert('Nenhuma aposta válida encontrada. Utilize o formato #01: 10-20-30-40-50');
+        showToast('Nenhuma aposta válida encontrada. Utilize o formato sugerido.', false);
         return;
       }
 
-      const lotterySelect = document.getElementById('lottery-select');
-      const concursoChecked = document.getElementById('toggle-concurso').checked;
-      const concursoValue = concursoChecked ? document.getElementById('concurso-number').value.trim() : '';
-
-      metaData.date = dateValue;
-      metaData.lottery = lotterySelect.value;
+      metaData.date = dateInput.value;
+      metaData.lottery = document.getElementById('lottery-select').value;
       metaData.lotteryLabel = getSelectedLotteryLabel();
-      metaData.concurso = concursoValue;
+      const concursoChecked = document.getElementById('toggle-concurso').checked;
+      metaData.concurso = concursoChecked ? document.getElementById('concurso-number').value.trim() : '';
 
       updateHeaderInfo();
-      document.getElementById('analysis-accordion').open = true;
-
-      renderRows(null);
       updateLink();
+      renderRows();
       updateAnalyzeButtonLabel();
+      showToast('Apostas processadas com sucesso!', true);
+      refreshActionVisibility();
+    }
 
-      const analyzeButton = document.getElementById('analyze-btn');
-      analyzeButton.hidden = false;
-
-      document.getElementById('generated-link-container').hidden = false;
+    function parseBets(text) {
+      const rule = getActiveLotteryRule();
+      const lines = text.split('\n');
+      const parsed = {};
+      lines.forEach((line) => {
+        if (!line.trim()) return;
+        const match = line.match(/#?(\d+)\s*:\s*([\d\s,-]+)/);
+        if (!match) return;
+        const id = parseInt(match[1], 10);
+        const numbers = (match[2].match(/\d+/g) || [])
+          .map((token) => parseInt(token, 10))
+          .filter((number) => !Number.isNaN(number) && number >= rule.min && number <= rule.max);
+        if (numbers.length === rule.numbersPerBet) {
+          parsed[id] = numbers;
+        }
+      });
+      return parsed;
     }
 
     function analyzeBets() {
       if (Object.keys(betsData).length === 0) {
-        alert('Informe e processe as apostas antes de analisar.');
+        showToast('Cadastre ao menos uma aposta válida antes de analisar.', false);
         return;
       }
+      const rule = getActiveLotteryRule();
       const analysisBox = document.getElementById('analysis-output');
-      const totalBets = Object.keys(betsData).length;
-      const universe = 24040016;
-      const quadra = 64106;
-      const terno = 866;
-      const duque = 36;
       const allNumbers = new Set();
-      Object.values(betsData).forEach(arr => arr.forEach(n => allNumbers.add(n)));
+      Object.values(betsData).forEach((numbers) => numbers.forEach((number) => allNumbers.add(number)));
+      const totalBets = Object.keys(betsData).length;
+      const totalNumbers = rule.max - rule.min + 1;
+      const chanceQuina = Math.min(100, (totalBets / Math.pow(totalNumbers, rule.numbersPerBet)) * 100 * rule.numbersPerBet * 10);
+      const chanceQuadra = Math.min(100, chanceQuina * 3);
+      const chanceTerno = Math.min(100, chanceQuina * 5);
+      const chanceDuque = Math.min(100, chanceQuina * 8);
 
-      const chanceQuina = (totalBets / universe) * 100;
-      const chanceQuadra = (totalBets / quadra) * 100;
-      const chanceTerno = (totalBets / terno) * 100;
-      const chanceDuque = (totalBets / duque) * 100;
-
-      analysisBox.hidden = false;
       analysisBox.innerHTML = `
-      <h3><i class="ph ph-chart-polar"></i> Painel rápido</h3>
-      <p><strong>${totalBets}</strong> ${totalBets === 1 ? 'aposta cadastrada' : 'apostas cadastradas'} envolvendo <strong>${allNumbers.size}</strong> dezenas únicas.</p>
-      <ul>
-        <li>Probabilidade estimada de quina: <strong>${chanceQuina.toFixed(5)}%</strong>.</li>
-        <li>Quadra: ~<strong>${chanceQuadra.toFixed(3)}%</strong> • Terno: <strong>${chanceTerno.toFixed(2)}%</strong> • Duque: <strong>${chanceDuque.toFixed(1)}%</strong>.</li>
-        <li>Revise concentrações e distribuições antes de prosseguir para maximizar cobertura.</li>
-      </ul>
-    `;
+          <h3 class="mb-2 flex items-center gap-2 text-base font-semibold text-branca"><i class="ph ph-chart-polar"></i>Painel rápido</h3>
+          <p class="mb-3">Foi identificado <strong>${totalBets}</strong> ${totalBets === 1 ? 'aposta' : 'apostas'} envolvendo <strong>${allNumbers.size}</strong> números únicos.</p>
+          <ul class="space-y-1">
+            <li>Probabilidade estimada de prêmio principal: <strong>${chanceQuina.toFixed(5)}%</strong>.</li>
+            <li>Quadra: ${chanceQuadra.toFixed(3)}% · Terno: ${chanceTerno.toFixed(2)}% · Duque: ${chanceDuque.toFixed(1)}%.</li>
+            <li>Revise concentrações e distribuições antes de prosseguir para maximizar cobertura.</li>
+          </ul>
+        `;
+      analysisBox.classList.remove('hidden');
       analysisBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
     function handleAdvance() {
       if (Object.keys(betsData).length === 0) {
-        alert('Conclua o processamento das apostas antes de prosseguir.');
+        showToast('Conclua o processamento das apostas antes de prosseguir.', false);
         return;
       }
-      const accordion = document.getElementById('analysis-accordion');
-      accordion.open = false;
-      accordion.classList.add('is-completed');
-      const advanceButton = document.getElementById('advance-button');
-      advanceButton.disabled = true;
-      advanceButton.innerHTML = '<i class="ph ph-check-circle"></i><span>Concluído</span>';
       const betsAccordion = document.getElementById('bets-accordion');
       betsAccordion.hidden = false;
       betsAccordion.open = true;
+      showToast('Tabela liberada! Gere o link e acompanhe seus jogos.', true);
+      document.getElementById('advance-button').classList.add('hidden');
     }
 
     function handleInsertResultClick(event) {
       if (event) {
+        event.preventDefault();
         event.stopPropagation();
-        if (event.preventDefault) event.preventDefault();
       }
       let resultsAccordion = document.getElementById('results-accordion');
       if (!resultsAccordion) {
         const template = document.getElementById('results-template');
         const fragment = template.content.cloneNode(true);
         const betsAccordion = document.getElementById('bets-accordion');
-        betsAccordion.parentNode.insertBefore(fragment, betsAccordion);
+        betsAccordion.parentNode.insertBefore(fragment, betsAccordion.nextSibling);
         resultsAccordion = document.getElementById('results-accordion');
         bindResultsAccordion();
       }
@@ -432,98 +656,93 @@
     }
 
     function bindResultsAccordion() {
-      const applyButton = document.getElementById('apply-drawn-btn');
-      const clearButton = document.getElementById('clear-drawn-btn');
-      const searchButton = document.getElementById('search-result-btn');
+      const applyButton = document.querySelector('#results-accordion #apply-drawn-btn');
+      const clearButton = document.querySelector('#results-accordion #clear-drawn-btn');
+      const searchButton = document.querySelector('#results-accordion #search-result-btn');
       applyButton.addEventListener('click', applyDrawn);
       clearButton.addEventListener('click', clearDrawn);
       searchButton.addEventListener('click', (event) => event.stopPropagation());
     }
 
-    function parseBets(text) {
-      const lines = text.split('\n');
-      const parsed = {};
-      for (const line of lines) {
-        if (line.trim() === '') continue;
-        const match = line.match(/#?(\d+)\s*:\s*([\d\s,-]+)/);
-        if (match) {
-          const id = parseInt(match[1], 10);
-          const numbers = match[2].match(/\d+/g);
-          if (numbers && numbers.length === 5) {
-            parsed[id] = numbers.map((n) => parseInt(n, 10));
-          }
-        }
-      }
-      return parsed;
-    }
-
-    function renderRows(drawnSet) {
+    function renderRows(drawnSet = null) {
       const tbody = document.querySelector('#bets tbody');
+      if (!tbody) return;
       tbody.innerHTML = '';
-      const keys = Object.keys(betsData).map((k) => parseInt(k, 10)).sort((a, b) => a - b);
+      const keys = Object.keys(betsData).map((key) => parseInt(key, 10)).sort((a, b) => a - b);
+      const rule = getActiveLotteryRule();
       keys.forEach((key) => {
         const row = document.createElement('tr');
+        row.className = 'bg-surface hover:bg-surface-muted/40 transition';
         const idx = document.createElement('td');
-        idx.textContent = '#' + pad(key);
+        idx.className = 'px-4 py-3 font-semibold text-muted';
+        idx.textContent = '#' + String(key).padStart(2, '0');
         const nums = document.createElement('td');
+        nums.className = 'flex flex-wrap items-center gap-2 px-4 py-3';
         const hitsCell = document.createElement('td');
+        hitsCell.className = 'px-4 py-3 text-right font-semibold text-muted';
         let hits = 0;
-        betsData[key].forEach((num) => {
+        betsData[key].forEach((number) => {
           const span = document.createElement('span');
-          const isHit = drawnSet && drawnSet.has(num);
-          span.className = 'num' + (isHit ? ' drawn hit' : '');
-          span.textContent = pad(num);
+          const isHit = drawnSet && drawnSet.has(number);
+          span.className = `inline-flex min-w-[2.5rem] items-center justify-center rounded-lg px-2 py-1 text-xs font-semibold ${isHit ? 'border-accent bg-accent/20 text-accent' : 'border-border/40 bg-surface-muted/40 text-muted'}`;
+          span.textContent = pad(number, rule.pad);
           nums.appendChild(span);
           if (isHit) hits += 1;
         });
         hitsCell.textContent = hits;
+        hitsCell.classList.toggle('text-success', hits > 0);
         row.append(idx, nums, hitsCell);
         tbody.appendChild(row);
       });
     }
 
     function parseDrawn(input) {
-      const digits = input.replace(/\D/g, '');
-      const nums = new Set();
-      for (let i = 0; i < digits.length && nums.size < 5; i += 2) {
-        const n = parseInt(digits.substring(i, i + 2), 10);
-        if (!Number.isNaN(n) && n >= 1 && n <= 80) {
-          nums.add(n);
-        }
-      }
-      return nums;
+      const rule = getActiveLotteryRule();
+      const drawCount = rule.numbersPerBet;
+      const tokens = (input.match(/\d+/g) || []).map((token) => parseInt(token, 10))
+        .filter((number) => !Number.isNaN(number) && number >= rule.min && number <= rule.max);
+      const drawnSet = new Set();
+      tokens.slice(0, drawCount).forEach((number) => drawnSet.add(number));
+      return drawnSet;
     }
 
     function applyDrawn() {
       const drawnInput = document.getElementById('drawn');
       if (!drawnInput) return;
       const drawnSet = parseDrawn(drawnInput.value);
-      if (drawnSet.size !== 5) {
+      const rule = getActiveLotteryRule();
+      if (drawnSet.size !== rule.numbersPerBet) {
+        showToast(`Informe exatamente ${rule.numbersPerBet} dezenas válidas.`, false);
         const summary = document.getElementById('summary');
-        summary.textContent = 'Informe exatamente 5 dezenas válidas';
-        summary.className = 'badge';
+        if (summary) {
+          summary.textContent = `Informe ${rule.numbersPerBet} dezenas válidas`;
+          summary.className = 'inline-flex items-center gap-2 rounded-full border-danger/40 bg-danger/10 px-3 py-1 text-xs font-medium text-danger';
+        }
         return;
       }
-      drawnInput.value = Array.from(drawnSet).sort((a, b) => a - b).map(pad).join('-');
+      drawnInput.value = Array.from(drawnSet).sort((a, b) => a - b).map((number) => pad(number, rule.pad)).join('-');
       renderRows(drawnSet);
       updateLink(drawnSet);
-
       const rows = Array.from(document.querySelectorAll('#bets tbody tr'));
-      let t2 = 0, t3 = 0, t4 = 0, t5 = 0;
+      const totals = { 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0 };
       rows.forEach((row) => {
         const count = parseInt(row.lastChild.textContent || '0', 10);
-        if (count === 2) t2 += 1;
-        else if (count === 3) t3 += 1;
-        else if (count === 4) t4 += 1;
-        else if (count === 5) t5 += 1;
+        if (!Number.isNaN(count) && count >= 2) {
+          totals[count] = (totals[count] || 0) + 1;
+        }
       });
-      const summaryText = `Duques: ${t2} • Ternos: ${t3} • Quadras: ${t4} • Quinas: ${t5}`;
+      const summaryText = Object.entries(totals)
+        .filter(([, value]) => value > 0)
+        .map(([key, value]) => `${key} acertos: ${value}`)
+        .join(' · ') || 'Sem acertos registrados';
       const summary = document.getElementById('summary');
-      summary.textContent = summaryText;
-      summary.className = 'badge ok';
+      if (summary) {
+        summary.textContent = summaryText;
+        summary.className = 'inline-flex items-center gap-2 rounded-full border-success/40 bg-success/10 px-3 py-1 text-xs font-medium text-success';
+      }
 
       updateDrawnHighlight(drawnSet, summaryText);
-      showToast(`Duques: ${t2} • Ternos: ${t3} • Quadras: ${t4} • Quinas: ${t5}`, true);
+      showToast(summaryText, true);
       logGeneratedLink('resultado', lastGeneratedLink);
     }
 
@@ -532,27 +751,83 @@
       if (!drawnInput) return;
       drawnInput.value = '';
       const summary = document.getElementById('summary');
-      summary.textContent = 'Aguardando...';
-      summary.className = 'badge';
-      renderRows(null);
+      if (summary) {
+        summary.textContent = 'Aguardando...';
+        summary.className = 'inline-flex items-center gap-2 rounded-full border-accent/40 bg-accent/10 px-3 py-1 text-xs font-medium text-accent';
+      }
+      renderRows();
       updateLink();
       updateDrawnHighlight(null, '');
+    }
+
+    function updateDrawnHighlight(drawnSet, summaryText) {
+      const highlight = document.getElementById('drawn-highlight');
+      if (!highlight) return;
+      if (!drawnSet || drawnSet.size === 0) {
+        highlight.classList.add('hidden');
+        highlight.querySelector('#drawn-highlight-title').textContent = '';
+        highlight.querySelector('#drawn-highlight-badges').innerHTML = '';
+        return;
+      }
+      const rule = getActiveLotteryRule();
+      const sorted = Array.from(drawnSet).sort((a, b) => a - b).map((number) => pad(number, rule.pad));
+      highlight.querySelector('#drawn-highlight-title').textContent = `Resultado: ${sorted.join(' · ')}`;
+      const badgesWrapper = highlight.querySelector('#drawn-highlight-badges');
+      badgesWrapper.innerHTML = '';
+      summaryText.split('·').map((item) => item.trim()).forEach((item) => {
+        if (!item) return;
+        const badge = document.createElement('span');
+        badge.className = 'inline-flex items-center gap-2 rounded-full border-accent/40 bg-accent/10 px-3 py-1 text-xs font-medium text-accent';
+        badge.innerHTML = `<i class="ph ph-seal-check"></i> ${item}`;
+        badgesWrapper.appendChild(badge);
+      });
+      highlight.classList.remove('hidden');
+    }
+
+    function updateAnalyzeButtonLabel() {
+      const analyzeButton = document.getElementById('analyze-btn');
+      if (!analyzeButton) return;
+      const total = Object.keys(betsData).length;
+      if (total === 0) {
+        analyzeButton.innerHTML = '<i class="ph ph-chart-pie"></i><span>Analisar apostas</span>';
+        return;
+      }
+      const label = total === 1 ? 'Analisar aposta' : `Analisar ${total} apostas`;
+      analyzeButton.innerHTML = `<i class="ph ph-chart-pie"></i><span>${label}</span>`;
+    }
+
+    function updateHeaderInfo() {
+      const container = document.getElementById('oculto-ate-preencher');
+      if (!metaData.date) {
+        container.hidden = true;
+        container.classList.add('hidden');
+        return;
+      }
+      const date = new Date(metaData.date + 'T00:00:00');
+      const formatted = date.toLocaleDateString('pt-BR', { timeZone: 'UTC' });
+      document.getElementById('info-date').textContent = formatted;
+      document.getElementById('info-lottery').textContent = metaData.lotteryLabel || '-';
+      document.getElementById('info-concurso').textContent = metaData.concurso || '-';
+      document.title = `Gamberine - Analisador (${formatted}${metaData.lotteryLabel ? ' · ' + metaData.lotteryLabel : ''})`;
+      container.hidden = false;
+      container.classList.remove('hidden');
     }
 
     function updateLink(drawnSet) {
       const container = document.getElementById('generated-link-container');
       if (Object.keys(betsData).length === 0) {
-        container.hidden = true;
-        container.innerHTML = '';
+        container.classList.add('hidden');
+        container.querySelector('input').value = '';
         lastGeneratedLink = '';
         return;
       }
       const url = new URL(window.location.href);
       url.search = '';
+      const rule = getActiveLotteryRule();
       const betsString = Object.keys(betsData)
         .map((key) => ({ key: parseInt(key, 10), value: betsData[key] }))
         .sort((a, b) => a.key - b.key)
-        .map((entry) => entry.value.map(pad).join('-'))
+        .map((entry) => entry.value.map((number) => pad(number, rule.pad)).join('-'))
         .join('_');
       url.searchParams.set('bets', betsString);
       if (metaData.date) {
@@ -564,22 +839,13 @@
       if (metaData.concurso) {
         url.searchParams.set('conc', metaData.concurso);
       }
-      const drawnInput = document.getElementById('drawn');
-      if (drawnInput && drawnInput.value && drawnSet && drawnSet.size === 5) {
-        url.searchParams.set('d', Array.from(drawnSet).sort((a, b) => a - b).map(pad).join(','));
+      if (drawnSet && drawnSet.size > 0) {
+        url.searchParams.set('d', Array.from(drawnSet).sort((a, b) => a - b).map((number) => pad(number, rule.pad)).join(','));
       }
       lastGeneratedLink = url.toString();
-      container.hidden = false;
-      container.innerHTML = `
-      <strong>Link gerado</strong>
-      <div class="generated-link__row">
-        <input type="text" readonly value="${lastGeneratedLink}" aria-label="Link gerado" onclick="this.select()">
-      </div>
-      <div class="generated-link__actions">
-        <button class="btn btnPrimary" type="button" data-action="open-link"><i class="ph ph-arrow-square-out"></i><span>Abrir link</span></button>
-        <button class="btn btnSecondary" type="button" data-action="copy-link"><i class="ph ph-copy"></i><span>Copiar link</span></button>
-      </div>
-    `;
+      container.classList.remove('hidden');
+      const input = container.querySelector('input');
+      input.value = lastGeneratedLink;
       bindGeneratedLinkActions(container);
     }
 
@@ -607,99 +873,45 @@
       }
     }
 
-    function updateDrawnHighlight(drawnSet, summaryText) {
-      const highlight = document.getElementById('drawn-highlight');
-      if (!highlight) return;
-      if (!drawnSet || drawnSet.size !== 5) {
-        highlight.hidden = true;
-        highlight.querySelector('#drawn-highlight-title').textContent = '';
-        highlight.querySelector('#drawn-highlight-badges').innerHTML = '';
-        return;
-      }
-      const sorted = Array.from(drawnSet).sort((a, b) => a - b).map(pad);
-      highlight.querySelector('#drawn-highlight-title').textContent = `Resultado: ${sorted.join(' • ')}`;
-      const badgesWrapper = highlight.querySelector('#drawn-highlight-badges');
-      badgesWrapper.innerHTML = '';
-      summaryText.split('•').map((item) => item.trim()).forEach((item) => {
-        if (!item) return;
-        const badge = document.createElement('span');
-        badge.className = 'badge ok';
-        badge.innerHTML = `<i class="ph ph-seal-check"></i> ${item}`;
-        badgesWrapper.appendChild(badge);
-      });
-      highlight.hidden = false;
-    }
-
-    function updateAnalyzeButtonLabel() {
+    function refreshActionVisibility() {
+      const betsText = document.getElementById('bets-input').value.trim();
+      const draftBets = parseBets(betsText);
+      const draftCount = Object.keys(draftBets).length;
+      const processedCount = Object.keys(betsData).length;
+      const processButton = document.getElementById('process-btn');
       const analyzeButton = document.getElementById('analyze-btn');
-      const total = Object.keys(betsData).length;
-      if (total === 0) {
-        analyzeButton.innerHTML = '<i class="ph ph-chart-pie"></i><span>Analisar apostas</span>';
-        return;
+      const openResultsButton = document.getElementById('open-results-btn');
+      const advanceButton = document.getElementById('advance-button');
+      const betsCard = document.getElementById('bets-card');
+
+      const dateInput = document.getElementById('result-date');
+      const hasDate = !!(dateInput && dateInput.value);
+      const dateIsValid = hasDate ? validateDateField() : false;
+      const canProcess = draftCount > 0 && dateIsValid && !!metaData.lottery;
+      processButton.classList.toggle('hidden', !canProcess);
+      processButton.disabled = !canProcess;
+      if (!canProcess) {
+        processButton.setAttribute('title', 'Preencha data, modalidade e apostas válidas para prosseguir.');
+      } else {
+        processButton.removeAttribute('title');
       }
-      const label = total === 1 ? 'Analisar aposta' : `Analisar ${total} apostas`;
-      analyzeButton.innerHTML = `<i class="ph ph-chart-pie"></i><span>${label}</span>`;
-    }
 
-    function updateHeaderInfo() {
-      const container = document.getElementById('oculto-ate-preencher');
-      if (!metaData.date) {
-        container.hidden = true;
-        return;
+      if (draftCount > 0 || processedCount > 0) {
+        betsCard.classList.remove('hidden');
+      } else {
+        betsCard.classList.add('hidden');
       }
-      const date = new Date(metaData.date + 'T00:00:00');
-      const formatted = date.toLocaleDateString('pt-BR', { timeZone: 'UTC' });
-      document.getElementById('info-date').textContent = formatted;
-      document.getElementById('info-lottery').textContent = metaData.lotteryLabel || '—';
-      document.getElementById('info-concurso').textContent = metaData.concurso || '—';
-      document.title = `Gamberine - Analisador (${formatted}${metaData.lotteryLabel ? ' · ' + metaData.lotteryLabel : ''})`;
-      container.hidden = false;
-    }
 
-    function pad(n) {
-      return String(n).padStart(2, '0');
-    }
-
-    function getSelectedLotteryLabel() {
-      const select = document.getElementById('lottery-select');
-      if (!select.value) return '';
-      const option = select.querySelector(`option[value="${select.value}"]`);
-      return option ? option.textContent : '';
-    }
-
-    async function updateConcursoSuggestions() {
-      const datalist = document.getElementById('concurso-suggestions');
-      if (!datalist) return;
-      const lottery = document.getElementById('lottery-select').value || 'geral';
-      const date = document.getElementById('result-date').value;
-      datalist.innerHTML = '';
-      if (!date) return;
-      const suggestions = await fetchConcursoSuggestions(lottery, date);
-      suggestions.forEach((value) => {
-        const option = document.createElement('option');
-        option.value = value;
-        datalist.appendChild(option);
-      });
-    }
-
-    function fetchConcursoSuggestions(lottery, date) {
-      return new Promise((resolve) => {
-        if (!date) {
-          resolve([]);
-          return;
-        }
-        const seed = parseInt(date.replace(/-/g, ''), 10) || Date.now();
-        const base = (seed % 9000) + 1000;
-        const items = [base - 1, base, base + 1].map((n) => Math.max(1, n));
-        resolve(items.map(String));
-      });
+      analyzeButton.classList.toggle('hidden', processedCount === 0);
+      openResultsButton.classList.toggle('hidden', processedCount === 0);
+      advanceButton.classList.toggle('hidden', processedCount === 0);
     }
 
     function showToast(message, success = false) {
       const stack = document.getElementById('toast-stack');
       const toast = document.createElement('div');
-      toast.className = 'toast' + (success ? ' success' : '');
-      toast.innerHTML = `<i class="ph ${success ? 'ph-star' : 'ph-warning'}"></i><span>${message}</span>`;
+      toast.className = `pointer-events-auto flex items-center gap-3 rounded-xl px-4 py-3 text-sm shadow-card transition ${success ? 'border-success/40 bg-success/10 text-success' : 'border-warm/40 bg-warm/10 text-warm'}`;
+      toast.innerHTML = `<i class="ph ${success ? 'ph-star' : 'ph-warning'} text-lg"></i><span class="leading-snug">${message}</span>`;
       stack.appendChild(toast);
       setTimeout(() => {
         toast.style.opacity = '0';
@@ -736,35 +948,44 @@
       const lotParam = url.searchParams.get('lot');
       const concParam = url.searchParams.get('conc');
 
+      if (lotParam) {
+        const select = document.getElementById('lottery-select');
+        select.value = lotParam;
+        metaData.lottery = lotParam;
+        metaData.lotteryLabel = getSelectedLotteryLabel();
+        updateBetsHelper();
+      }
+
+      if (dateParam) {
+        const dateInput = document.getElementById('result-date');
+        dateInput.value = dateParam;
+        if (validateDateField()) {
+          metaData.date = dateParam;
+        }
+      }
+
+      if (concParam) {
+        const toggle = document.getElementById('toggle-concurso');
+        const wrapper = document.getElementById('concurso-input-wrapper');
+        toggle.checked = true;
+        wrapper.classList.remove('hidden');
+        const input = document.getElementById('concurso-number');
+        input.value = concParam;
+        metaData.concurso = concParam;
+      }
+
       if (betsParam) {
+        const betsInput = document.getElementById('bets-input');
+        const rule = getActiveLotteryRule();
         const betsArray = betsParam.split('_');
         let text = '';
         betsArray.forEach((chunk, index) => {
-          if (chunk.split('-').length === 5) {
-            text += `#${String(index + 1).padStart(2, '0')}: ${chunk}\n`;
+          const numbers = chunk.split('-').map((token) => parseInt(token, 10));
+          if (numbers.length === rule.numbersPerBet && numbers.every((number) => !Number.isNaN(number))) {
+            text += `#${String(index + 1).padStart(2, '0')}: ${numbers.map((number) => pad(number, rule.pad)).join('-')}\n`;
           }
         });
-        document.getElementById('bets-input').value = text.trim();
-      }
-      if (dateParam) {
-        const dateInput = document.getElementById('result-date');
-        const processButton = document.getElementById('process-btn');
-        dateInput.value = dateParam;
-        const isValid = validateDateField();
-        processButton.hidden = !isValid;
-      }
-      if (lotParam) {
-        if (lotteryChoices) {
-          lotteryChoices.setChoiceByValue(lotParam);
-        } else {
-          document.getElementById('lottery-select').value = lotParam;
-        }
-      }
-      if (concParam) {
-        const toggle = document.getElementById('toggle-concurso');
-        toggle.checked = true;
-        document.getElementById('concurso-input-wrapper').hidden = false;
-        document.getElementById('concurso-number').value = concParam;
+        betsInput.value = text.trim();
       }
 
       if (betsParam && dateParam) {
@@ -777,6 +998,55 @@
             applyDrawn();
           }
         }
+      }
+
+      updateHeaderInfo();
+      refreshActionVisibility();
+    }
+
+    function getSelectedLotteryLabel() {
+      const select = document.getElementById('lottery-select');
+      if (!select.value) return '';
+      const option = select.querySelector(`option[value="${select.value}"]`);
+      return option ? option.textContent : '';
+    }
+
+    function pad(number, length = 2) {
+      return String(number).padStart(length, '0');
+    }
+
+    async function updateConcursoSuggestions() {
+      const datalist = document.getElementById('concurso-suggestions');
+      if (!datalist) return;
+      const lottery = document.getElementById('lottery-select').value || 'geral';
+      const date = document.getElementById('result-date').value;
+      datalist.innerHTML = '';
+      if (!date) return;
+      const suggestions = await fetchConcursoSuggestions(lottery, date);
+      suggestions.forEach((value) => {
+        const option = document.createElement('option');
+        option.value = value;
+        datalist.appendChild(option);
+      });
+    }
+
+    function fetchConcursoSuggestions(lottery, date) {
+      return new Promise((resolve) => {
+        if (!date) {
+          resolve([]);
+          return;
+        }
+        const seed = parseInt(date.replace(/-/g, ''), 10) || Date.now();
+        const base = (seed % 9000) + 1000;
+        const items = [base - 1, base, base + 1].map((number) => Math.max(1, number));
+        resolve(items.map(String));
+      });
+    }
+
+    function updateFooterYear() {
+      const footerYear = document.getElementById('footer-year');
+      if (footerYear) {
+        footerYear.textContent = new Date().getFullYear();
       }
     }
   </script>

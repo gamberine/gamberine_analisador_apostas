@@ -1,0 +1,62 @@
+﻿/* ============================
+   Ficheiro de variáveis globais e tokens de design
+   ============================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Paleta principal */
+  --primaryColor       : #ed3224;
+  --primaryColorHover  : #cb2e23;
+  --secondaryColor     : #1b5866;
+  --secondaryColorHover: #15424d;
+  --accent             : #36b37e;
+  --muted              : #c7cedf;
+  --warm               : #f97316;
+
+  /* Superfícies */
+  --bg                 : #0b1020;
+  --bgSecundario       : #0b1228;
+  --card               : #111832;
+  --gradientHeader     : linear-gradient(110deg, #18233f, #0f172a);
+  --shadow             : #0f172a59;
+  --border             : #2a355d;
+
+  /* Texto e feedback */
+  --text               : #f1f5ff;
+  --branca             : #ffffff;
+  --hit                : #ffe08a;
+  --drawn              : #3b82f6;
+  --destaque           : #3b82f6e6;
+  --danger             : #ef4444;
+  --ok                 : #22c55e;
+
+  /* Compatibilidade com estilos anteriores */
+  --destaqueColor : #ff4089;
+  --successColor  : #16a34a;
+  --warningColor  : #f59e0b;
+  --errorColor    : #dc2626;
+  --bgColorLight  : #0b1020;
+  --bgColorDarker : #0b1228;
+  --textColor     : #f1f5ff;
+  --textColorOnDark: #ffffff;
+
+  /* Tipografia */
+  --fontTitulos   : 'Raleway', sans-serif;
+  --fontConteudo  : 'Montserrat', sans-serif;
+
+  /* Tempo */
+  --transitionSpeed: 0.25s;
+
+  color-scheme: dark;
+}
+
+body {
+  font-family     : var(--fontConteudo);
+  font-size       : 0.95rem;
+  line-height     : 1.5;
+  background-color: var(--bg);
+  color           : var(--text);
+  margin          : 0;
+}
