@@ -1,6 +1,7 @@
-﻿/* Ajustes complementares para o layout em Tailwind */
+﻿@import url('variables.css');
 
-@import url(variables.css);
+/* Ajustes complementares para o layout em Tailwind */
+
 *,
 *::before,
 *::after {
@@ -134,3 +135,5 @@ textarea::placeholder {
     animation-duration: 0.01ms !important;
   }
 }
+
+

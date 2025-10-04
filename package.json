@@ -1,0 +1,30 @@
+﻿{
+    "name":  "gamberine_analisador_apostas",
+    "version":  "1.0.0",
+    "description":  "PublicaÃ§Ã£o via GitHub Pages. - Estilos externos: `gamb_variables_geral.css` - BotÃµes com classes `btn btnPrimary` e `btn btnSecondary` - Cores de acerto usando `--primaryColor` e `--primaryColorHover` - AcordeÃ£o na Parte 1 e responsivo (max-width: 1280px)",
+    "main":  "index.js",
+    "scripts":  {
+                    "start":  "npm run watch",
+                    "build:css":  "tailwindcss -i ./src/styles/main.css -o ./assets/css/app.css --minify",
+                    "build":  "npm run build:css",
+                    "watch":  "tailwindcss -i ./src/styles/main.css -o ./assets/css/app.css --watch"
+                },
+    "repository":  {
+                       "type":  "git",
+                       "url":  "git+https://github.com/gamberine/gamberine_analisador_apostas.git"
+                   },
+    "keywords":  [
+
+                 ],
+    "author":  "",
+    "license":  "ISC",
+    "bugs":  {
+                 "url":  "https://github.com/gamberine/gamberine_analisador_apostas/issues"
+             },
+    "homepage":  "https://github.com/gamberine/gamberine_analisador_apostas#readme",
+    "devDependencies":  {
+                            "autoprefixer":  "^10.4.21",
+                            "postcss":  "^8.5.6",
+                            "tailwindcss":  "^3.4.18"
+                        }
+}

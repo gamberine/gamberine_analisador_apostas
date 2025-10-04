@@ -8,51 +8,12 @@
   <title>Gamberine - Analisador de Apostas</title>
   <meta name="description"
     content="Análise prévia, tabela de apostas e marcador automático do resultado das loterias da Caixa.">
-
-  <link rel="stylesheet" href="variables.css">
-  <script>
-    tailwind = {
-      config: {
-        theme: {
-          extend: {
-            colors: {
-              base: 'var(--bg)',
-              surface: 'var(--card)',
-              'surface-muted': 'var(--bgSecundario)',
-              border: 'var(--border)',
-              text: 'var(--text)',
-              muted: 'var(--muted)',
-              branca: 'var(--branca)',
-              accent: 'var(--accent)',
-              highlight: 'var(--destaque)',
-              success: 'var(--ok)',
-              danger: 'var(--danger)',
-              info: 'var(--drawn)',
-              warm: 'var(--warm)',
-              primary: 'var(--primaryColor)',
-              'primary-hover': 'var(--primaryColorHover)'
-            },
-            fontFamily: {
-              sans: ['var(--fontConteudo)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-              display: ['var(--fontTitulos)', 'var(--fontConteudo)', 'ui-sans-serif', 'system-ui', 'sans-serif']
-            },
-            boxShadow: {
-              card: '0 18px 32px -24px var(--shadow)'
-            },
-            backgroundImage: {
-              header: 'var(--gradientHeader)'
-            }
-          }
-        }
-      }
-    };
-  </script>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="assets/css/app.css">
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body class="min-h-screen bg-base font-sans text-text antialiased">
-  <header class="sticky top-0 z-20 bg-header bg-cover bg-center">
+  <header class="sticky top-0 z-20 border-b border-border/60 bg-header bg-cover bg-center">
     <div class="mx-auto flex w-full max-w-6xl flex-col gap-2 px-4 py-6">
       <h1 class="font-display text-2xl font-semibold text-branca">Gamberine - Analisador de Apostas</h1>
       <div id="oculto-ate-preencher" class="hidden text-sm text-muted" hidden>
@@ -69,7 +30,7 @@
   </header>
 
   <main class="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-10">
-    <fieldset class="rounded-2xl bg-surface shadow-card" data-accordion data-open>
+    <fieldset class="rounded-2xl border border-border/60 bg-surface shadow-card" data-accordion data-open>
       <legend
         class="flex items-center justify-between gap-2 px-6 py-4 text-sm font-semibold uppercase tracking-wide text-muted">
         <span class="flex items-center gap-2">
@@ -91,7 +52,7 @@
           </label>
           <label class="flex flex-col gap-2 text-sm" for="lottery-select">
             <span class="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-muted">
-              Modalidade da aposta
+              Tipo de loteria
               <span class="relative"
                 data-tooltip="Com essa informação e o número do concurso, você terá a experiência completa e poderá receber detalhes futuramente.">
                 <i class="ph ph-info text-muted"></i>
@@ -103,8 +64,8 @@
             </select>
           </label>
           <div class="flex flex-col text-sm">
-            <label class="flex items-startrounded-xl bg-surface-muted/40 px-4">
-              <input type="checkbox" id="toggle-concurso" class="mt-1 h-4 w-4 rounded bg-surface accent-accent">
+            <label class="flex items-start gap-3 rounded-xl border border-border/60 bg-surface-muted/40 px-4 py-3">
+              <input type="checkbox" id="toggle-concurso" class="mt-1 h-4 w-4 rounded border border-border/60 bg-surface accent-accent">
               <span class="leading-relaxed text-muted">Deseja inserir o número do concurso?</span>
             </label>
             <div id="concurso-input-wrapper" class="hidden">
@@ -119,7 +80,8 @@
         </p>
       </div>
     </fieldset>
-    <fieldset class="rounded-2xl bg-surface shadow-card" data-accordion data-open>
+    <div class="flex flex-col gap-6 xl:flex-row xl:items-start">
+      <fieldset class="rounded-2xl border border-border/60 bg-surface shadow-card xl:w-2/5 xl:max-w-[40%]" data-accordion data-open>
       <legend
         class="flex items-center justify-between gap-2 px-6 py-4 text-sm font-semibold uppercase tracking-wide text-muted">
         <span class="flex items-center gap-2">
@@ -140,11 +102,10 @@
           <textarea id="bets-input" rows="4" placeholder="Cole ou digite aqui suas apostas"
             class="min-h-[112px] w-full resize-y rounded-xl bg-surface-muted/60 px-4 py-3 text-sm text-branca outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/40"></textarea>
         </label>
-        <p class="text-xs leading-relaxed text-muted" id="bets-hint">Informe 5 dezenas (01-80) por aposta. Cole qualquer
-          formato e nós organizamos automaticamente.</p>
+        <p class="text-xs leading-relaxed text-muted" id="bets-hint">Para apostas padrão, informe 5 dezenas (01-80) por aposta. Cole qualquer formato e nós organizamos automaticamente.</p>
       </div>
     </fieldset>
-    <fieldset id="bets-card" class="hidden rounded-2xl bg-surface shadow-card" data-accordion>
+      <fieldset id="bets-card" class="hidden rounded-2xl border border-border/60 bg-surface shadow-card xl:flex-1" data-accordion>
       <legend
         class="flex items-center justify-between gap-2 px-6 py-4 text-sm font-semibold uppercase tracking-wide text-muted">
         <span class="flex items-center gap-2">
@@ -226,9 +187,10 @@
           </div>
         </div>
       </div>
-    </fieldset>
+      </fieldset>
+    </div>
 
-    <details class="rounded-2xl bg-surface shadow-card" id="bets-accordion" hidden>
+    <details class="rounded-2xl border border-border/60 bg-surface shadow-card" id="bets-accordion" hidden>
       <summary
         class="flex cursor-pointer items-center justify-between gap-4 px-6 py-4 text-sm font-semibold uppercase tracking-wide text-muted">
         <span class="flex items-center gap-2"><i class="ph ph-list-checks text-accent"></i>Tabela de apostas</span>
@@ -255,7 +217,7 @@
     </details>
 
     <template id="results-template">
-      <details class="rounded-2xl bg-surface shadow-card" id="results-accordion" open>
+      <details class="rounded-2xl border border-border/60 bg-surface shadow-card" id="results-accordion" open>
         <summary
           class="flex cursor-pointer items-center justify-between gap-4 px-6 py-4 text-sm font-semibold uppercase tracking-wide text-muted">
           <span class="flex items-center gap-2"><i class="ph ph-shooting-star text-accent"></i>Inserir resultado do
@@ -490,6 +452,8 @@
       if (insertResultButton) {
         insertResultButton.addEventListener('click', handleInsertResultClick);
       }
+      updateBetsHelper();
+      refreshActionVisibility();
     }
     function validateDateField() {
       const dateInput = document.getElementById('result-date');
@@ -521,8 +485,21 @@
       const rule = getActiveLotteryRule();
       const helper = document.getElementById('bets-hint');
       const format = document.getElementById('bets-input-format');
-      if (helper) helper.textContent = `Informe ${rule.label}. Cole qualquer formato e nós organizamos automaticamente.`;
-      if (format) format.textContent = `Formato esperado "#01: ${Array.from({ length: rule.numbersPerBet }, (_, index) => String(index + 1).padStart(rule.pad, '0')).join('-')}"`;
+      const textarea = document.getElementById('bets-input');
+      const lotteryName = metaData.lotteryLabel || 'apostas padrão';
+      const rangeMin = pad(rule.min, rule.pad);
+      const rangeMax = pad(rule.max, rule.pad);
+      const unitLabel = rule.numbersPerBet === 1 ? 'dígito' : 'dezenas';
+      if (helper) {
+        helper.textContent = `Para ${lotteryName}, informe ${rule.numbersPerBet} ${unitLabel} (${rangeMin}-${rangeMax}) por aposta. Cole qualquer formato e nós organizamos automaticamente.`;
+      }
+      if (format) {
+        const sample = Array.from({ length: rule.numbersPerBet }, (_, index) => pad(index + 1, rule.pad)).join('-');
+        format.textContent = `Formato esperado "#01: ${sample}"`;
+      }
+      if (textarea) {
+        textarea.placeholder = `Cole ou digite ${rule.numbersPerBet} ${unitLabel} no intervalo ${rangeMin}-${rangeMax}`;
+      }
     }
 
     function normalizeBetsInput(inputValue) {
@@ -874,7 +851,9 @@
     }
 
     function refreshActionVisibility() {
-      const betsText = document.getElementById('bets-input').value.trim();
+      const betsInput = document.getElementById('bets-input');
+      if (!betsInput) return;
+      const betsText = betsInput.value.trim();
       const draftBets = parseBets(betsText);
       const draftCount = Object.keys(draftBets).length;
       const processedCount = Object.keys(betsData).length;
@@ -883,11 +862,12 @@
       const openResultsButton = document.getElementById('open-results-btn');
       const advanceButton = document.getElementById('advance-button');
       const betsCard = document.getElementById('bets-card');
-
       const dateInput = document.getElementById('result-date');
       const hasDate = !!(dateInput && dateInput.value);
       const dateIsValid = hasDate ? validateDateField() : false;
-      const canProcess = draftCount > 0 && dateIsValid && !!metaData.lottery;
+      const prerequisitesMet = !!metaData.lottery && dateIsValid;
+
+      const canProcess = draftCount > 0 && prerequisitesMet;
       processButton.classList.toggle('hidden', !canProcess);
       processButton.disabled = !canProcess;
       if (!canProcess) {
@@ -896,16 +876,38 @@
         processButton.removeAttribute('title');
       }
 
-      if (draftCount > 0 || processedCount > 0) {
-        betsCard.classList.remove('hidden');
-      } else {
-        betsCard.classList.add('hidden');
+      const shouldShowCard = prerequisitesMet && (draftCount > 0 || processedCount > 0);
+      const wasHidden = betsCard.classList.contains('hidden');
+      betsCard.classList.toggle('hidden', !shouldShowCard);
+      const panel = betsCard.querySelector('[data-accordion-panel]');
+      const toggle = betsCard.querySelector('.accordion-toggle');
+      if (!shouldShowCard) {
+        if (panel && toggle) {
+          panel.hidden = true;
+          toggle.setAttribute('aria-expanded', 'false');
+          const icon = toggle.querySelector('i');
+          if (icon) {
+            icon.classList.remove('ph-caret-up');
+            icon.classList.add('ph-caret-down');
+          }
+        }
+      } else if (wasHidden) {
+        if (panel && toggle) {
+          panel.hidden = false;
+          toggle.setAttribute('aria-expanded', 'true');
+          const icon = toggle.querySelector('i');
+          if (icon) {
+            icon.classList.remove('ph-caret-down');
+            icon.classList.add('ph-caret-up');
+          }
+        }
       }
 
       analyzeButton.classList.toggle('hidden', processedCount === 0);
       openResultsButton.classList.toggle('hidden', processedCount === 0);
       advanceButton.classList.toggle('hidden', processedCount === 0);
     }
+
 
     function showToast(message, success = false) {
       const stack = document.getElementById('toast-stack');
@@ -1053,3 +1055,7 @@
 </body>
 
 </html>
+
+
+
+
