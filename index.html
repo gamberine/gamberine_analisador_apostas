@@ -13,7 +13,7 @@
 </head>
 
 <body class="min-h-screen bg-base font-sans text-text antialiased">
-  <header class="sticky top-0 z-20 border-b border-border/60 bg-header bg-cover bg-center">
+  <header class="sticky top-0 z-20 bg-header bg-cover bg-center">
     <div class="mx-auto flex w-full max-w-6xl flex-col gap-2 px-4 py-6">
       <h1 class="font-display text-2xl font-semibold text-branca">Gamberine - Analisador de Apostas</h1>
       <div id="oculto-ate-preencher" class="hidden text-sm text-muted" hidden>
@@ -30,14 +30,14 @@
   </header>
 
   <main class="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-10">
-    <fieldset class="rounded-2xl border border-border/60 bg-surface shadow-card" data-accordion data-open>
+    <fieldset class="rounded-2xl bg-surface shadow-card" data-accordion data-open>
       <legend
         class="flex items-center justify-between gap-2 px-6 py-4 text-sm font-semibold uppercase tracking-wide text-muted">
         <span class="flex items-center gap-2">
           <i class="ph ph-calendar-blank text-accent"></i>
           Dados do sorteio
         </span>
-        <button type="button" class="accordion-toggle text-muted transition hover:text-branca" aria-expanded="true">
+        <button type="button" class="accordion-toggle text-muted transition hover:text-muted" aria-expanded="true">
           <span class="sr-only">Alternar exibição</span>
           <i class="ph ph-caret-up text-lg"></i>
         </button>
@@ -52,7 +52,7 @@
           </label>
           <label class="flex flex-col gap-2 text-sm" for="lottery-select">
             <span class="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-muted">
-              Tipo de loteria
+              Modalidade Aposta
               <span class="relative"
                 data-tooltip="Com essa informação e o número do concurso, você terá a experiência completa e poderá receber detalhes futuramente.">
                 <i class="ph ph-info text-muted"></i>
@@ -63,15 +63,15 @@
               <option value="">Selecione</option>
             </select>
           </label>
-          <div class="flex flex-col text-sm">
-            <label class="flex items-start gap-3 rounded-xl border border-border/60 bg-surface-muted/40 px-4 py-3">
-              <input type="checkbox" id="toggle-concurso" class="mt-1 h-4 w-4 rounded border border-border/60 bg-surface accent-accent">
+          <div class="flex flex-col text-sm relative top--5">
+            <label class="flex items-center px-4">
+              <input type="checkbox" id="toggle-concurso" class="h-4 w-4 rounded accent-accent">
               <span class="leading-relaxed text-muted">Deseja inserir o número do concurso?</span>
             </label>
             <div id="concurso-input-wrapper" class="hidden">
               <input type="text" id="concurso-number" list="concurso-suggestions" placeholder="Informe o nº do concurso"
                 inputmode="numeric"
-                class="w-full rounded-xl bg-surface-muted/60 px-4 py-3 text-sm text-branca outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/40">
+                class="w-full rounded-xl bg-surface-muted/60 px-4 py-3 mt-1 text-sm text-branca shadow-inner-sm outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/40">
               <datalist id="concurso-suggestions"></datalist>
             </div>
           </div>
@@ -81,116 +81,119 @@
       </div>
     </fieldset>
     <div class="flex flex-col gap-6 xl:flex-row xl:items-start">
-      <fieldset class="rounded-2xl border border-border/60 bg-surface shadow-card xl:w-2/5 xl:max-w-[40%]" data-accordion data-open>
-      <legend
-        class="flex items-center justify-between gap-2 px-6 py-4 text-sm font-semibold uppercase tracking-wide text-muted">
-        <span class="flex items-center gap-2">
-          <i class="ph ph-number-circle-five text-accent"></i>
-          Dados da(s) aposta(s)
-        </span>
-        <button type="button" class="accordion-toggle text-muted transition hover:text-branca" aria-expanded="true">
-          <span class="sr-only">Alternar exibição</span>
-          <i class="ph ph-caret-up text-lg"></i>
-        </button>
-      </legend>
-      <div class="space-y-4 px-6 py-6" data-accordion-panel>
-        <label class="flex flex-col gap-3 text-sm" for="bets-input">
-          <span class="text-xs font-semibold uppercase tracking-wide text-muted">
-            Números apostados
-            <span class="text-muted" id="bets-input-format">Formato padrão "#01: 10-20-30-40-50"</span>
+      <fieldset class="rounded-2xl bg-surface shadow-card xl:w-2/5 xl:max-w-[40%]" data-accordion data-open>
+        <legend
+          class="flex items-center justify-between gap-2 px-6 py-4 text-sm font-semibold uppercase tracking-wide text-muted">
+          <span class="flex items-center gap-2">
+            <i class="ph ph-number-circle-five text-accent"></i>
+            Dados da(s) aposta(s)
           </span>
-          <textarea id="bets-input" rows="4" placeholder="Cole ou digite aqui suas apostas"
-            class="min-h-[112px] w-full resize-y rounded-xl bg-surface-muted/60 px-4 py-3 text-sm text-branca outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/40"></textarea>
-        </label>
-        <p class="text-xs leading-relaxed text-muted" id="bets-hint">Para apostas padrão, informe 5 dezenas (01-80) por aposta. Cole qualquer formato e nós organizamos automaticamente.</p>
-      </div>
-    </fieldset>
-      <fieldset id="bets-card" class="hidden rounded-2xl border border-border/60 bg-surface shadow-card xl:flex-1" data-accordion>
-      <legend
-        class="flex items-center justify-between gap-2 px-6 py-4 text-sm font-semibold uppercase tracking-wide text-muted">
-        <span class="flex items-center gap-2">
-          <i class="ph ph-play text-accent"></i>
-          Ações e processamento
-        </span>
-        <button type="button" class="accordion-toggle text-muted transition hover:text-branca" aria-expanded="false">
-          <span class="sr-only">Alternar exibição</span>
-          <i class="ph ph-caret-down text-lg"></i>
-        </button>
-      </legend>
-      <div class="space-y-6 px-6 py-6" data-accordion-panel hidden>
-        <div class="flex flex-wrap items-end gap-4">
-          <div class="flex gap-3">
-            <button type="button" id="apply-drawn-btn"
-              class="inline-flex items-center gap-2 rounded-xl bg-primary px-4 py-2 text-sm font-medium text-branca transition hover:bg-primary-hover">
-              <i class="ph ph-check-circle"></i>
-              <span>Aplicar resultado</span>
-            </button>
-            <button type="button" id="clear-drawn-btn"
-              class="inline-flex items-center gap-2 rounded-xl border-muted/30 bg-transparent px-4 py-2 text-sm font-medium text-muted transition hover:border-muted hover:text-branca">
-              <i class="ph ph-broom"></i>
-              <span>Limpar</span>
-            </button>
-            <button type="button" id="search-result-btn"
-              class="inline-flex items-center gap-2 rounded-xl border-muted/30 bg-transparent px-4 py-2 text-sm font-medium text-muted opacity-60"
-              disabled data-tooltip="Em breve">
-              <i class="ph ph-magnifying-glass"></i>
-              <span>Buscar resultado</span>
-            </button>
-          </div>
-          <div class="ml-auto flex flex-wrap gap-3">
-            <button id="process-btn"
-              class="hidden inline-flex items-center gap-2 rounded-xl bg-primary px-4 py-2 text-sm font-medium text-branca transition hover:bg-primary-hover"
-              type="button">
-              <i class="ph ph-play-circle"></i>
-              <span>Gerar tabela e link</span>
-            </button>
-            <button id="analyze-btn"
-              class="hidden inline-flex items-center gap-2 rounded-xl border-muted/30 bg-transparent px-4 py-2 text-sm font-medium text-muted transition hover:border-muted hover:text-branca"
-              type="button">
-              <i class="ph ph-chart-pie"></i>
-              <span>Analisar apostas</span>
-            </button>
-            <button id="open-results-btn"
-              class="hidden inline-flex items-center gap-2 rounded-xl border-muted/30 bg-transparent px-4 py-2 text-sm font-medium text-muted transition hover:border-muted hover:text-branca"
-              type="button">
-              <i class="ph ph-shooting-star"></i>
-              <span>Inserir resultado</span>
-            </button>
-            <button id="advance-button"
-              class="hidden inline-flex items-center gap-2 rounded-xl border-muted/50 bg-transparent px-4 py-2 text-sm font-medium text-muted transition hover:border-muted hover:text-branca"
-              type="button">
-              <span>Prosseguir</span>
-              <i class="ph ph-arrow-fat-lines-right"></i>
-            </button>
-          </div>
+          <button type="button" class="accordion-toggle text-muted transition hover:text-muted" aria-expanded="true">
+            <span class="sr-only">Alternar exibição</span>
+            <i class="ph ph-caret-up text-lg"></i>
+          </button>
+        </legend>
+        <div class="space-y-4 px-6 py-6" data-accordion-panel>
+          <label class="flex flex-col gap-3 text-sm" for="bets-input">
+            <span class="text-xs font-semibold uppercase tracking-wide text-muted flex flex-col">
+              NÚMEROS APOSTADOS
+              <span class="text-xs leading-relaxed normal-case text-muted" id="bets-input-format">Formato padrão "#01:
+                10-20-30-40-50"</span></span>
+            <textarea id="bets-input" rows="4" placeholder="Cole ou digite aqui suas apostas"
+              class="min-h-[112px] w-full resize-y rounded-xl bg-surface-muted/60 px-4 py-3 text-sm text-branca outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/40"></textarea>
+          </label>
+          <span class="text-xs leading-relaxed text-muted flex flex-col" id="bets-hint">Para apostas padrão, informe: 5 dezenas (01-80)
+            por aposta.
+            <span>Cole qualquer formato e nós organizamos automaticamente.</span>
+          </span>
         </div>
-        <div id="analysis-output" class="hidden rounded-xl bg-surface-muted/40 p-4 text-sm text-muted"></div>
-        <div id="generated-link-container" class="hidden space-y-3 rounded-xl bg-surface-muted/30 p-4">
-          <strong class="text-sm uppercase tracking-wide text-muted">Link gerado</strong>
-          <div class="flex flex-col gap-3 md:flex-row md:items-center">
-            <input type="text" readonly value="" aria-label="Link gerado"
-              class="flex-1 rounded-xl bg-surface px-4 py-2 text-sm text-branca outline-none">
-            <div class="flex gap-2">
-              <button
-                class="inline-flex items-center gap-2 rounded-xl bg-primary px-4 py-2 text-sm font-medium text-branca transition hover:bg-primary-hover"
-                type="button" data-action="open-link">
-                <i class="ph ph-arrow-square-out"></i>
-                <span>Abrir link</span>
+      </fieldset>
+      <fieldset id="bets-card" class="hidden rounded-2xl bg-surface shadow-card xl:flex-1" data-accordion>
+        <legend
+          class="flex items-center justify-between gap-2 px-6 py-4 text-sm font-semibold uppercase tracking-wide text-muted">
+          <span class="flex items-center gap-2">
+            <i class="ph ph-play text-accent"></i>
+            Ações e processamento
+          </span>
+          <button type="button" class="accordion-toggle text-muted transition hover:text-muted" aria-expanded="false">
+            <span class="sr-only">Alternar exibição</span>
+            <i class="ph ph-caret-down text-lg"></i>
+          </button>
+        </legend>
+        <div class="space-y-6 px-6 py-6" data-accordion-panel hidden>
+          <div class="flex flex-wrap items-end gap-4">
+            <div class="flex gap-3">
+              <button type="button" id="apply-drawn-btn"
+                class="inline-flex items-center gap-2 rounded-xl bg-primary px-4 py-2 text-sm font-medium text-branca transition hover:bg-primary-hover">
+                <i class="ph ph-check-circle"></i>
+                <span>Aplicar resultado</span>
               </button>
-              <button
-                class="inline-flex items-center gap-2 rounded-xl border-muted/30 bg-transparent px-4 py-2 text-sm font-medium text-muted transition hover:border-muted hover:text-branca"
-                type="button" data-action="copy-link">
-                <i class="ph ph-copy"></i>
-                <span>Copiar link</span>
+              <button type="button" id="clear-drawn-btn"
+                class="inline-flex items-center gap-2 rounded-xl border-muted/30 bg-transparent px-4 py-2 text-sm font-medium text-muted transition hover:border-muted hover:text-muted">
+                <i class="ph ph-broom"></i>
+                <span>Limpar</span>
+              </button>
+              <button type="button" id="search-result-btn"
+                class="inline-flex items-center gap-2 rounded-xl border-muted/30 bg-transparent px-4 py-2 text-sm font-medium text-muted opacity-60"
+                disabled data-tooltip="Em breve">
+                <i class="ph ph-magnifying-glass"></i>
+                <span>Buscar resultado</span>
+              </button>
+            </div>
+            <div class="ml-auto flex flex-wrap gap-3">
+              <button id="process-btn"
+                class="hidden inline-flex items-center gap-2 rounded-xl bg-primary px-4 py-2 text-sm font-medium text-branca transition hover:bg-primary-hover"
+                type="button">
+                <i class="ph ph-play-circle"></i>
+                <span>Gerar tabela e link</span>
+              </button>
+              <button id="analyze-btn"
+                class="hidden inline-flex items-center gap-2 rounded-xl border-muted/30 bg-transparent px-4 py-2 text-sm font-medium text-muted transition hover:border-muted hover:text-muted"
+                type="button">
+                <i class="ph ph-chart-pie"></i>
+                <span>Analisar apostas</span>
+              </button>
+              <button id="open-results-btn"
+                class="hidden inline-flex items-center gap-2 rounded-xl border-muted/30 bg-transparent px-4 py-2 text-sm font-medium text-muted transition hover:border-muted hover:text-muted"
+                type="button">
+                <i class="ph ph-shooting-star"></i>
+                <span>Inserir resultado</span>
+              </button>
+              <button id="advance-button"
+                class="hidden inline-flex items-center gap-2 rounded-xl border-muted/50 bg-transparent px-4 py-2 text-sm font-medium text-muted transition hover:border-muted hover:text-muted"
+                type="button">
+                <span>Prosseguir</span>
+                <i class="ph ph-arrow-fat-lines-right"></i>
               </button>
             </div>
           </div>
+          <div id="analysis-output" class="hidden rounded-xl bg-surface-muted/40 p-4 text-sm text-muted"></div>
+          <div id="generated-link-container" class="hidden space-y-3 rounded-xl bg-surface-muted/30 p-4">
+            <strong class="text-sm uppercase tracking-wide text-muted">Link gerado</strong>
+            <div class="flex flex-col gap-3 md:flex-row md:items-center">
+              <input type="text" readonly value="" aria-label="Link gerado"
+                class="flex-1 rounded-xl bg-surface px-4 py-2 text-sm text-branca outline-none">
+              <div class="flex gap-2">
+                <button
+                  class="inline-flex items-center gap-2 rounded-xl bg-primary px-4 py-2 text-sm font-medium text-branca transition hover:bg-primary-hover"
+                  type="button" data-action="open-link">
+                  <i class="ph ph-arrow-square-out"></i>
+                  <span>Abrir link</span>
+                </button>
+                <button
+                  class="inline-flex items-center gap-2 rounded-xl border-muted/30 bg-transparent px-4 py-2 text-sm font-medium text-muted transition hover:border-muted hover:text-muted"
+                  type="button" data-action="copy-link">
+                  <i class="ph ph-copy"></i>
+                  <span>Copiar link</span>
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
       </fieldset>
     </div>
 
-    <details class="rounded-2xl border border-border/60 bg-surface shadow-card" id="bets-accordion" hidden>
+    <details class="rounded-2xl bg-surface shadow-card" id="bets-accordion" hidden>
       <summary
         class="flex cursor-pointer items-center justify-between gap-4 px-6 py-4 text-sm font-semibold uppercase tracking-wide text-muted">
         <span class="flex items-center gap-2"><i class="ph ph-list-checks text-accent"></i>Tabela de apostas</span>
@@ -217,7 +220,7 @@
     </details>
 
     <template id="results-template">
-      <details class="rounded-2xl border border-border/60 bg-surface shadow-card" id="results-accordion" open>
+      <details class="rounded-2xl bg-surface shadow-card" id="results-accordion" open>
         <summary
           class="flex cursor-pointer items-center justify-between gap-4 px-6 py-4 text-sm font-semibold uppercase tracking-wide text-muted">
           <span class="flex items-center gap-2"><i class="ph ph-shooting-star text-accent"></i>Inserir resultado do
@@ -238,7 +241,7 @@
               <span>Aplicar</span>
             </button>
             <button
-              class="inline-flex items-center gap-2 rounded-xl border-muted/30 bg-transparent px-4 py-2 text-sm font-medium text-muted transition hover:border-muted hover:text-branca"
+              class="inline-flex items-center gap-2 rounded-xl border-muted/30 bg-transparent px-4 py-2 text-sm font-medium text-muted transition hover:border-muted hover:text-muted"
               type="button" id="clear-drawn-btn">
               <i class="ph ph-broom"></i>
               <span>Limpar</span>
@@ -257,7 +260,7 @@
     </template>
   </main>
 
-  <footer class="border-t border-muted/10 bg-surface-muted/40 py-6 text-center text-xs text-muted">
+  <footer class="bg-surface-muted/60 py-6 text-center text-xs text-muted">
     <div class="mx-auto flex w-full max-w-6xl flex-col items-center gap-2 px-4">
       <span>Gamberine © <span id="footer-year"></span>. Organize, acompanhe e compare seus jogos.</span>
     </div>
@@ -1055,7 +1058,3 @@
 </body>
 
 </html>
-
-
-
-

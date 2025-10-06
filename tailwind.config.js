@@ -8,25 +8,25 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        base: 'var(--bg)',
-        surface: 'var(--card)',
+        base: 'var(--bg-primary)',
+        surface: 'var(--bg-surface)',
         'surface-muted': 'var(--bgSecundario)',
         border: 'var(--border)',
         text: 'var(--text)',
         muted: 'var(--muted)',
-        branca: 'var(--branca)',
+        branca: 'var(--white)',
         accent: 'var(--accent)',
-        highlight: 'var(--destaque)',
+        highlight: 'var(--highlight)',
         success: 'var(--ok)',
         danger: 'var(--danger)',
         info: 'var(--drawn)',
         warm: 'var(--warm)',
-        primary: 'var(--primaryColor)',
-        'primary-hover': 'var(--primaryColorHover)'
+        primary: 'var(--primary-color)',
+        'primary-hover': 'var(--primary-color-hover)'
       },
       fontFamily: {
-        sans: ['var(--fontConteudo)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        display: ['var(--fontTitulos)', 'var(--fontConteudo)', 'ui-sans-serif', 'system-ui', 'sans-serif']
+        sans: ['var(--font-primary)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        display: ['var(--font-secondary)', 'var(--font-primary)', 'ui-sans-serif', 'system-ui', 'sans-serif']
       },
       boxShadow: {
         card: '0 18px 32px -24px var(--shadow)'

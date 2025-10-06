@@ -3,7 +3,7 @@
 Publicação via GitHub Pages.
 - Estilos externos: `gamb_variables_geral.css`
 - Botões com classes `btn btnPrimary` e `btn btnSecondary`
-- Cores de acerto usando `--primaryColor` e `--primaryColorHover`
+- Cores de acerto usando `--primary-color` e `--primary-color-hover`
 - Acordeão na Parte 1 e responsivo (max-width: 1280px)
 
 ## Publicar no GitHub Pages
