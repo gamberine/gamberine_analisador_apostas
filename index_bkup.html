@@ -10,25 +10,23 @@
     content="Análise prévia, tabela de apostas e marcador automático do resultado das loterias da Caixa.">
   <link rel="stylesheet" href="assets/css/variables.css">
   <link rel="stylesheet" href="assets/css/app.css">
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/estilo.css">
 </head>
 
 <body class="min-h-screen bg-base font-sans text-text antialiased">
-  <header class="sticky top-0 z-20 bg-header bg-cover bg-center flex items-center justify-center h-12">
-    <div class="mx-auto flex w-full max-w-6xl flex-col px-4 gap-2">
-      <h1 class="font-display text-2xl font-semibold text-white leading-5 text-center">Gamberine - Analisador de Apostas
-      </h1>
+  <header class="sticky top-0 z-20 bg-header bg-cover bg-center">
+    <div class="mx-auto flex w-full max-w-6xl flex-col px-4 py-2">
+      <h1 class="font-display text-2xl font-semibold text-white leading-5 text-center">Gamberine - Analisador de Apostas</h1>
       <div id="oculto-ate-preencher" class="sub hidden flex flex-wrap justify-center gap-2 text-sm text-muted" hidden>
         <span>Dados:</span>
-        <span class="font-semibold hit" id="info-lottery">-</span>
+        <span class="f59e0b font-semibold" id="info-lottery">-</span>
         <span class="text-muted">|</span>
         <span>Concurso:</span>
-        <span class=" font-semibold hit" id="info-concurso">-</span>
+        <span class=" f59e0b font-semibold" id="info-concurso">-</span>
         <span class="text-muted">|</span>
         <span>Data do sorteio:</span>
-        <strong class="font-semibold hit" id="info-date">-</strong>
-        <button type="button" id="edit-draw-data" class="header-edit-button accent hidden"
-          aria-label="Editar dados do sorteio">
+        <strong class="f59e0b font-semibold" id="info-date">-</strong>
+        <button type="button" id="edit-draw-data" class="header-edit-button accent hidden" aria-label="Editar dados do sorteio">
           <i class="fi fi-ts-money-check-edit-alt"></i>
         </button>
       </div>
@@ -103,14 +101,11 @@
           <label class="flex flex-col gap-3 text-sm" for="bets-input">
             <span class="text-xs font-semibold tracking-wide text-white flex flex-col">
               NÚMEROS APOSTADOS
-              <span class="text-xs font-medium leading-relaxed text-muted flex flex-col" id="bets-input-format">Formato
-                padrão "#01:10-20-30-40-50"</span></span>
-            <textarea id="bets-input" rows="2" inputmode="numeric" autocomplete="off"
-              placeholder="Cole ou digite aqui suas apostas"
+              <span class="text-xs font-medium leading-relaxed text-muted flex flex-col" id="bets-input-format">Formato padrão "#01:10-20-30-40-50"</span></span>
+            <textarea id="bets-input" rows="2" inputmode="numeric" autocomplete="off" placeholder="Cole ou digite aqui suas apostas"
               class="min-h-[112px] w-full resize-y rounded-xl bg-surface-muted/60 px-4 py-3 text-sm text-white outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/40"></textarea>
           </label>
-          <span class="text-xs leading-relaxed text-muted flex flex-col" id="bets-hint">Para apostas padrão, informe: 5
-            dezenas (01-80)
+          <span class="text-xs leading-relaxed text-muted flex flex-col" id="bets-hint">Para apostas padrão, informe: 5 dezenas (01-80)
             por aposta.
             <span>Cole qualquer formato e nós organizamos automaticamente.</span>
           </span>
@@ -131,63 +126,76 @@
         <div class="space-y-6 px-6 py-6" data-accordion-panel hidden>
           <div class="flex flex-wrap items-end gap-4">
             <div class="flex gap-3">
-              <button type="button" id="clear-drawn-btn" class="btn btn--ghost">
+              <button type="button" id="apply-drawn-btn"
+                class="btn btn--primary btn--pill">
+                <i class="fi fi-rr-check-circle"></i>
+                <span>Aplicar resultado</span>
+              </button>
+              <button type="button" id="clear-drawn-btn"
+                class="btn btn--ghost btn--pill">
                 <i class="fi fi-rr-broom"></i>
                 <span>Limpar</span>
               </button>
-
-              <!-- <button type="button" id="search-result-btn" class="btn btn--outline" disabled
-                data-tooltip="Em breve">
+              <button type="button" id="search-result-btn"
+                class="btn btn--outline btn--pill"
+                disabled data-tooltip="Em breve">
                 <i class="fi fi-rr-search"></i>
                 <span>Buscar resultado</span>
-              </button> -->
+              </button>
             </div>
             <div class="ml-auto flex flex-wrap gap-3">
-              <button id="process-btn" class="hidden btn btn--primary" type="button">
+              <button id="process-btn"
+                class="hidden btn btn--primary btn--pill"
+                type="button">
                 <i class="fi fi-rr-play-circle"></i>
                 <span>Gerar tabela e link</span>
               </button>
-              <button id="analyze-btn" class="hidden btn btn--secondary" type="button">
+              <button id="analyze-btn"
+                class="hidden btn btn--secondary btn--pill"
+                type="button">
                 <i class="fi fi-rr-chart-pie"></i>
                 <span>Analisar apostas</span>
               </button>
-              <button id="open-results-btn" class="hidden btn btn--outline" type="button">
+              <button id="open-results-btn"
+                class="hidden btn btn--outline btn--pill"
+                type="button">
                 <i class="fi fi-rr-star"></i>
                 <span>Inserir resultado</span>
               </button>
-              <button type="button" id="apply-drawn-btn" class="btn btn--outline">
-                <i class="fi fi-rr-check-circle"></i>
-                <span>Aplicar resultado 1</span>
-              </button>
-              <button id="advance-button" class="hidden btn btn--ghost" type="button">
+              <button id="advance-button"
+                class="hidden btn btn--ghost btn--pill"
+                type="button">
                 <span>Prosseguir</span>
                 <i class="fi fi-rr-arrow-small-right"></i>
               </button>
             </div>
           </div>
-         
-        </div>
-      </fieldset>
-    </div>
-    <!-- <fieldset id="bets-card" class="hidden rounded-2xl bg-surface shadow-card xl:flex-1" data-accordion></fieldset> -->
- <fieldset id="analysis-output" class="hidden rounded-xl bg-surface-muted/40 p-4 text-sm text-muted"></fieldset>
-          <fieldset id="generated-link-container" class="hidden space-y-3 rounded-xl bg-surface-muted/30 p-4">
+          <div id="analysis-output" class="hidden rounded-xl bg-surface-muted/40 p-4 text-sm text-muted"></div>
+          <div id="generated-link-container" class="hidden space-y-3 rounded-xl bg-surface-muted/30 p-4">
             <strong class="text-sm uppercase tracking-wide text-muted">Link gerado</strong>
             <div class="flex flex-col gap-3 md:flex-row md:items-center">
               <input type="text" readonly value="" aria-label="Link gerado"
                 class="flex-1 rounded-xl bg-surface px-4 py-2 text-sm text-white outline-none">
               <div class="flex gap-2">
-                <button class="btn btn--success" type="button" data-action="open-link">
+                <button
+                  class="btn btn--success btn--pill"
+                  type="button" data-action="open-link">
                   <i class="fi fi-rr-external-link"></i>
                   <span>Abrir link</span>
                 </button>
-                <button class="btn btn--ghost" type="button" data-action="copy-link">
+                <button
+                  class="btn btn--ghost btn--pill"
+                  type="button" data-action="copy-link">
                   <i class="fi fi-rr-copy"></i>
                   <span>Copiar link</span>
                 </button>
               </div>
             </div>
-          </fieldset>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+
     <details class="rounded-2xl bg-surface shadow-card" id="bets-accordion" hidden>
       <summary
         class="flex cursor-pointer items-center justify-between gap-4 px-6 py-4 text-sm font-semibold uppercase tracking-wide text-muted">
@@ -222,29 +230,34 @@
             sorteio</span>
           <i class="fi fi-rr-angle-small-down text-lg"></i>
         </summary>
-        <!-- <div class=""> -->
-        <div class="flex flex-wrap gap-3 space-y-4 px-6 py-6">
+        <div class="space-y-4 px-6 py-6">
           <label class="flex flex-col gap-2 text-sm" for="drawn">
             <span class="text-xs font-semibold uppercase tracking-wide text-muted">Números sorteados</span>
             <input id="drawn" type="text" placeholder="Ex: 02,16,31,54,78" inputmode="numeric" autocomplete="off"
               class="w-full rounded-xl bg-surface-muted/60 px-4 py-3 text-sm text-white outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/40">
           </label>
-          <button class="btn btn--ghost" type="button" id="clear-drawn-btn">
-            <i class="fi fi-rr-broom"></i>
-            <span>Limpar</span>
-          </button>
-          <button type="button" id="apply-drawn-btn" class="btn btn--outline">
-            <i class="fi fi-rr-check-circle"></i>
-            <span>Aplicar resultado</span>
-          </button>
-          <!-- <button class="btn btn--outline" type="button" id="search-result-btn" disabled
-              data-tooltip="Em breve">
+          <div class="flex flex-wrap gap-3">
+            <button
+              class="btn btn--primary btn--pill"
+              type="button" id="apply-drawn-btn">
+              <i class="fi fi-rr-check-circle"></i>
+              <span>Aplicar</span>
+            </button>
+            <button
+              class="btn btn--ghost btn--pill"
+              type="button" id="clear-drawn-btn">
+              <i class="fi fi-rr-broom"></i>
+              <span>Limpar</span>
+            </button>
+            <button
+              class="btn btn--outline btn--pill"
+              type="button" id="search-result-btn" disabled data-tooltip="Em breve">
               <i class="fi fi-rr-search"></i>
               <span>Buscar resultado</span>
-            </button> -->
-          <span id="summary"
-            class="inline-flex items-center gap-2 rounded-full border-accent/40 bg-accent/10 px-3 py-1 text-xs font-medium text-accent">Aguardando...</span>
-        </div>
+            </button>
+            <span id="summary"
+              class="inline-flex items-center gap-2 rounded-full border-accent/40 bg-accent/10 px-3 py-1 text-xs font-medium text-accent">Aguardando...</span>
+          </div>
         </div>
       </details>
     </template>

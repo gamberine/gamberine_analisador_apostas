@@ -3,49 +3,13 @@
 
 
 body {
-  font-size            : 1.6rem;
-  font-family          : var(--font-family-primary);
-  background-color     : var(--color-bg-base);
-  color                : var(--color-text-default);
-  line-height          : 1.4;
-  margin               : 0;
-  min-height           : 100dvh;
-  display              : grid;
-  grid-template-rows   : var(--header-height) 1fr var(--footer-height);
-  grid-template-columns: 1fr;
-
-  /* Define as variáveis de altura para fácil ajuste */
-  --header-height: 12dvh;
-  --footer-height: 6dvh;
+  font-size       : 1.6rem;
+  font-family     : var(--font-primary);
+  background-color: var(--bg-primary);
+  color           : var(--text-color);
+  line-height     : 1.4;
+  margin          : 0;
 }
-
-header {
-  height: var(--header-height);
-  background: var(--bg-gradient-header);
-  padding   : 1rem;
-  position  : sticky;
-  top       : 0;
-  z-index   : 10;
-}
-
-main {
-  /* max-width: 118rem; */
-  height        : auto;
-  overflow-y    : auto;
-  margin        : 0 auto;
-  gap           : 2.4rem;
-  width         : 100%;
-  padding-block : 3.2rem 4.8rem;
-  padding-inline: 1.5rem;
-}
-
-footer {
-  display        : flex;
-  align-items    : center;
-  justify-content: center;
-  height         : var(--footer-height);
-}
-
 
 *,
 :after,
@@ -171,16 +135,21 @@ footer {
 
 :host,
 html {
-  line-height                   : 1.4;
-  -moz-tab-size                 : 4;
-  -o-tab-size                   : 4;
-  tab-size                      : 4;
-  font-family                   : var(--font-family-primary), ui-sans-serif, system-ui, sans-serif;
-  /* Variável atualizada */
-  font-feature-settings         : normal;
-  font-variation-settings       : normal;
-  -webkit-tap-highlight-color   : transparent;
-  /* font-size                  : 62.5%; */
+  line-height                : 1.4;
+  -moz-tab-size              : 4;
+  -o-tab-size                : 4;
+  tab-size                   : 4;
+  font-family                : var(--font-primary), ui-sans-serif, system-ui, sans-serif;
+  font-feature-settings      : normal;
+  font-variation-settings    : normal;
+  -webkit-tap-highlight-color: transparent;
+
+  /* ************************************************** */
+  /* NOVO: Define a base para facilitar o cálculo REM   */
+  /* 62.5% de 16px (padrão do navegador) = 10px        */
+  /* Isso faz com que 1rem = 10px, 1.5rem = 15px, etc. */
+  /* ************************************************** */
+  font-size: 62.5%;
 }
 
 hr {
@@ -553,8 +522,7 @@ video {
 }
 
 .min-h-screen {
-  min-height: 100dvh;
-  /* Atualizado para dvh para melhor compatibilidade mobile */
+  min-height: 100vh;
 }
 
 .w-4 {
@@ -718,13 +686,19 @@ video {
 }
 
 .border-accent {
-  border-color: var(--color-accent);
-  /* Variável atualizada */
+  border-color: var(--accent);
 }
 
 .bg-base {
-  background-color: var(--color-bg-base);
-  /* Variável atualizada */
+  background-color: var(--bg-primary);
+}
+
+.bg-primary {
+  background-color: var(--primary-color);
+}
+
+.bg-surface {
+  background-color: var(--bg-surface);
 }
 
 .bg-transparent {
@@ -732,8 +706,7 @@ video {
 }
 
 .bg-header {
-  background-image: var(--bg-gradient-header);
-  /* Variável atualizada */
+  background-image: var(--bg-gradient-primary);
 }
 
 .bg-cover {
@@ -811,13 +784,11 @@ video {
 }
 
 .font-display {
-  font-family: var(--font-family-secondary), var(--font-family-primary), ui-sans-serif, system-ui, sans-serif;
-  /* Variáveis atualizadas */
+  font-family: var(--font-secondary), var(--font-primary), ui-sans-serif, system-ui, sans-serif;
 }
 
 .font-sans {
-  font-family: var(--font-family-primary), ui-sans-serif, system-ui, sans-serif;
-  /* Variável atualizada */
+  font-family: var(--font-primary), ui-sans-serif, system-ui, sans-serif;
 }
 
 .text-2xl {
@@ -861,10 +832,6 @@ video {
   text-transform: uppercase;
 }
 
-.normal-case {
-  text-transform: none !important;
-}
-
 .leading-relaxed {
   line-height: 1.625;
 }
@@ -878,43 +845,35 @@ video {
 }
 
 .text-accent {
-  color: var(--color-accent);
-  /* Variável atualizada */
+  color: var(--accent);
 }
 
 .text-base {
-  color: var(--color-bg-base);
-  /* Variável atualizada */
+  color: var(--bg-primary);
 }
 
 .text-white {
-  color: var(--color-white);
-  /* Variável atualizada */
+  color: var(--white);
 }
 
 .text-danger {
-  color: var(--color-danger);
-  /* Variável atualizada */
+  color: var(--danger);
 }
 
 .text-muted {
-  color: var(--color-text-muted);
-  /* Variável atualizada */
+  color: var(--muted);
 }
 
 .text-success {
-  color: var(--color-accent);
-  /* Variável atualizada */
+  color: var(--accent);
 }
 
 .text-text {
-  color: var(--color-text-default);
-  /* Variável atualizada */
+  color: var(--text-color);
 }
 
 .text-warm {
-  color: var(--color-warm);
-  /* Variável atualizada */
+  color: var(--warm);
 }
 
 .antialiased {
@@ -923,8 +882,7 @@ video {
 }
 
 .accent-accent {
-  accent-color: var(--color-accent);
-  /* Variável atualizada */
+  accent-color: var(--accent);
 }
 
 .opacity-60 {
@@ -932,10 +890,8 @@ video {
 }
 
 .shadow-card {
-  --tw-shadow        : 0 18px 32px -24px var(--color-shadow-default);
-  /* Variável atualizada */
-  --tw-shadow-colored: 0 18px 32px -24px var(--color-shadow-default);
-  /* Variável atualizada */
+  --tw-shadow        : 0 18px 32px -24px var(--shadow-color);
+  --tw-shadow-colored: 0 18px 32px -24px var(--tw-shadow-color);
   box-shadow         : var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
@@ -960,23 +916,19 @@ video {
 }
 
 .hover\:border-muted:hover {
-  border-color: var(--color-text-muted);
-  /* Variável atualizada */
+  border-color: var(--muted);
 }
 
 .hover\:bg-primary-hover:hover {
-  background-color: var(--color-primary-hover);
-  /* Variável atualizada */
+  background-color: var(--primary-color-hover);
 }
 
 .hover\:text-white:hover {
-  color: var(--color-white);
-  /* Variável atualizada */
+  color: var(--white);
 }
 
 .focus\:border-accent:focus {
-  border-color: var(--color-accent);
-  /* Variável atualizada */
+  border-color: var(--accent);
 }
 
 .focus\:ring-2:focus {

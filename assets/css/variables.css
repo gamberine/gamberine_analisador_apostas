@@ -1,0 +1,360 @@
+/* arquivo variables.css - Otimizado e Simplificado */
+
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&Montserrat:wght@400;500;600;700&display=swap');
+@import url("https://cdn.jsdelivr.net/npm/@flaticon/flaticon-uicons/css/all/all.css");
+
+:root {
+  /* ----------------------------------------------------- */
+  /* Cores Primárias e Secundárias (Marca) */
+  /* ----------------------------------------------------- */
+  --color-primary        : #ed3224;
+  --color-primary-hover  : #cb2e23;
+  --color-secondary      : #1b5866;
+  --color-secondary-hover: #15424d;
+
+  /* ----------------------------------------------------- */
+  /* Cores de Fundo (Backgrounds) */
+  /* ----------------------------------------------------- */
+  --color-bg-base        : #0f172a;
+  --color-bg-base-hover  : #18233f;
+  --color-bg-surface-1   : #111832;
+  --color-bg-surface-2   : #18203d;
+  --color-bg-surface-dark: #0b1228;
+  --color-border-default : #2a355d;
+
+  /* ----------------------------------------------------- */
+  /* Cores de Feedback e Estado */
+  /* ----------------------------------------------------- */
+  --color-accent : #22c55e;
+  --color-success: #16a34a;
+  --color-warning: #f59e0b;
+  --color-danger : #ef4444;
+  --color-error  : #dc2626;
+
+  /* Cores Específicas de Domínio (Melhor mover para o Tailwind config se possível) */
+  --color-drawn    : #3b82f6;
+  --color-highlight: #3b82f6e6;
+  --color-hit      : #ffe08a;
+  --color-warm     : #ff4089;
+
+  /* ----------------------------------------------------- */
+  /* Cores de Texto e Utilitários */
+  /* ----------------------------------------------------- */
+  --color-text-default  : #f1f5ff;
+  --color-text-muted    : #b8c1d6;
+  --color-white         : #ffffff;
+  --color-shadow-default: #0f172a59;
+
+  /* ----------------------------------------------------- */
+  /* Tipografia e Outras Propriedades */
+  /* ----------------------------------------------------- */
+  --font-family-primary  : 'Montserrat', sans-serif;
+  --font-family-secondary: 'Raleway', sans-serif;
+
+  --bg-gradient-header: linear-gradient(110deg, var(--color-bg-base-hover), var(--color-bg-base));
+
+  --shadow-default       : 0 1.8rem 3.2rem -2.4rem var(--color-shadow-default);
+  --transition-speed     : 0.5s;
+  --border-radius-default: 0.5rem;
+
+  color-scheme: dark;
+}
+
+.shadows {
+  box-shadow: var(--shadow-default);
+}
+.font-primary {
+  font-family: var(--font-family-primary);
+}
+
+.font-secondary {
+  font-family: var(--font-family-secondary);
+}
+
+
+
+/* ---------------- nunca mexer nas minhas classes -------------- */
+
+.primary-color {
+  color       : var(--color-primary);
+  border-color: var(--color-border-default);
+}
+
+.primary-color-hover {
+  color       : var(--color-primary-hover);
+  border-color: var(--color-border-default);
+}
+
+.secondary-color {
+  color       : var(--color-secondary);
+  border-color: var(--color-border-default);
+}
+
+.secondary-color-hover {
+  color       : var(--color-secondary-hover);
+  border-color: var(--color-border-default);
+}
+
+.accent {
+  color       : var(--color-accent);
+  border-color: var(--color-border-default);
+}
+
+.success {
+  color       : var(--color-success);
+  border-color: var(--color-border-default);
+}
+
+.warning {
+  color       : var(--color-warning);
+  border-color: var(--color-border-default);
+}
+
+.error {
+  color       : var(--color-error);
+  border-color: var(--color-border-default);
+}
+
+.danger {
+  color       : var(--color-danger);
+  border-color: var(--color-border-default);
+}
+
+.muted {
+  color       : var(--color-text-muted);
+  border-color: var(--color-border-default);
+}
+
+.warm {
+  color       : var(--color-warm);
+  border-color: var(--color-border-default);
+}
+
+.text {
+  color       : var(--color-text-default);
+  border-color: var(--color-border-default);
+}
+
+.white {
+  color       : var(--color-white);
+  border-color: var(--color-border-default);
+}
+
+.hit {
+  color       : var(--color-hit);
+  border-color: var(--color-border-default);
+}
+
+.drawn {
+  color       : var(--color-drawn);
+  border-color: var(--color-border-default);
+}
+
+.highlight {
+  color       : var(--color-highlight);
+  border-color: var(--color-border-default);
+}
+
+.bg-primary {
+  background-color: var(--color-primary);
+  border-color    : var(--color-border-default);
+}
+
+.bg-primary-hover {
+  background-color: var(--color-primary-hover);
+  border-color    : var(--color-border-default);
+}
+
+.bg-secundario {
+  background-color: var(--color-bg-surface-dark);
+  border-color    : var(--color-border-default);
+}
+
+.bg-surface {
+  background-color: var(--color-bg-surface-1);
+  border-color    : var(--color-border-default);
+}
+
+.bg-surface-muted {
+  background-color: var(--color-bg-surface-2);
+  border-color    : var(--color-border-default);
+}
+
+.gradient-header {
+  background-image: var(--bg-gradient-header);
+  border-color    : var(--color-border-default);
+}
+
+.shadow-color {
+  background-color: var(--color-shadow-default);
+  border-color    : var(--color-border-default);
+}
+
+.shadows {
+  box-shadow: var(--shadow-default);
+}
+
+.border-color {
+  border-color: var(--color-border-default);
+}
+
+.font-primary {
+  font-family: var(--font-family-primary);
+}
+
+.font-secondary {
+  font-family: var(--font-family-secondary);
+}
+
+
+/* Efeito Hover Universal para Botões */
+.header-edit-button:hover,
+.btn:hover:not(:disabled) {
+  transform: translateY(-0.1rem);
+  filter: brightness(1.2);
+  box-shadow: 0 0.5rem 1rem -0.5rem var(--color-shadow-default);
+  transition: all calc(var(--transition-speed) / 2) ease-out;
+}
+
+.btn:active:not(:disabled) {
+  transform : translateY(0);
+  filter    : none;
+  box-shadow: none;
+}
+
+button {
+  min-height : 2.5rem;
+}
+
+.btn {
+  font-family: var(--font-family-primary);
+  border-radius: var(--border-radius-default);
+  color        : var(--color-white);
+  display      : inline-flex;
+  align-items  : center;
+  justify-content: center;
+  gap          : 0.5rem;
+  padding      : 0 1.5rem;
+  margin: 0 auto;
+  font-size    : 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  border       : 0.1rem solid transparent;
+  transition   : background-color var(--transition-speed) ease, border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease, color var(--transition-speed) ease, transform var(--transition-speed) ease;
+}
+
+.btn:hover:not(:disabled) {
+  transform: translateY(-0.1rem);
+}
+
+.btn:focus-visible {
+  box-shadow: 0 0 0 0.2rem var(--color-bg-base), 0 0 0 0.4rem var(--color-accent);
+}
+/* 
+.btn--pill {
+  border-radius: 50%;
+} */
+
+.btn--primary {
+  background: var(--color-primary);
+  color     : var(--color-white);
+  box-shadow: var(--shadow-default);
+}
+
+.btn--primary:hover {
+  /* background: var(--color-primary-hover); */
+  box-shadow: 0 2.2rem 3.6rem -1.8rem var(--color-shadow-default);
+}
+
+.btn--success {
+  background  : var(--color-success);
+  color       : var(--color-white);
+  border-color: var(--color-success);
+}
+
+/* .btn--success:hover {
+  background: var(--color-accent);
+} */
+
+.btn--secondary {
+  background  : var(--color-bg-surface-1);
+  color       : var(--color-white);
+  border-color: var(--color-border-default);
+}
+
+/* .btn--secondary:hover {
+  background  : var(--color-bg-base-hover);
+  border-color: var(--color-primary);
+} */
+
+.btn--outline {
+  background  : transparent;
+  color       : var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+/* .btn--outline:hover {
+  background: var(--color-accent);
+  color     : var(--color-bg-base);
+} */
+
+.btn--danger {
+  background: var(--color-danger);
+  color     : var(--color-white);
+  box-shadow: 0 1.8rem 3.2rem -2.0rem rgba(239, 68, 68, 0.45);
+}
+
+/* .btn--danger:hover {
+  background: var(--color-error);
+} */
+
+.btn--ghost {
+  color       : var(--color-text-muted);
+  border-color: transparent;
+}
+
+.btn--ghost:hover {
+  color           : var(--color-white);
+  border-color    : var(--color-border-default);
+  background-color: rgba(15, 23, 42, 0.35);
+}
+
+.btn--sm {
+  padding  : 0.55rem 1rem;
+  font-size: 0.85rem;
+}
+
+.btn--lg {
+  padding  : 0.9rem 1.8rem;
+  font-size: 1.05rem;
+}
+
+.btn--icon {
+  width  : 2.5rem;
+  height : 2.5rem;
+  padding: 0;
+}
+
+.btn--icon.btn--sm {
+  width : 2rem;
+  height: 2rem;
+}
+
+.btn--icon.btn--lg {
+  width : 2.5rem;
+  height: 2.5rem;
+}
+
+.header-edit-button {
+  width         : auto;
+  height        : auto;
+  border        : none;
+  min-height    : 1px;
+  padding-inline: .5rem;
+  transition    : all ease .5s;
+}
+
+button i {
+  align-items: center;
+  display    : flex;
+}

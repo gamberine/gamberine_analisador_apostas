@@ -1,0 +1,882 @@
+/* arquivo style.css - Refatorado */
+
+@import url('variables.css');
+
+details>summary {
+  list-style: none;
+}
+
+details>summary::-webkit-details-marker {
+  display: none;
+}
+
+[data-tooltip] {
+  position: relative;
+}
+
+[data-tooltip]::after {
+  content       : attr(data-tooltip);
+  position      : absolute;
+  bottom        : calc(100% + 6px);
+  left          : 50%;
+  transform     : translateX(-50%);
+  background    : var(--surface-muted, var(--bgSecundario));
+  color         : var(--white);
+  padding       : 6px 10px;
+  border-radius : var(--border-radius);
+  font-size     : 11px;
+  line-height   : 1.2;
+  width         : max-content;
+  max-width     : 220px;
+  opacity       : 0;
+  pointer-events: none;
+  transition    : opacity 0.18s ease, transform 0.18s ease;
+  box-shadow    : 0 10px 18px -12px rgba(15, 23, 42, 0.5);
+  white-space   : normal;
+  text-align    : center;
+  z-index       : 20;
+}
+
+[data-tooltip]:hover::after,
+[data-tooltip]:focus::after {
+  opacity  : 1;
+  transform: translate(-50%, -2px);
+}
+
+.toast {
+  display                : inline-flex;
+  align-items            : center;
+  gap                    : 10px;
+  padding                : 12px 16px;
+  border-radius          : var(--border-radius);
+  background             : rgba(59, 130, 246, 0.18);
+  border                 : 1px solid rgba(59, 130, 246, 0.4);
+  color                  : var(--muted);
+  backdrop-filter        : blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  min-width              : 240px;
+}
+
+#toast-stack {
+  position      : fixed;
+  bottom        : 24px;
+  right         : 24px;
+  display       : flex;
+  flex-direction: column;
+  gap           : 12px;
+  z-index       : 100;
+}
+
+.toast.success {
+  background  : rgba(34, 197, 94, 0.18);
+  border-color: rgba(34, 197, 94, 0.4);
+  color       : var(--white);
+}
+
+#drawn-highlight {
+  display       : flex;
+  flex-direction: column;
+  gap           : 12px;
+  margin-bottom : 18px;
+  padding       : 16px;
+  border-radius : var(--border-radius);
+  background    : rgba(249, 115, 22, 0.12);
+  border        : 1px solid rgba(249, 115, 22, 0.35);
+}
+
+#drawn-highlight h2 {
+  margin     : 0;
+  color      : var(--warm);
+  font-size  : 20px;
+  font-weight: 700;
+}
+
+.drawn-highlight__badges {
+  display  : flex;
+  flex-wrap: wrap;
+  gap      : 8px;
+}
+
+.drawn-highlight__badges .badge {
+  background: rgba(34, 197, 94, 0.18);
+  color     : var(--accent);
+}
+
+input,
+select,
+textarea,
+button {
+  font-family: inherit;
+  min-height : 3rem;
+  /* 48px */
+}
+
+/* O resto do estilo dos botões (btn) permanece, pois são classes customizadas */
+.btn {
+  display        : inline-flex;
+  align-items    : center;
+  justify-content: center;
+  gap            : 0.5rem;
+  padding        : 1.5rem;
+  border-radius  : var(--border-radius);
+  font-size      : 0.95rem;
+  font-weight    : 600;
+  letter-spacing : 0.02em;
+  border         : 1px solid transparent;
+  background     : transparent;
+  color          : var(--white);
+  text-decoration: none;
+  cursor         : pointer;
+  transition     : background-color var(--transitionSpeed) ease, border-color var(--transitionSpeed) ease, box-shadow var(--transitionSpeed) ease, color var(--transitionSpeed) ease, transform var(--transitionSpeed) ease;
+}
+
+.btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn:focus-visible {
+  outline   : none;
+  box-shadow: 0 0 0 2px var(--bg-primary), 0 0 0 4px var(--accent);
+}
+
+.btn:disabled,
+.btn[disabled] {
+  cursor    : not-allowed;
+  opacity   : 0.55;
+  box-shadow: none;
+  transform : none;
+}
+
+.btn--pill {
+  border-radius: 50%;
+}
+
+.btn--primary {
+  background: var(--primary-color);
+  color     : var(--white);
+  box-shadow: 0 18px 32px -20px var(--shadow-color);
+}
+
+.btn--primary:hover {
+  background: var(--primary-color-hover);
+  box-shadow: 0 22px 36px -18px var(--shadow-color);
+}
+
+.btn--success {
+  background  : var(--success);
+  color       : var(--white);
+  border-color: var(--success);
+}
+
+.btn--success:hover {
+  background: var(--accent);
+}
+
+.btn--secondary {
+  background  : var(--bg-surface);
+  color       : var(--white);
+  border-color: var(--border-color);
+}
+
+.btn--secondary:hover {
+  background  : var(--bg-primary-hover);
+  border-color: var(--primary-color);
+}
+
+.btn--outline {
+  background  : transparent;
+  color       : var(--accent);
+  border-color: var(--accent);
+}
+
+.btn--outline:hover {
+  background: var(--accent);
+  color     : var(--bg-primary);
+}
+
+.btn--danger {
+  background: var(--danger);
+  color     : var(--white);
+  box-shadow: 0 18px 32px -20px rgba(239, 68, 68, 0.45);
+}
+
+.btn--danger:hover {
+  background: var(--error);
+}
+
+.btn--ghost {
+  background  : transparent;
+  color       : var(--muted);
+  border-color: transparent;
+}
+
+.btn--ghost:hover {
+  color           : var(--white);
+  border-color    : var(--border-color);
+  background-color: rgba(15, 23, 42, 0.35);
+}
+
+.btn--sm {
+  padding  : 0.55rem 1rem;
+  font-size: 0.85rem;
+}
+
+.btn--lg {
+  padding  : 0.9rem 1.8rem;
+  font-size: 1.05rem;
+}
+
+.btn--icon {
+  width  : 2.5rem;
+  height : 2.5rem;
+  padding: 0;
+}
+
+.btn--icon.btn--sm {
+  width : 2rem;
+  height: 2rem;
+}
+
+.btn--icon.btn--lg {
+  width : 3rem;
+  height: 3rem;
+}
+
+.header-edit-button {
+  display        : inline-flex;
+  align-items    : center;
+  justify-content: center;
+  width          : 20px;
+  height         : 20px;
+  border         : none;
+  background     : transparent;
+  transition     : color var(--transitionSpeed) ease, border-color var(--transitionSpeed) ease, background-color var(--transitionSpeed) ease;
+}
+
+.header-edit-button:hover {
+  color           : var(--white);
+  border-color    : var(--border-color);
+  background-color: rgba(24, 35, 63, 0.6);
+}
+
+.header-edit-button i {
+  font-size: 1rem;
+}
+
+input[type="checkbox"] {
+  min-height: 1px !important;
+}
+
+input[type="date"],
+select,
+textarea {
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+/*
+ * Removida a estilização de input[type="text"] aqui, pois a
+ * estilização mais detalhada está abaixo junto com date/textarea/select,
+ * e a definição de 'padding', 'background', 'border' e 'border-radius'
+ * de todos os campos de input/textarea/select está unificada mais abaixo.
+ */
+/* input[type="text"] {
+  background-color: var(--bgSecundario) !important;
+  border          : 1px solid var(--border-color);
+  border-radius   : var(--border-radius);
+} */
+
+input[type="date"] {
+  background-color: var(--bgSecundario);
+  color           : var(--white);
+  accent-color    : var(--accent);
+  min-height      : 3rem;
+  min-width       : 100%;
+  border          : 1px solid var(--border-color);
+  border-radius   : var(--border-radius);
+}
+
+input[type="date"]::-webkit-datetime-edit,
+input[type="date"]::-webkit-datetime-edit-text,
+input[type="date"]::-webkit-datetime-edit-month-field,
+input[type="date"]::-webkit-datetime-edit-day-field,
+input[type="date"]::-webkit-datetime-edit-year-field {
+  color: var(--white);
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  color       : var(--muted);
+  opacity     : 0.7;
+  cursor      : pointer;
+  margin-right: 0.2rem;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+  color  : var(--accent);
+}
+
+select {
+  background-color   : var(--bgSecundario);
+  color              : var(--white);
+  padding-right      : 3rem;
+  border-radius      : var(--border-radius);
+  border             : 1px solid var(--border-color);
+  appearance         : none;
+  background-image   : url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' viewBox='0 0 16 16'%3E%3Cpath fill='%23c7cedf' d='M3.53 6.47a.75.75 0 0 1 1.06 0L8 9.88l3.41-3.41a.75.75 0 1 1 1.06 1.06l-3.94 3.94a.75.75 0 0 1-1.06 0L3.53 7.53a.75.75 0 0 1 0-1.06Z'/%3E%3C/svg%3E");
+  background-repeat  : no-repeat;
+  background-position: right 1rem center;
+  background-size    : 1rem;
+}
+
+select:focus {
+  border-color: var(--accent);
+  box-shadow  : 0 0 0 2px rgba(54, 179, 126, 0.35);
+}
+
+textarea {
+  background-color: var(--bgSecundario);
+  color           : var(--white);
+  border-radius   : var(--border-radius);
+  border          : 1px solid var(--border-color);
+}
+
+textarea::placeholder {
+  color: rgba(199, 206, 223, 0.7);
+}
+
+/* O ::selection não existe no app.css, mantido. */
+::selection {
+  background: var(--accent);
+  color     : var(--white);
+}
+
+/* O media query para preferes-reduced-motion não existe no app.css, mantido. */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration : 0.01ms !important;
+  }
+}
+
+/* As classes utilitárias '.bg-surface' e '.bg-surface-muted' permanecem. */
+.bg-surface {
+  background: var(--bg-surface);
+}
+
+.bg-surface-muted {
+  background: var(--bg-surface-muted);
+}
+
+.sub {
+  opacity   : 0.85;
+  font-size : 13px;
+  transition: opacity 0.3s ease;
+}
+
+main {
+  max-width     : 1180px;
+  margin        : 32px auto;
+  padding       : 0 16px 48px;
+  display       : flex;
+  flex-direction: column;
+  gap           : 24px;
+}
+
+/* O estilo para '.card' é customizado, mas a regra '.card { border-width: 1px; }' mais abaixo é redundante. */
+.card {
+  background              : var(--bgSecundario);
+  border                  : 1px solid var(--border-color);
+  border-radius           : var(--border-radius);
+  /* A linha 'border-width: 1px;' removida aqui (está abaixo no código original) */
+  padding                 : 20px;
+  position                : relative;
+  box-shadow              : 0 18px 32px -24px var(--shadow-color);
+}
+
+/* O estilo para 'legend' duplicou. O original em style.css era: */
+/*
+  legend {
+    padding: 0 12px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--muted);
+  }
+*/
+/* E o segundo em style.css era: */
+/*
+  .card legend {
+    padding: .5rem 1rem;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--muted);
+  }
+*/
+/* O segundo é mais específico para o contexto do cartão e utiliza rem, mantido a versão mais específica do card. */
+legend {
+  padding    : 0 12px;
+  font-size  : 15px;
+  font-weight: 600;
+  color      : var(--muted);
+}
+
+.top--5 {
+  top: -5px;
+}
+
+label span {
+  padding-inline-start: 0.5rem;
+}
+
+label span span {
+  padding-inline-start: initial;
+}
+
+.normal-case {
+  text-transform: none;
+}
+
+.generated-link__row {
+  display    : flex;
+  flex-wrap  : wrap;
+  gap        : 12px;
+  align-items: center;
+}
+
+/* O estilo de input dentro de .generated-link__row é mantido, mas com a refatoração do input abaixo, pode ser simplificado */
+.generated-link__row input {
+  flex     : 1;
+  min-width: 240px;
+}
+
+/* O resto das classes de badge, table, thead, tbody, th, td, etc. são específicas e mantidas. */
+
+.generated-link__actions {
+  display  : flex;
+  flex-wrap: wrap;
+  gap      : 12px;
+}
+
+.badge {
+  display       : inline-flex;
+  align-items   : center;
+  gap           : 6px;
+  padding       : 4px 10px;
+  border-radius : 50%;
+  background    : #1f2937;
+  color         : #e5e7eb;
+  font-size     : 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.badge.ok {
+  background: rgba(34, 197, 94, 0.18);
+  color     : var(--accent);
+}
+
+table {
+  width          : 100%;
+  border-collapse: collapse;
+  margin-top     : 16px;
+}
+
+th,
+td {
+  border              : 1px solid var(--border-color);
+  padding             : 10px;
+  text-align          : center;
+  font-variant-numeric: tabular-nums;
+}
+
+th {
+  background: #0f1a36;
+  position  : sticky;
+  top       : 0;
+  z-index   : 1;
+}
+
+tbody tr:nth-child(odd) {
+  background: #0e1530;
+}
+
+/*
+ * Removido:
+ * * { box-sizing: border-box; }
+ * Duplicado com a remoção do primeiro bloco.
+ */
+
+header {
+  padding         : 1rem;
+  background      : var(--bg-gradient-primary);
+  /* border-bottom: 1px solid var(--border-color); */
+  text-align      : center;
+  position        : sticky;
+  top             : 0;
+  z-index         : 10;
+}
+
+.card {
+  border-width: 1px;
+}
+
+.card legend {
+  padding    : .5rem 1rem;
+  font-size  : 15px;
+  font-weight: 600;
+  color      : var(--muted);
+}
+
+/* Os comentários do stage-grid, stage-columns, draw-card__row foram removidos
+ * pois o código estava comentado e a estrutura foi possivelmente substituída
+ * por classes do Tailwind (md:grid-cols-2, xl:grid-cols-3, etc.) no app.css.
+ */
+
+.field {
+  display       : flex;
+  flex-direction: column;
+  gap           : 8px;
+  min-width     : 220px;
+  flex          : 1;
+}
+
+.field-label {
+  font-size     : 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight   : 600;
+  color         : var(--muted);
+  display       : inline-flex;
+  align-items   : center;
+  gap           : 6px;
+}
+
+.field-label .optional {
+  font-size     : 11px;
+  opacity       : 0.7;
+  text-transform: none;
+}
+
+.field-checkbox {
+  margin-top    : 20px;
+  display       : flex;
+  flex-direction: column;
+  gap           : 12px;
+}
+
+.field-checkbox label {
+  display    : inline-flex;
+  align-items: center;
+  gap        : 8px;
+  font-weight: 600;
+}
+
+/*
+ * Estilização unificada e mantida para inputs.
+ * Removi a duplicação dos estilos de input/textarea/select/date
+ * que estavam mais acima no arquivo original.
+ */
+input[type="text"],
+input[type="date"],
+textarea,
+select {
+  padding      : 11px 14px;
+  background   : var(--bg-secundario);
+  color        : var(--text-color);
+  border       : 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  width        : 100%;
+  transition   : border 0.2s ease, box-shadow 0.2s ease;
+  font-size    : 15px;
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus,
+textarea:focus,
+select:focus {
+  outline     : none;
+  border-color: var(--accent);
+  box-shadow  : 0 0 0 2px #36b37e40;
+}
+
+.choices {
+  background   : var(--bg-secundario);
+  border-radius: var(--border-radius);
+}
+
+.choices__inner {
+  background   : transparent;
+  border       : 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding      : 5px 12px;
+  min-height   : 46px;
+  color        : var(--text-color);
+}
+
+.choices__list--single .choices__item {
+  color: var(--text-color);
+}
+
+.choices__list--dropdown {
+  background  : var(--bg-secundario);
+  border-color: var(--border-color);
+}
+
+.choices__item--selectable.is-highlighted {
+  background: #36b37e40;
+}
+
+.helper-text {
+  font-size: 13px;
+  opacity  : 0.75;
+  margin   : 0 0 8px;
+}
+
+.card-actions {
+  display    : flex;
+  flex-wrap  : wrap;
+  gap        : 12px;
+  align-items: center;
+}
+
+.analysis-output {
+  margin-top   : 16px;
+  padding      : 16px;
+  border-radius: 50%;
+  /* Isto parece um erro no código original, se o elemento não for circular, o radius de 50% vai fazer dele um círculo. */
+  background   : rgba(59, 130, 246, 0.12);
+  border       : 1px solid rgba(59, 130, 246, 0.4);
+}
+
+.analysis-output h3 {
+  margin     : 0 0 10px;
+  font-size  : 16px;
+  display    : flex;
+  align-items: center;
+  gap        : 8px;
+}
+
+.analysis-output ul {
+  margin : 10px 0 0 18px;
+  padding: 0;
+}
+
+.analysis-output li {
+  margin-bottom: 6px;
+}
+
+details.accordion {
+  background   : var(--bg-surface);
+  border       : 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding      : 0 20px;
+}
+
+details.accordion[open] {
+  border-color: rgba(54, 179, 126, 0.35);
+}
+
+details.accordion summary {
+  list-style : none;
+  cursor     : pointer;
+  padding    : 20px 0;
+  display    : flex;
+  align-items: center;
+  gap        : 14px;
+  user-select: none;
+}
+
+details.accordion summary::-webkit-details-marker {
+  display: none;
+}
+
+details.accordion summary h2 {
+  margin     : 0;
+  font-size  : 18px;
+  font-weight: 700;
+  flex       : 1;
+}
+
+.summary-icon {
+  width          : 34px;
+  height         : 34px;
+  border-radius  : 50%;
+  display        : inline-flex;
+  align-items    : center;
+  justify-content: center;
+  background     : rgba(59, 130, 246, 0.15);
+  color          : rgba(59, 130, 246, 0.9);
+  font-size      : 18px;
+}
+
+.accordion-arrow {
+  color     : var(--muted);
+  transition: transform 0.32s ease;
+}
+
+details.accordion[open] .accordion-arrow {
+  transform: rotate(180deg);
+}
+
+.accordion-content {
+  padding: 0 0 22px 0;
+}
+
+.accordion-content p,
+.accordion-content ul {
+  color: rgba(241, 245, 255, 0.82);
+}
+
+.accordion-content ul {
+  margin : 0 0 0 18px;
+  padding: 0;
+}
+
+.accordion-cta {
+  display        : flex;
+  justify-content: flex-end;
+}
+
+.accordion.is-completed {
+  opacity: 0.9;
+}
+
+.accordion.is-completed summary {
+  position    : relative;
+  padding-left: 12px;
+}
+
+.accordion.is-completed summary::before {
+  content  : '\2713';
+  position : absolute;
+  left     : -2px;
+  font-size: 18px;
+  color    : var(--accent);
+  transform: translateY(-1px);
+}
+
+.num {
+  display        : inline-flex;
+  width          : 36px;
+  height         : 36px;
+  align-items    : center;
+  justify-content: center;
+  border-radius  : var(--border-radius);
+  background     : var(--bg-secundario);
+  border         : 1px solid var(--border-color);
+  margin         : 3px;
+  font-weight    : 600;
+}
+
+.num.drawn {
+  background  : var(--drawn);
+  color       : #fff;
+  border-color: #1e3a8a;
+}
+
+.num.hit {
+  background  : var(--primary-color, var(--accent));
+  color       : var(--white);
+  border-color: var(--primary-color-hover, var(--accent));
+}
+
+[data-tooltip]:hover::after {
+  opacity: 1;
+}
+
+.info-button {
+  width          : 24px;
+  height         : 24px;
+  border-radius  : 50%;
+  background     : rgba(59, 130, 246, 0.2);
+  border         : 1px solid rgba(59, 130, 246, 0.4);
+  display        : inline-flex;
+  align-items    : center;
+  justify-content: center;
+  color          : rgba(59, 130, 246, 0.9);
+  cursor         : pointer;
+}
+
+.summary-title {
+  display    : flex;
+  align-items: center;
+  gap        : 12px;
+  flex       : 1;
+}
+
+.summary-actions {
+  display    : inline-flex;
+  align-items: center;
+  gap        : 12px;
+}
+
+.summary-actions button {
+  white-space: nowrap;
+}
+
+#open-results-btn img {
+  width : 18px;
+  height: 18px;
+}
+
+footer {
+  padding   : 32px 16px 48px;
+  text-align: center;
+  opacity   : 0.65;
+  font-size : 13px;
+}
+
+/* Os media queries foram mantidos, mas as regras internas de grid/flex foram
+ * comentadas no original e assumimos que o Tailwind (em app.css) está a
+ * tratar de responsividade para essas estruturas.
+ */
+@media (min-width: 1024px) {
+  .stage-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+  }
+
+  .stage-columns {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 1280px) {
+  .stage-columns {
+    grid-template-columns: 1fr;
+  }
+
+  .stage-grid {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    align-items          : start;
+  }
+}
+
+@media (max-width: 720px) {
+  header {
+    position: static;
+  }
+
+  .draw-card__row {
+    flex-direction: column;
+  }
+
+  .generated-link__row {
+    flex-direction: column;
+  }
+
+  .summary-actions {
+    flex-wrap      : wrap;
+    justify-content: flex-start;
+  }
+
+  #toast-stack {
+    bottom: 16px;
+    right : 16px;
+  }
+}

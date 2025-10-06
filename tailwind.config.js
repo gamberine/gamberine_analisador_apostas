@@ -11,13 +11,13 @@ module.exports = {
         base: 'var(--bg-primary)',
         surface: 'var(--bg-surface)',
         'surface-muted': 'var(--bgSecundario)',
-        border: 'var(--border)',
-        text: 'var(--text)',
+        border: 'var(--border-color)',
+        text: 'var(--text-color)',
         muted: 'var(--muted)',
         branca: 'var(--white)',
         accent: 'var(--accent)',
         highlight: 'var(--highlight)',
-        success: 'var(--ok)',
+        success: 'var(--accent)',
         danger: 'var(--danger)',
         info: 'var(--drawn)',
         warm: 'var(--warm)',
@@ -29,10 +29,10 @@ module.exports = {
         display: ['var(--font-secondary)', 'var(--font-primary)', 'ui-sans-serif', 'system-ui', 'sans-serif']
       },
       boxShadow: {
-        card: '0 18px 32px -24px var(--shadow)'
+        card: '0 18px 32px -24px var(--shadow-color)'
       },
       backgroundImage: {
-        header: 'var(--gradientHeader)'
+        header: 'var(--bg-gradient-primary)'
       }
     }
   },

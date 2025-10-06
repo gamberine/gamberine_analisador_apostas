@@ -1,0 +1,170 @@
+ @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&Montserrat:wght@400;500;600;700&display=swap');
+ @import url("https://cdn.jsdelivr.net/npm/@flaticon/flaticon-uicons/css/all/all.css");
+
+ :root {
+   --primary-color        : #ed3224;
+   --primary-color-hover  : #cb2e23;
+   --secondary-color      : #1b5866;
+   --secondary-color-hover: #15424d;
+   --accent               : #22c55e;
+   --bg-primary           : #0f172a;
+   --bg-primary-hover     : #18233f;
+   --bg-surface           : #111832;
+   --bg-surface-muted     : #18203d;
+   --bg-secundario        : #0b1228;
+   --border-color         : #2a355d;
+   --danger               : #ef4444;
+   --error                : #dc2626;
+   --drawn                : #3b82f6;
+   --highlight            : #3b82f6e6;
+   --hit                  : #ffe08a;
+   --muted                : #b8c1d6;
+   --shadow-color         : #0f172a59;
+   --success              : #16a34a;
+   --text-color           : #f1f5ff;
+   --warm                 : #ff4089;
+   --warning              : #f59e0b;
+   --white                : #ffffff;
+   --bg-gradient-primary  : linear-gradient(110deg, var(--bg-primary-hover), var(--bg-primary));
+
+   --shadows: 0 18px 32px -24px var(--shadow-color);
+     --transitionSpeed: 0.25s;
+     --border-radius: .5rem;
+
+   --font-primary  : 'Montserrat', sans-serif;
+   --font-secondary: 'Raleway', sans-serif;
+
+     color-scheme: dark;
+ }
+
+ /* Utility classes generated from design tokens */
+ .primary-color {
+   color       : var(--primary-color);
+   border-color: var(--border-color);
+ }
+
+ .primary-color-hover {
+   color       : var(--primary-color-hover);
+   border-color: var(--border-color);
+ }
+
+ .secondary-color {
+   color       : var(--secondary-color);
+   border-color: var(--border-color);
+ }
+
+ .secondary-color-hover {
+   color       : var(--secondary-color-hover);
+   border-color: var(--border-color);
+ }
+
+ .accent {
+   color       : var(--accent);
+   border-color: var(--border-color);
+ }
+
+ .success {
+   color       : var(--success);
+   border-color: var(--border-color);
+ }
+
+ .warning {
+   color       : var(--warning);
+   border-color: var(--border-color);
+ }
+
+ .error {
+   color       : var(--error);
+   border-color: var(--border-color);
+ }
+
+ .danger {
+   color       : var(--danger);
+   border-color: var(--border-color);
+ }
+
+ .muted {
+   color       : var(--muted);
+   border-color: var(--border-color);
+ }
+
+ .warm {
+   color       : var(--warm);
+   border-color: var(--border-color);
+ }
+
+ .text {
+   color       : var(--text-color);
+   border-color: var(--border-color);
+ }
+
+ .white {
+   color       : var(--white);
+   border-color: var(--border-color);
+ }
+
+ .hit {
+   color       : var(--hit);
+   border-color: var(--border-color);
+ }
+
+ .drawn {
+   color       : var(--drawn);
+   border-color: var(--border-color);
+ }
+
+ .highlight {
+   color       : var(--highlight);
+   border-color: var(--border-color);
+ }
+
+ .bg-primary {
+   background-color: var(--bg-primary);
+   border-color    : var(--border-color);
+ }
+
+ .bg-primary-hover {
+   background-color: var(--bg-primary-hover);
+   border-color    : var(--border-color);
+ }
+
+ .bg-secundario {
+   background-color: var(--bgSecundario);
+   border-color    : var(--border-color);
+ }
+
+ .bg-surface {
+   background-color: var(--bg-surface);
+   border-color    : var(--border-color);
+ }
+
+ .bg-surface-muted {
+   background-color: var(--bg-surface-muted);
+   border-color    : var(--border-color);
+ }
+
+ .gradient-header {
+   background-image: var(--bg-gradient-primary);
+   border-color    : var(--border-color);
+ }
+
+ .shadow-color {
+   background-color: var(--shadow-color);
+   border-color    : var(--border-color);
+ }
+
+ .shadows {
+   box-shadow: 0 18px 32px -24px var(--shadow-color);
+ }
+
+ .border-color {
+   border-color: var(--border-color);
+ }
+
+ .font-primary {
+   font-family: var(--font-primary);
+ }
+
+ .font-secondary {
+   font-family: var(--font-secondary);
+ }

@@ -1,13 +1,13 @@
-﻿{
+{
     "name":  "gamberine_analisador_apostas",
     "version":  "1.0.0",
-    "description":  "PublicaÃ§Ã£o via GitHub Pages. - Estilos externos: `gamb_variables_geral.css` - BotÃµes com classes `btn btnPrimary` e `btn btnSecondary` - Cores de acerto usando `--primary-color` e `--primary-color-hover` - AcordeÃ£o na Parte 1 e responsivo (max-width: 1280px)",
+    "description":  "Publicação via GitHub Pages. - Estilos externos: `gamb_variables_geral.css` - Botões com classes `btn btnPrimary` e `btn btnSecondary` - Cores de acerto usando `--primary-color` e `--primary-color-hover` - Acordeão na Parte 1 e responsivo (max-width: 1280px)",
     "main":  "index.js",
     "scripts":  {
                     "start":  "npm run watch",
-                    "build:css":  "tailwindcss -i ./src/styles/main.css -o ./assets/css/app.css --minify",
+                    "build:css":  "tailwindcss -i ./assets/css/main.css -o ./assets/css/app.css --minify",
                     "build":  "npm run build:css",
-                    "watch":  "tailwindcss -i ./src/styles/main.css -o ./assets/css/app.css --watch"
+                    "watch":  "tailwindcss -i ./assets/css/main.css -o ./assets/css/app.css --watch"
                 },
     "repository":  {
                        "type":  "git",
