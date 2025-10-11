@@ -1,0 +1,45 @@
+@import url('variables.css');
+
+.btn--success-outline {
+  background-color: transparent;
+  border-color: var(--color-success);
+  color: var(--color-success);
+  box-shadow: inset 0 0 0 0 transparent;
+  transition: color 0.18s ease, border-color 0.18s ease, background-color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.btn--success-outline:hover {
+  background-color: rgba(34, 197, 94, 0.12);
+  box-shadow: inset 0 0 0 0.1rem rgba(34, 197, 94, 0.35);
+}
+
+.btn--success-outline:focus-visible {
+  box-shadow: 0 0 0 0.2rem rgba(15, 23, 42, 0.85), 0 0 0 0.32rem rgba(34, 197, 94, 0.55);
+}
+
+.btn--arrow {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn--arrow .btn__icon {
+  transition: transform 0.24s ease;
+}
+
+.btn--arrow:hover .btn__icon {
+  transform: translateX(0.3rem);
+}
+
+.btn--arrow:active {
+  transform: translateY(0.05rem) scale(0.98);
+}
+
+.btn--arrow:active .btn__icon {
+  transform: translateX(0.45rem);
+}
+
+.btn--arrow .btn__label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}

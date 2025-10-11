@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="pt-BR">
 
 <head>
@@ -8,9 +8,11 @@
   <title>Gamberine - Analisador de Apostas</title>
   <meta name="description"
     content="Análise prévia, tabela de apostas e marcador automático do resultado das loterias da Caixa.">
+
   <link rel="stylesheet" href="assets/css/variables.css">
   <link rel="stylesheet" href="assets/css/app.css">
   <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/buttons-enhancement.css">
 </head>
 
 <body class="min-h-screen bg-base font-sans text-text antialiased">
@@ -20,13 +22,19 @@
       </h1>
       <div id="oculto-ate-preencher" class="sub hidden flex flex-wrap justify-center gap-2 text-sm text-muted" hidden>
         <span>Dados:</span>
-        <span class="font-semibold hit" id="info-lottery">-</span>
+
+        <span class="font-semibold accent" id="info-lottery">-</span>
+
         <span class="text-muted">|</span>
         <span>Concurso:</span>
-        <span class=" font-semibold hit" id="info-concurso">-</span>
+
+        <span class=" font-semibold accent" id="info-concurso">-</span>
+
         <span class="text-muted">|</span>
         <span>Data do sorteio:</span>
-        <strong class="font-semibold hit" id="info-date">-</strong>
+
+        <strong class="font-semibold accent" id="info-date">-</strong>
+
         <button type="button" id="edit-draw-data" class="header-edit-button accent hidden"
           aria-label="Editar dados do sorteio">
           <i class="fi fi-ts-money-check-edit-alt"></i>
@@ -44,7 +52,7 @@
           Dados do sorteio
         </span>
         <button type="button" class="accordion-toggle text-muted transition hover:text-muted" aria-expanded="true">
-          <span class="sr-only">Alternar exibição</span>
+          <span class="sr-only">Alternar exibiÃ§Ã£o</span>
           <i class="fi fi-rr-angle-small-up text-lg"></i>
         </button>
       </legend>
@@ -60,7 +68,7 @@
             <span class="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-muted">
               Modalidade Aposta
               <span class="relative"
-                data-tooltip="Com essa informação e o número do concurso, você terá a experiência completa e poderá receber detalhes futuramente.">
+                                   data-tooltip="Com essa informação e o número do concurso, você terá a experiência completa e receber detalhes futuramente.">
                 <i class="fi fi-rr-info text-muted"></i>
               </span>
             </span>
@@ -72,17 +80,17 @@
           <div class="flex flex-col text-sm relative top--5">
             <label class="flex items-center px-4 gap-2">
               <input type="checkbox" id="toggle-concurso" class="h-4 w-4 rounded accent-accent">
-              <span class="leading-relaxed text-muted">Deseja inserir o número do concurso?</span>
+              <span class="leading-relaxed text-muted">Deseja inserir o Nº do concurso?</span>
             </label>
             <div id="concurso-input-wrapper" class="hidden">
-              <input type="text" id="concurso-number" list="concurso-suggestions" placeholder="Informe o nº do concurso"
+              <input type="text" id="concurso-number" list="concurso-suggestions" placeholder="Informe o nÂº do concurso"
                 inputmode="numeric"
                 class="w-full rounded-xl bg-surface-muted/60 px-4 py-3 mt-1 text-sm text-white shadow-inner-sm outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/40">
               <datalist id="concurso-suggestions"></datalist>
             </div>
           </div>
         </div>
-        <p class="text-xs text-muted">Preencha a data e a modalidade para habilitar as próximas etapas automaticamente.
+        <p class="text-xs text-muted">Preencha a data e a modalidade para habilitar as prÃ³ximas etapas automaticamente.
         </p>
       </div>
     </fieldset>
@@ -94,7 +102,7 @@
           Dados da(s) aposta(s)
         </span>
         <button type="button" class="accordion-toggle text-muted transition hover:text-muted" aria-expanded="true">
-          <span class="sr-only">Alternar exibição</span>
+          <span class="sr-only">Alternar exibiÃ§Ã£o</span>
           <i class="fi fi-rr-angle-small-up text-lg"></i>
         </button>
       </legend>
@@ -102,17 +110,17 @@
         <!-- <div class="flex flex-wrap items-end gap-4"> -->
         <label class="flex flex-col gap-3 text-sm" for="bets-input">
           <span class="text-xs font-semibold tracking-wide text-white">
-            NÚMEROS APOSTADOS
+            NÃšMEROS APOSTADOS
           </span>
           <textarea id="bets-input" rows="2" inputmode="numeric" autocomplete="on"
             placeholder=""
             class="w-full resize-y rounded-xl bg-surface-muted/60 py-3 text-sm text-white outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/40"></textarea>
         </label>
         <span class="text-xs leading-relaxed text-muted flex flex-col" id="bets-hint">
-          Para apostas padrão, informe: 5 dezenas (01-80) por aposta.
-          <!-- <span>Cole qualquer formato e nós organizamos automaticamente.</span> -->
+          Para apostas padrÃ£o, informe: 5 dezenas (01-80) por aposta.
+          <!-- <span>Cole qualquer formato e nÃ³s organizamos automaticamente.</span> -->
         </span>
-        <button type="button" id="clear-drawn-btn" class="btn btn--ghost">
+        <button type="button" id="clear-bets-btn" class="btn btn--ghost">
           <i class="fi fi-rr-broom"></i>
           <span>Limpar</span>
         </button>
@@ -128,10 +136,10 @@
         class="flex items-center justify-between gap-2 px-6 py-4 text-sm font-semibold uppercase tracking-wide text-muted">
         <span class="flex items-center gap-2">
           <i class="fi fi-rr-play text-accent"></i>
-          Ações e processamento
+          AÃ§Ãµes e processamento
         </span>
         <button type="button" class="accordion-toggle text-muted transition hover:text-muted" aria-expanded="false">
-          <span class="sr-only">Alternar exibição</span>
+          <span class="sr-only">Alternar exibiÃ§Ã£o</span>
           <i class="fi fi-rr-angle-small-down text-lg"></i>
         </button>
       </legend>
@@ -182,23 +190,6 @@
     <!-- </div> -->
     <!-- <fieldset id="bets-card" class="hidden rounded-2xl bg-surface shadow-card xl:flex-1" data-accordion></fieldset> -->
     <fieldset id="analysis-output" class="hidden rounded-xl bg-surface-muted/40 p-4 text-sm text-muted"></fieldset>
-    <fieldset id="generated-link-container" class="hidden space-y-3 rounded-xl bg-surface-muted/30 p-4">
-      <strong class="text-sm uppercase tracking-wide text-muted">Link gerado</strong>
-      <div class="flex flex-col gap-3 md:flex-row md:items-center">
-        <input type="text" readonly value="" aria-label="Link gerado"
-          class="flex-1 rounded-xl bg-surface px-4 py-2 text-sm text-white outline-none">
-        <div class="flex gap-2">
-          <button class="btn btn--success" type="button" data-action="open-link">
-            <i class="fi fi-rr-external-link"></i>
-            <span>Abrir link</span>
-          </button>
-          <button class="btn btn--ghost" type="button" data-action="copy-link">
-            <i class="fi fi-rr-copy"></i>
-            <span>Copiar link</span>
-          </button>
-        </div>
-      </div>
-    </fieldset>
     <details class="rounded-2xl bg-surface shadow-card" id="bets-accordion" hidden>
       <summary
         class="flex cursor-pointer items-center justify-between gap-4 px-6 py-4 text-sm font-semibold uppercase tracking-wide text-muted">
@@ -236,7 +227,7 @@
         <!-- <div class=""> -->
         <div class="flex flex-wrap gap-3 space-y-4 px-6 py-6">
           <label class="flex flex-col gap-2 text-sm" for="drawn">
-            <span class="text-xs font-semibold uppercase tracking-wide text-muted">Números sorteados</span>
+            <span class="text-xs font-semibold uppercase tracking-wide text-muted">NÃºmeros sorteados</span>
             <input id="drawn" type="text" placeholder="Ex: 02,16,31,54,78" inputmode="numeric" autocomplete="off"
               class="w-full rounded-xl bg-surface-muted/60 px-4 py-3 text-sm text-white outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/40">
           </label>
@@ -256,24 +247,41 @@
           <span id="summary"
             class="inline-flex items-center gap-2 rounded-full border-accent/40 bg-accent/10 px-3 py-1 text-xs font-medium text-accent">Aguardando...</span>
         </div>
-        </div>
-      </details>
-    </template>
+        <fieldset id="generated-link-container" class="hidden w-full space-y-3 rounded-xl bg-surface-muted/30 p-4">
+          <strong class="text-sm uppercase tracking-wide text-muted">Link gerado</strong>
+          <div class="flex flex-col gap-3 md:flex-row md:items-center">
+            <input type="text" readonly value="" aria-label="Link gerado"
+              class="flex-1 rounded-xl bg-surface px-4 py-2 text-sm text-white outline-none">
+            <div class="flex gap-2">
+              <button class="btn btn--success" type="button" data-action="open-link">
+                <i class="fi fi-rr-external-link"></i>
+                <span>Abrir link</span>
+              </button>
+              <button class="btn btn--ghost" type="button" data-action="copy-link">
+                <i class="fi fi-rr-copy"></i>
+                <span>Copiar link</span>
+              </button>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+    </details>
+  </template>
 
     <div class="flex w-full max-w-6xl fixed bottom-6 px-4 py-6">
       <!-- <div class="flex flex-wrap items-end gap-4"> -->
       <!-- <div class="flex gap-3"> -->
     
-      <button id="advance-button" class="hidden btn btn--ghost" type="button">
-        <span>Prosseguir</span>
-        <i class="fi fi-rr-arrow-small-right"></i>
+      <button id="advance-button" class="hidden btn btn--success-outline btn--arrow" type="button">
+        <span class="btn__label">Prosseguir</span>
+        <i class="fi fi-rr-arrow-small-right btn__icon" aria-hidden="true"></i>
       </button>
     </div>
   </main>
 
   <footer class="bg-surface-muted/60 py-6 text-center text-xs text-muted">
     <div class="mx-auto flex w-full max-w-6xl flex-col items-center gap-2 px-4">
-      <span>Gamberine © <span id="footer-year"></span>. Organize, acompanhe e compare seus jogos.</span>
+      <span>Gamberine Â© <span id="footer-year"></span>. Organize, acompanhe e compare seus jogos.</span>
     </div>
   </footer>
 
@@ -288,16 +296,16 @@
       'dupla-sena': { numbersPerBet: 6, min: 1, max: 50, pad: 2, label: '6 dezenas (01-50)' },
       timemania: { numbersPerBet: 10, min: 1, max: 80, pad: 2, label: '10 dezenas (01-80)' },
       'dia-de-sorte': { numbersPerBet: 7, min: 1, max: 31, pad: 2, label: '7 dezenas (01-31)' },
-      'super-sete': { numbersPerBet: 7, min: 0, max: 9, pad: 1, label: '7 dígitos (0-9)' },
+      'super-sete': { numbersPerBet: 7, min: 0, max: 9, pad: 1, label: '7 dÃ­gitos (0-9)' },
       loteca: { numbersPerBet: 14, min: 1, max: 3, pad: 1, label: '14 palpites (1-3)' },
-      federal: { numbersPerBet: 5, min: 0, max: 9, pad: 1, label: '5 dígitos (0-9)' },
+      federal: { numbersPerBet: 5, min: 0, max: 9, pad: 1, label: '5 dÃ­gitos (0-9)' },
       'mais-milionaria': { numbersPerBet: 6, min: 1, max: 50, pad: 2, label: '6 dezenas (01-50)' }
     };
 
     const lotteries = [
       { value: 'mega-sena', label: 'Mega-Sena' },
       { value: 'quina', label: 'Quina' },
-      { value: 'lotofacil', label: 'Lotofácil' },
+      { value: 'lotofacil', label: 'LotofÃ¡cil' },
       { value: 'lotomania', label: 'Lotomania' },
       { value: 'dupla-sena', label: 'Dupla Sena' },
       { value: 'timemania', label: 'Timemania' },
@@ -305,7 +313,7 @@
       { value: 'super-sete', label: 'Super Sete' },
       { value: 'loteca', label: 'Loteca' },
       { value: 'federal', label: 'Loteria Federal' },
-      { value: 'mais-milionaria', label: 'Mais Milionária' }
+      { value: 'mais-milionaria', label: 'Mais MilionÃ¡ria' }
     ];
 
     let betsData = {};
@@ -366,8 +374,9 @@
       const processButton = document.getElementById('process-btn');
       const analyzeButton = document.getElementById('analyze-btn');
       const advanceButton = document.getElementById('advance-button');
-      const applyButton = document.getElementById('apply-drawn-btn');
-      const clearButton = document.getElementById('clear-drawn-btn');
+      const clearBetsButton = document.getElementById('clear-bets-btn');
+      const applyDrawButton = document.getElementById('apply-drawn-btn');
+      const clearDrawButton = document.getElementById('clear-drawn-btn');
       const searchButton = document.getElementById('search-result-btn');
       const insertResultButton = document.getElementById('open-results-btn');
       const editDrawButton = document.getElementById('edit-draw-data');
@@ -427,7 +436,7 @@
         metaData.lottery = lotterySelect.value;
         metaData.lotteryLabel = getSelectedLotteryLabel();
         updateBetsHelper();
-        normalizeCurrentInput();
+        normalizeCurrentInput({ strict: true, silent: true });
         if (toggleConcurso.checked) updateConcursoSuggestions();
         allowAutoHideDrawSection = true;
         updateHeaderInfo();
@@ -456,28 +465,52 @@
         updateHeaderInfo();
       });
 
-      const normalizeCurrentInput = () => {
+      const normalizeCurrentInput = (options = {}) => {
+        const { strict = false, silent = false } = options;
         const value = betsInput.value;
-        const normalized = normalizeBetsInput(value);
+        const { lines, remainder } = buildFormattedBets(value);
+        let normalized = lines.map((entry) => `${entry.label}: ${entry.values.join('-')}`).join('\n');
+        if (!strict && remainder.length > 0) {
+          const rule = getActiveLotteryRule();
+          const partial = remainder.map((number) => pad(number, rule.pad)).join('-');
+          normalized = `${normalized}${normalized ? '\n' : ''}${`#${String(lines.length + 1).padStart(2, '0')}`}: ${partial}`;
+        }
+        if (strict && remainder.length > 0 && !silent) {
+          showToast(`Detectamos ${remainder.length} ${remainder.length === 1 ? 'dezena incompleta' : 'dezenas incompletas'} e removemos automaticamente.`, false);
+        }
         if (normalized !== value) {
           betsInput.value = normalized;
         }
+        return { normalized, remainder };
       };
 
-      ['input', 'paste', 'blur'].forEach((eventName) => {
-        betsInput.addEventListener(eventName, () => {
-          normalizeCurrentInput();
-          refreshActionVisibility();
-        });
+      betsInput.addEventListener('keydown', restrictBetsInput);
+      betsInput.addEventListener('input', () => {
+        refreshActionVisibility();
+      });
+      betsInput.addEventListener('paste', handleBetsPaste);
+      betsInput.addEventListener('blur', () => {
+        normalizeCurrentInput({ strict: true });
+        refreshActionVisibility();
       });
 
       processButton.addEventListener('click', processInputs);
       analyzeButton.addEventListener('click', analyzeBets);
       advanceButton.addEventListener('click', handleAdvance);
 
-      applyButton.addEventListener('click', applyDrawn);
-      clearButton.addEventListener('click', clearDrawn);
-      searchButton.addEventListener('click', (event) => event.stopPropagation());
+      if (clearBetsButton) {
+        clearBetsButton.addEventListener('click', clearBets);
+      }
+
+      if (applyDrawButton) {
+        applyDrawButton.addEventListener('click', applyDrawn);
+      }
+      if (clearDrawButton) {
+        clearDrawButton.addEventListener('click', clearDrawn);
+      }
+      if (searchButton) {
+        searchButton.addEventListener('click', (event) => event.stopPropagation());
+      }
 
       if (insertResultButton) {
         insertResultButton.addEventListener('click', handleInsertResultClick);
@@ -502,7 +535,7 @@
       }
       const picked = new Date(dateInput.value + 'T00:00:00');
       if (Number.isNaN(picked.getTime())) {
-        dateInput.setCustomValidity('Data inválida.');
+        dateInput.setCustomValidity('Data invÃ¡lida.');
         return false;
       }
       const today = new Date();
@@ -597,12 +630,12 @@
       const rule = getActiveLotteryRule();
       const helper = document.getElementById('bets-hint');
       const textarea = document.getElementById('bets-input');
-      const lotteryName = getSelectedLotteryLabel() || metaData.lotteryLabel || 'apostas padrão';
+      const lotteryName = getSelectedLotteryLabel() || metaData.lotteryLabel || 'apostas padrÃ£o';
       const rangeMin = pad(rule.min, rule.pad);
       const rangeMax = pad(rule.max, rule.pad);
-      const unitLabel = rule.numbersPerBet === 1 ? 'dígito' : 'dezenas';
+      const unitLabel = rule.numbersPerBet === 1 ? 'dÃ­gito' : 'dezenas';
       if (helper) {
-        helper.textContent = `Para ${lotteryName}, informe ${rule.numbersPerBet} ${unitLabel} (${rangeMin}-${rangeMax}) por aposta. Cole qualquer formato e nós organizamos automaticamente.`;
+        helper.textContent = `Para ${lotteryName}, informe ${rule.numbersPerBet} ${unitLabel} (${rangeMin}-${rangeMax}) por aposta. Cole qualquer formato e nÃ³s organizamos automaticamente.`;
       }
       if (textarea) {
         const sample = Array.from({ length: rule.numbersPerBet }, (_, index) => pad(index + 1, rule.pad)).join('-');
@@ -610,34 +643,100 @@
       }
     }
 
-    function normalizeBetsInput(inputValue) {
+    function buildFormattedBets(inputValue) {
       const rule = getActiveLotteryRule();
       const numbers = (inputValue.match(/\d+/g) || [])
         .map((token) => parseInt(token, 10))
         .filter((number) => !Number.isNaN(number) && number >= rule.min && number <= rule.max);
-      if (numbers.length === 0) {
-        return '';
-      }
       const lines = [];
       let current = [];
       numbers.forEach((number) => {
+        current.push(number);
         if (current.length === rule.numbersPerBet) {
           const formatted = current.map((value) => pad(value, rule.pad));
-          lines.push(`#${String(lines.length + 1).padStart(2, '0')}: ${formatted.join('-')}`);
+          lines.push({
+            label: `#${String(lines.length + 1).padStart(2, '0')}`,
+            values: formatted
+          });
           current = [];
         }
-        current.push(number);
       });
-      if (current.length > 0) {
-        const formatted = current.map((value) => pad(value, rule.pad));
-        lines.push(`#${String(lines.length + 1).padStart(2, '0')}: ${formatted.join('-')}`);
+      return { lines, remainder: current };
+    }
+
+    function normalizeBetsInput(inputValue, options = {}) {
+      const { strict = false } = options;
+      const { lines, remainder } = buildFormattedBets(inputValue);
+      const formatted = lines
+        .map((entry) => `${entry.label}: ${entry.values.join('-')}`)
+        .join('\n');
+      if (strict || remainder.length === 0) {
+        return formatted;
       }
-      return lines.join('\n');
+      if (remainder.length > 0) {
+        const rule = getActiveLotteryRule();
+        const partial = remainder.map((value) => pad(value, rule.pad)).join('-');
+        return `${formatted}${formatted ? '\n' : ''}${`#${String(lines.length + 1).padStart(2, '0')}`}: ${partial}`;
+      }
+      return formatted;
+    }
+
+    function restrictBetsInput(event) {
+      if (event.defaultPrevented) return;
+      if (event.ctrlKey || event.metaKey || event.altKey) return;
+      const allowedKeys = [
+        'Backspace',
+        'Delete',
+        'ArrowLeft',
+        'ArrowRight',
+        'ArrowUp',
+        'ArrowDown',
+        'Tab',
+        'Enter',
+        'Home',
+        'End'
+      ];
+      if (allowedKeys.includes(event.key)) return;
+      if (/^\d$/.test(event.key)) return;
+      event.preventDefault();
+    }
+
+    function handleBetsPaste(event) {
+      event.preventDefault();
+      const textarea = event.target;
+      if (!(textarea instanceof HTMLTextAreaElement)) return;
+      const clipboard = event.clipboardData || window.clipboardData;
+      const raw = clipboard ? clipboard.getData('text') : '';
+      const tokens = raw.match(/\d+/g) || [];
+      if (tokens.length === 0) return;
+      const sanitized = tokens.join(' ');
+      const { selectionStart, selectionEnd } = textarea;
+      textarea.setRangeText(sanitized, selectionStart, selectionEnd, 'end');
+      textarea.value = normalizeBetsInput(textarea.value, { strict: true });
+      refreshActionVisibility();
+    }
+
+    function clearBets() {
+      const betsInput = document.getElementById('bets-input');
+      if (!betsInput) return;
+      const hadContent = betsInput.value.trim().length > 0;
+      betsInput.value = '';
+      betsInput.focus({ preventScroll: true });
+      refreshActionVisibility();
+      if (hadContent) {
+        showToast('Campo de apostas limpo.', true);
+      }
     }
 
     function processInputs() {
       const betsInput = document.getElementById('bets-input');
-      const betsText = betsInput.value.trim();
+      const { lines, remainder } = buildFormattedBets(betsInput.value);
+      const formatted = lines.map((entry) => `${entry.label}: ${entry.values.join('-')}`).join('\n');
+      betsInput.value = formatted;
+      if (remainder.length > 0) {
+        showToast('Detectamos uma aposta incompleta e a descartamos automaticamente.', false);
+      }
+      const betsText = formatted.trim();
       const dateInput = document.getElementById('result-date');
 
       if (!validateDateField()) {
@@ -647,7 +746,7 @@
 
       betsData = parseBets(betsText);
       if (Object.keys(betsData).length === 0) {
-        showToast('Nenhuma aposta válida encontrada. Utilize o formato sugerido.', false);
+        showToast('Nenhuma aposta vÃ¡lida encontrada. Utilize o formato sugerido.', false);
         return;
       }
 
@@ -687,7 +786,7 @@
 
     function analyzeBets() {
       if (Object.keys(betsData).length === 0) {
-        showToast('Cadastre ao menos uma aposta válida antes de analisar.', false);
+        showToast('Cadastre ao menos uma aposta vÃ¡lida antes de analisar.', false);
         return;
       }
       const rule = getActiveLotteryRule();
@@ -702,12 +801,12 @@
       const chanceDuque = Math.min(100, chanceQuina * 8);
 
       analysisBox.innerHTML = `
-          <h3 class="mb-2 flex items-center gap-2 text-base font-semibold text-white"><i class="fi fi-rr-stats"></i>Painel rápido</h3>
-          <p class="mb-3">Foi identificado <strong>${totalBets}</strong> ${totalBets === 1 ? 'aposta' : 'apostas'} envolvendo <strong>${allNumbers.size}</strong> números únicos.</p>
+          <h3 class="mb-2 flex items-center gap-2 text-base font-semibold text-white"><i class="fi fi-rr-stats"></i>Painel rÃ¡pido</h3>
+          <p class="mb-3">Foi identificado <strong>${totalBets}</strong> ${totalBets === 1 ? 'aposta' : 'apostas'} envolvendo <strong>${allNumbers.size}</strong> nÃºmeros Ãºnicos.</p>
           <ul class="space-y-1">
-            <li>Probabilidade estimada de prêmio principal: <strong>${chanceQuina.toFixed(5)}%</strong>.</li>
-            <li>Quadra: ${chanceQuadra.toFixed(3)}% • Terno: ${chanceTerno.toFixed(2)}% • Duque: ${chanceDuque.toFixed(1)}%.</li>
-            <li>Revise concentrações e distribuições antes de prosseguir para maximizar cobertura.</li>
+            <li>Probabilidade estimada de prÃªmio principal: <strong>${chanceQuina.toFixed(5)}%</strong>.</li>
+            <li>Quadra: ${chanceQuadra.toFixed(3)}% â€¢ Terno: ${chanceTerno.toFixed(2)}% â€¢ Duque: ${chanceDuque.toFixed(1)}%.</li>
+            <li>Revise concentraÃ§Ãµes e distribuiÃ§Ãµes antes de prosseguir para maximizar cobertura.</li>
           </ul>
         `;
       analysisBox.classList.remove('hidden');
@@ -726,20 +825,29 @@
       document.getElementById('advance-button').classList.add('hidden');
     }
 
+    function ensureResultsAccordion() {
+      let resultsAccordion = document.getElementById('results-accordion');
+      if (!resultsAccordion) {
+        const template = document.getElementById('results-template');
+        if (!template) return null;
+        const fragment = template.content.cloneNode(true);
+        const betsAccordion = document.getElementById('bets-accordion');
+        if (betsAccordion && betsAccordion.parentNode) {
+          betsAccordion.parentNode.insertBefore(fragment, betsAccordion.nextSibling);
+          resultsAccordion = document.getElementById('results-accordion');
+          bindResultsAccordion();
+        }
+      }
+      return resultsAccordion;
+    }
+
     function handleInsertResultClick(event) {
       if (event) {
         event.preventDefault();
         event.stopPropagation();
       }
-      let resultsAccordion = document.getElementById('results-accordion');
-      if (!resultsAccordion) {
-        const template = document.getElementById('results-template');
-        const fragment = template.content.cloneNode(true);
-        const betsAccordion = document.getElementById('bets-accordion');
-        betsAccordion.parentNode.insertBefore(fragment, betsAccordion.nextSibling);
-        resultsAccordion = document.getElementById('results-accordion');
-        bindResultsAccordion();
-      }
+      const resultsAccordion = ensureResultsAccordion();
+      if (!resultsAccordion) return;
       resultsAccordion.hidden = false;
       resultsAccordion.open = true;
       const betsAccordion = document.getElementById('bets-accordion');
@@ -803,10 +911,10 @@
       const drawnSet = parseDrawn(drawnInput.value);
       const rule = getActiveLotteryRule();
       if (drawnSet.size !== rule.numbersPerBet) {
-        showToast(`Informe exatamente ${rule.numbersPerBet} dezenas válidas.`, false);
+        showToast(`Informe exatamente ${rule.numbersPerBet} dezenas vÃ¡lidas.`, false);
         const summary = document.getElementById('summary');
         if (summary) {
-          summary.textContent = `Informe ${rule.numbersPerBet} dezenas válidas`;
+          summary.textContent = `Informe ${rule.numbersPerBet} dezenas vÃ¡lidas`;
           summary.className = 'inline-flex items-center gap-2 rounded-full border-danger/40 bg-danger/10 px-3 py-1 text-xs font-medium text-danger';
         }
         return;
@@ -825,7 +933,7 @@
       const summaryText = Object.entries(totals)
         .filter(([, value]) => value > 0)
         .map(([key, value]) => `${key} acertos: ${value}`)
-        .join(' • ') || 'Sem acertos registrados';
+        .join(' â€¢ ') || 'Sem acertos registrados';
       const summary = document.getElementById('summary');
       if (summary) {
         summary.textContent = summaryText;
@@ -862,10 +970,10 @@
       }
       const rule = getActiveLotteryRule();
       const sorted = Array.from(drawnSet).sort((a, b) => a - b).map((number) => pad(number, rule.pad));
-      highlight.querySelector('#drawn-highlight-title').textContent = `Resultado: ${sorted.join(' • ')}`;
+      highlight.querySelector('#drawn-highlight-title').textContent = `Resultado: ${sorted.join(' â€¢ ')}`;
       const badgesWrapper = highlight.querySelector('#drawn-highlight-badges');
       badgesWrapper.innerHTML = '';
-      summaryText.split('•').map((item) => item.trim()).forEach((item) => {
+      summaryText.split('â€¢').map((item) => item.trim()).forEach((item) => {
         if (!item) return;
         const badge = document.createElement('span');
         badge.className = 'inline-flex items-center gap-2 rounded-full border-accent/40 bg-accent/10 px-3 py-1 text-xs font-medium text-accent';
@@ -905,19 +1013,32 @@
       document.getElementById('info-date').textContent = formatted;
       document.getElementById('info-lottery').textContent = metaData.lotteryLabel || '-';
       document.getElementById('info-concurso').textContent = metaData.concurso || '-';
-      document.title = `Gamberine - Analisador (${formatted}${metaData.lotteryLabel ? ' • ' + metaData.lotteryLabel : ''})`;
+      document.title = `Gamberine - Analisador (${formatted}${metaData.lotteryLabel ? ' â€¢ ' + metaData.lotteryLabel : ''})`;
       container.hidden = false;
       container.classList.remove('hidden');
       refreshDrawSectionVisibility();
     }
 
     function updateLink(drawnSet) {
-      const container = document.getElementById('generated-link-container');
-      if (Object.keys(betsData).length === 0) {
-        container.classList.add('hidden');
-        container.querySelector('input').value = '';
+      const hasBets = Object.keys(betsData).length > 0;
+      let container = document.getElementById('generated-link-container');
+      if (!hasBets) {
+        if (container) {
+          container.classList.add('hidden');
+          const inputField = container.querySelector('input');
+          if (inputField) {
+            inputField.value = '';
+          }
+        }
         lastGeneratedLink = '';
         return;
+      }
+      if (!container) {
+        ensureResultsAccordion();
+        container = document.getElementById('generated-link-container');
+        if (!container) {
+          return;
+        }
       }
       const url = new URL(window.location.href);
       url.search = '';
@@ -950,22 +1071,24 @@
     function bindGeneratedLinkActions(container) {
       const openBtn = container.querySelector('[data-action="open-link"]');
       const copyBtn = container.querySelector('[data-action="copy-link"]');
-      if (openBtn) {
+      if (openBtn && !openBtn.dataset.bound) {
+        openBtn.dataset.bound = 'true';
         openBtn.addEventListener('click', () => {
           if (!lastGeneratedLink) return;
           window.open(lastGeneratedLink, '_blank', 'noopener');
           logGeneratedLink('abrir', lastGeneratedLink);
         });
       }
-      if (copyBtn) {
+      if (copyBtn && !copyBtn.dataset.bound) {
+        copyBtn.dataset.bound = 'true';
         copyBtn.addEventListener('click', async () => {
           if (!lastGeneratedLink) return;
           try {
             await navigator.clipboard.writeText(lastGeneratedLink);
-            showToast('Link copiado para a área de transferência', true);
+            showToast('Link copiado para a Ã¡rea de transferÃªncia', true);
             logGeneratedLink('copiar', lastGeneratedLink);
           } catch (err) {
-            showToast('Não foi possível copiar automaticamente. Selecione o texto manualmente.', false);
+            showToast('NÃ£o foi possÃ­vel copiar automaticamente. Selecione o texto manualmente.', false);
           }
         });
       }
@@ -975,8 +1098,8 @@
       const betsInput = document.getElementById('bets-input');
       if (!betsInput) return;
       const betsText = betsInput.value.trim();
-      const draftBets = parseBets(betsText);
-      const draftCount = Object.keys(draftBets).length;
+      const { lines: draftLines, remainder } = buildFormattedBets(betsText);
+      const draftCount = draftLines.length;
       const processedCount = Object.keys(betsData).length;
       const processButton = document.getElementById('process-btn');
       const analyzeButton = document.getElementById('analyze-btn');
@@ -988,11 +1111,16 @@
       const dateIsValid = hasDate ? validateDateField() : false;
       const prerequisitesMet = !!metaData.lottery && dateIsValid;
 
-      const canProcess = draftCount > 0 && prerequisitesMet;
+      const hasOnlyCompleteBets = draftCount > 0 && remainder.length === 0;
+      const canProcess = hasOnlyCompleteBets && prerequisitesMet;
       processButton.classList.toggle('hidden', !canProcess);
       processButton.disabled = !canProcess;
       if (!canProcess) {
-        processButton.setAttribute('title', 'Preencha data, modalidade e apostas válidas para prosseguir.');
+        const tooltipMessage = !prerequisitesMet
+          ? 'Preencha data e modalidade para prosseguir.'
+          : 'Informe apostas com a quantidade exata de dezenas exigida pela modalidade.';
+        processButton.setAttribute('title', tooltipMessage);
+      }
       } else {
         processButton.removeAttribute('title');
       }
@@ -1051,14 +1179,14 @@
         stored.push(payload);
         localStorage.setItem('gamberine-link-log', JSON.stringify(stored));
       } catch (err) {
-        console.warn('Não foi possível registrar no storage local.', err);
+        console.warn('NÃ£o foi possÃ­vel registrar no storage local.', err);
       }
       if (navigator.sendBeacon) {
         try {
           const blob = new Blob([JSON.stringify(payload)], { type: 'application/json' });
           navigator.sendBeacon('link-log.txt', blob);
         } catch (err) {
-          console.warn('Envio assíncrono indisponível para o log.', err);
+          console.warn('Envio assÃ­ncrono indisponÃ­vel para o log.', err);
         }
       }
     }
@@ -1176,3 +1304,8 @@
 </body>
 
 </html>
+
+
+
+
+

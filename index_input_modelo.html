@@ -86,119 +86,108 @@
         </p>
       </div>
     </fieldset>
-    <!-- <div class="flex flex-col gap-6 xl:flex-row xl:items-start"> -->
-    <fieldset id="oculto-ate-preencher-concurso-input-wrapper" class="rounded-2xl bg-surface shadow-card xl:w-2/5 xl:max-w-[100%]" data-accordion data-open hidden>
-      <legend class="flex items-center justify-between gap-2 px-6 py-4 text-sm font-semibold uppercase tracking-wide text-muted">
-        <span class="flex items-center gap-2">
-          <i class="fi fi-rr-calendar text-accent"></i>
-          Dados da(s) aposta(s)
-        </span>
-        <button type="button" class="accordion-toggle text-muted transition hover:text-muted" aria-expanded="true">
-          <span class="sr-only">Alternar exibição</span>
-          <i class="fi fi-rr-angle-small-up text-lg"></i>
-        </button>
-      </legend>
-      <div class="space-y-12 px-6 py-6" data-accordion-panel>
-        <!-- <div class="flex flex-wrap items-end gap-4"> -->
-        <label class="flex flex-col gap-3 text-sm" for="bets-input">
-          <span class="text-xs font-semibold tracking-wide text-white">
-            NÚMEROS APOSTADOS
+    <div class="flex flex-col gap-6 xl:flex-row xl:items-start">
+      <fieldset class="rounded-2xl bg-surface shadow-card xl:w-2/5 xl:max-w-[40%]" data-accordion data-open>
+        <legend
+          class="flex items-center justify-between gap-2 px-6 py-4 text-sm font-semibold uppercase tracking-wide text-muted">
+          <span class="flex items-center gap-2">
+            <i class="fi fi-rr-sort-numeric-up text-accent"></i>
+            Dados da(s) aposta(s)
           </span>
-          <textarea id="bets-input" rows="2" inputmode="numeric" autocomplete="on"
-            placeholder=""
-            class="w-full resize-y rounded-xl bg-surface-muted/60 py-3 text-sm text-white outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/40"></textarea>
-        </label>
-        <span class="text-xs leading-relaxed text-muted flex flex-col" id="bets-hint">
-          Para apostas padrão, informe: 5 dezenas (01-80) por aposta.
-          <!-- <span>Cole qualquer formato e nós organizamos automaticamente.</span> -->
-        </span>
-        <button type="button" id="clear-drawn-btn" class="btn btn--ghost">
-          <i class="fi fi-rr-broom"></i>
-          <span>Limpar</span>
-        </button>
-        <button id="process-btn" class="hidden btn btn--primary" type="button">
-          <i class="fi fi-rr-play-circle"></i>
-          <span>Gerar tabela e link</span>
-        </button>
-      </div>
-     
-    </fieldset>
-    <fieldset id="bets-card" class="hidden rounded-2xl bg-surface shadow-card xl:flex-1" data-accordion>
-      <legend
-        class="flex items-center justify-between gap-2 px-6 py-4 text-sm font-semibold uppercase tracking-wide text-muted">
-        <span class="flex items-center gap-2">
-          <i class="fi fi-rr-play text-accent"></i>
-          Ações e processamento
-        </span>
-        <button type="button" class="accordion-toggle text-muted transition hover:text-muted" aria-expanded="false">
-          <span class="sr-only">Alternar exibição</span>
-          <i class="fi fi-rr-angle-small-down text-lg"></i>
-        </button>
-      </legend>
-      <div class="space-y-6 px-6 py-6" data-accordion-panel hidden>
-        <div class="flex flex-wrap items-end gap-4">
-          <!-- <div class="flex gap-3"> -->
-          <!-- <button type="button" id="clear-drawn-btn" class="btn btn--ghost">
-            <i class="fi fi-rr-broom"></i>
-            <span>Limpar</span>
+          <button type="button" class="accordion-toggle text-muted transition hover:text-muted" aria-expanded="true">
+            <span class="sr-only">Alternar exibição</span>
+            <i class="fi fi-rr-angle-small-up text-lg"></i>
           </button>
-          <button id="process-btn" class="hidden btn btn--primary" type="button">
-            <i class="fi fi-rr-play-circle"></i>
-            <span>Gerar tabela e link</span>
+        </legend>
+        <div class="space-y-4 px-6 py-6" data-accordion-panel>
+          <label class="flex flex-col gap-3 text-sm" for="bets-input">
+            <span class="text-xs font-semibold tracking-wide text-white flex flex-col">
+              NÚMEROS APOSTADOS
+              <span class="text-xs font-medium leading-relaxed text-muted flex flex-col" id="bets-input-format">Formato
+                padrão "#01:10-20-30-40-50"</span></span>
+            <textarea id="bets-input" rows="2" inputmode="numeric" autocomplete="off"
+              placeholder="Cole ou digite aqui suas apostas"
+              class="min-h-[112px] w-full resize-y rounded-xl bg-surface-muted/60 px-4 py-3 text-sm text-white outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/40"></textarea>
+          </label>
+          <span class="text-xs leading-relaxed text-muted flex flex-col" id="bets-hint">Para apostas padrão, informe: 5
+            dezenas (01-80)
+            por aposta.
+            <span>Cole qualquer formato e nós organizamos automaticamente.</span>
+          </span>
+        </div>
+      </fieldset>
+      <fieldset id="bets-card" class="hidden rounded-2xl bg-surface shadow-card xl:flex-1" data-accordion>
+        <legend
+          class="flex items-center justify-between gap-2 px-6 py-4 text-sm font-semibold uppercase tracking-wide text-muted">
+          <span class="flex items-center gap-2">
+            <i class="fi fi-rr-play text-accent"></i>
+            Ações e processamento
+          </span>
+          <button type="button" class="accordion-toggle text-muted transition hover:text-muted" aria-expanded="false">
+            <span class="sr-only">Alternar exibição</span>
+            <i class="fi fi-rr-angle-small-down text-lg"></i>
           </button>
-          <button id="advance-button" class="hidden btn btn--ghost" type="button">
-            <span>Prosseguir</span>
-            <i class="fi fi-rr-arrow-small-right"></i>
-          </button> -->
-          <!-- <button type="button" id="search-result-btn" class="btn btn--outline" disabled
+        </legend>
+        <div class="space-y-6 px-6 py-6" data-accordion-panel hidden>
+          <div class="flex flex-wrap items-end gap-4">
+            <div class="flex gap-3">
+              <button type="button" id="clear-drawn-btn" class="btn btn--ghost">
+                <i class="fi fi-rr-broom"></i>
+                <span>Limpar</span>
+              </button>
+
+              <!-- <button type="button" id="search-result-btn" class="btn btn--outline" disabled
                 data-tooltip="Em breve">
                 <i class="fi fi-rr-search"></i>
                 <span>Buscar resultado</span>
               </button> -->
-          <!-- </div> -->
-          <div class="ml-auto flex flex-wrap gap-3">
-
-            <button id="analyze-btn" class="hidden btn btn--secondary" type="button">
-              <i class="fi fi-rr-chart-pie"></i>
-              <span>Analisar apostas</span>
-            </button>
-            <button id="open-results-btn" class="hidden btn btn--outline" type="button">
-              <i class="fi fi-rr-star"></i>
-              <span>Inserir resultado</span>
-            </button>
-            <button type="button" id="apply-drawn-btn" class="btn btn--outline">
-              <i class="fi fi-rr-check-circle"></i>
-              <span>Aplicar resultado 1</span>
-            </button>
-            <!-- <button id="advance-button" class="hidden btn btn--ghost" type="button">
-              <span>Prosseguir</span>
-              <i class="fi fi-rr-arrow-small-right"></i>
-            </button> -->
+            </div>
+            <div class="ml-auto flex flex-wrap gap-3">
+              <button id="process-btn" class="hidden btn btn--primary" type="button">
+                <i class="fi fi-rr-play-circle"></i>
+                <span>Gerar tabela e link</span>
+              </button>
+              <button id="analyze-btn" class="hidden btn btn--secondary" type="button">
+                <i class="fi fi-rr-chart-pie"></i>
+                <span>Analisar apostas</span>
+              </button>
+              <button id="open-results-btn" class="hidden btn btn--outline" type="button">
+                <i class="fi fi-rr-star"></i>
+                <span>Inserir resultado</span>
+              </button>
+              <button type="button" id="apply-drawn-btn" class="btn btn--outline">
+                <i class="fi fi-rr-check-circle"></i>
+                <span>Aplicar resultado 1</span>
+              </button>
+              <button id="advance-button" class="hidden btn btn--ghost" type="button">
+                <span>Prosseguir</span>
+                <i class="fi fi-rr-arrow-small-right"></i>
+              </button>
+            </div>
           </div>
+         
         </div>
-
-      </div>
-    </fieldset>
-    <!-- </div> -->
+      </fieldset>
+    </div>
     <!-- <fieldset id="bets-card" class="hidden rounded-2xl bg-surface shadow-card xl:flex-1" data-accordion></fieldset> -->
-    <fieldset id="analysis-output" class="hidden rounded-xl bg-surface-muted/40 p-4 text-sm text-muted"></fieldset>
-    <fieldset id="generated-link-container" class="hidden space-y-3 rounded-xl bg-surface-muted/30 p-4">
-      <strong class="text-sm uppercase tracking-wide text-muted">Link gerado</strong>
-      <div class="flex flex-col gap-3 md:flex-row md:items-center">
-        <input type="text" readonly value="" aria-label="Link gerado"
-          class="flex-1 rounded-xl bg-surface px-4 py-2 text-sm text-white outline-none">
-        <div class="flex gap-2">
-          <button class="btn btn--success" type="button" data-action="open-link">
-            <i class="fi fi-rr-external-link"></i>
-            <span>Abrir link</span>
-          </button>
-          <button class="btn btn--ghost" type="button" data-action="copy-link">
-            <i class="fi fi-rr-copy"></i>
-            <span>Copiar link</span>
-          </button>
-        </div>
-      </div>
-    </fieldset>
+ <fieldset id="analysis-output" class="hidden rounded-xl bg-surface-muted/40 p-4 text-sm text-muted"></fieldset>
+          <fieldset id="generated-link-container" class="hidden space-y-3 rounded-xl bg-surface-muted/30 p-4">
+            <strong class="text-sm uppercase tracking-wide text-muted">Link gerado</strong>
+            <div class="flex flex-col gap-3 md:flex-row md:items-center">
+              <input type="text" readonly value="" aria-label="Link gerado"
+                class="flex-1 rounded-xl bg-surface px-4 py-2 text-sm text-white outline-none">
+              <div class="flex gap-2">
+                <button class="btn btn--success" type="button" data-action="open-link">
+                  <i class="fi fi-rr-external-link"></i>
+                  <span>Abrir link</span>
+                </button>
+                <button class="btn btn--ghost" type="button" data-action="copy-link">
+                  <i class="fi fi-rr-copy"></i>
+                  <span>Copiar link</span>
+                </button>
+              </div>
+            </div>
+          </fieldset>
     <details class="rounded-2xl bg-surface shadow-card" id="bets-accordion" hidden>
       <summary
         class="flex cursor-pointer items-center justify-between gap-4 px-6 py-4 text-sm font-semibold uppercase tracking-wide text-muted">
@@ -259,16 +248,6 @@
         </div>
       </details>
     </template>
-
-    <div class="flex w-full max-w-6xl fixed bottom-6 px-4 py-6">
-      <!-- <div class="flex flex-wrap items-end gap-4"> -->
-      <!-- <div class="flex gap-3"> -->
-    
-      <button id="advance-button" class="hidden btn btn--ghost" type="button">
-        <span>Prosseguir</span>
-        <i class="fi fi-rr-arrow-small-right"></i>
-      </button>
-    </div>
   </main>
 
   <footer class="bg-surface-muted/60 py-6 text-center text-xs text-muted">
@@ -596,6 +575,7 @@
     function updateBetsHelper() {
       const rule = getActiveLotteryRule();
       const helper = document.getElementById('bets-hint');
+      const format = document.getElementById('bets-input-format');
       const textarea = document.getElementById('bets-input');
       const lotteryName = getSelectedLotteryLabel() || metaData.lotteryLabel || 'apostas padrão';
       const rangeMin = pad(rule.min, rule.pad);
@@ -604,20 +584,26 @@
       if (helper) {
         helper.textContent = `Para ${lotteryName}, informe ${rule.numbersPerBet} ${unitLabel} (${rangeMin}-${rangeMax}) por aposta. Cole qualquer formato e nós organizamos automaticamente.`;
       }
-      if (textarea) {
+      if (format) {
         const sample = Array.from({ length: rule.numbersPerBet }, (_, index) => pad(index + 1, rule.pad)).join('-');
-        textarea.placeholder = `Cole ou digite ${rule.numbersPerBet} ${unitLabel} (${rangeMin}-${rangeMax}). Formato: "#01: ${sample}"`;
+        format.textContent = `Formato esperado "#01: ${sample}"`;
+      }
+      if (textarea) {
+        textarea.placeholder = `Cole ou digite ${rule.numbersPerBet} ${unitLabel} no intervalo ${rangeMin}-${rangeMax}`;
       }
     }
 
     function normalizeBetsInput(inputValue) {
-      const rule = getActiveLotteryRule();
-      const numbers = (inputValue.match(/\d+/g) || [])
-        .map((token) => parseInt(token, 10))
-        .filter((number) => !Number.isNaN(number) && number >= rule.min && number <= rule.max);
-      if (numbers.length === 0) {
-        return '';
-      }
+        const rule = getActiveLotteryRule();
+        const sanitized = inputValue
+          .replace(/^[^\S\r\n]*#\s*\d+\s*[:\-]?\s*/gm, '')
+          .replace(/^[^\S\r\n]*\d+\s*:\s*/gm, '');
+        const numbers = (sanitized.match(/\d+/g) || [])
+          .map((token) => parseInt(token, 10))
+          .filter((number) => !Number.isNaN(number) && number >= rule.min && number <= rule.max);
+        if (numbers.length === 0) {
+          return '';
+        }
       const lines = [];
       let current = [];
       numbers.forEach((number) => {

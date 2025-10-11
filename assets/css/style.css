@@ -19,7 +19,7 @@ details>summary::-webkit-details-marker {
   left          : 50%;
   transform     : translateX(-50%);
   background    : var(--color-bg-surface-2, var(--color-bg-surface-dark));
-  color         : var(--color-white);
+  color         : var(--color-white, #fff);
   padding       : 0.6rem 1rem;
   border-radius : var(--border-radius-default);
   font-size     : 1.1rem;
@@ -54,8 +54,8 @@ details>summary::-webkit-details-marker {
   background             : rgba(59, 130, 246, 0.18);
   border                 : 0.1rem solid rgba(59, 130, 246, 0.4);
   color                  : var(--color-text-muted);
-  backdrop-filter        : blur(0.6rem);
   -webkit-backdrop-filter: blur(0.6rem);
+  backdrop-filter        : blur(0.6rem);
   min-width              : 24rem;
 }
 
@@ -197,6 +197,14 @@ legend {
   padding  : 0 1.2rem;
   font-size: 1.5rem;
   color    : var(--color-text-muted);
+}
+
+legend.flex {
+  background   : var(--color-bg-base);
+  border-radius: var(--border-radius-default);
+  padding-block: 0 5px;
+  position     : relative;
+  left         : 1.7rem;
 }
 
 .top--5 {
@@ -438,3 +446,88 @@ details.accordion summary h2 {
     right : 1.6rem;
   }
 }
+
+  
+/* ============== wizard ===================== */
+
+.wizard-steps {
+    display        : flex;
+    flex-wrap      : wrap;
+    align-items    : center;
+    justify-content: center;
+    gap            : 0.75rem;
+    padding        : 0.75rem 0 1.5rem;
+  }
+
+  .wizard-stepper {
+    display       : inline-flex;
+    align-items   : center;
+    gap           : 0.5rem;
+    border-radius : 9999px;
+    border        : 1px solid rgba(255, 255, 255, 0.18);
+    background    : rgba(255, 255, 255, 0.03);
+    padding       : 0.45rem 0.95rem;
+    text-transform: uppercase;
+    font-size     : 0.7rem;
+    font-weight   : 600;
+    letter-spacing: 0.08em;
+    color         : rgba(226, 232, 240, 0.55);
+    transition    : all 0.2s ease;
+  }
+
+  .wizard-stepper[aria-current="step"] {
+    border-color: var(--accent, rgba(56, 189, 248, 0.8));
+    background  : rgba(56, 189, 248, 0.12);
+    color       : #fff;
+  }
+
+  .wizard-stepper[data-state="completed"] {
+    border-color: var(--success, rgba(34, 197, 94, 0.65));
+    background  : rgba(34, 197, 94, 0.12);
+    color       : var(--success, #bbf7d0);
+  }
+
+  .wizard-stepper[data-state="locked"] {
+    opacity: 0.35;
+    cursor : not-allowed;
+  }
+
+  .wizard-stepper__index {
+    display        : inline-flex;
+    align-items    : center;
+    justify-content: center;
+    width          : 1.75rem;
+    height         : 1.75rem;
+    border-radius  : 9999px;
+    background     : rgba(255, 255, 255, 0.08);
+    font-size      : 0.9rem;
+    font-weight    : 700;
+    line-height    : 1;
+  }
+
+  .wizard-stepper[aria-current="step"] .wizard-stepper__index {
+    background: var(--accent, rgba(56, 189, 248, 0.9));
+    color     : #031b2f;
+  }
+
+  .wizard-stepper[data-state="completed"] .wizard-stepper__index {
+    background: var(--success, rgba(34, 197, 94, 0.85));
+    color     : #052e16;
+  }
+
+  .wizard-divider {
+    flex      : 0 0 3.5rem;
+    height    : 1px;
+    border-top: 1px dashed rgba(255, 255, 255, 0.14);
+    opacity   : 0.8;
+  }
+
+  @media (max-width: 768px) {
+    .wizard-divider {
+      display: none;
+    }
+
+    .wizard-steps {
+      justify-content: flex-start;
+    }
+  }

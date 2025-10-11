@@ -15,7 +15,6 @@
   <title>Gamberine - Analisador de Apostas</title>
 
   <meta name="description"
-
     content="Análise prévia, tabela de apostas e marcador automático do resultado das loterias da Caixa.">
 
   <link rel="stylesheet" href="assets/css/variables.css">
@@ -23,9 +22,7 @@
   <link rel="stylesheet" href="assets/css/app.css">
 
   <link rel="stylesheet" href="assets/css/style.css">
-
-
-
+  <link rel="stylesheet" href="assets/css/buttons-enhancement.css">
 </head>
 
 
@@ -59,7 +56,6 @@
         <strong class="font-semibold accent" id="info-date">-</strong>
 
         <button type="button" id="edit-draw-data" class="header-edit-button accent hidden"
-
           aria-label="Editar dados do sorteio">
 
           <i class="fi fi-ts-money-check-edit-alt"></i>
@@ -145,11 +141,9 @@
               <label class="flex flex-col gap-2 text-sm" for="result-date">
 
                 <span class="text-xs font-semibold uppercase tracking-wide text-muted">Data do sorteio <span
-
                     class="text-danger">*</span></span>
 
                 <input type="date" id="result-date"
-
                   class="w-full rounded-xl bg-surface-muted/60 px-4 py-3 text-sm text-white shadow-inner-sm outline-none transition focus-border-accent focus:ring-2 focus-ring-accent/40">
 
               </label>
@@ -161,8 +155,7 @@
                   Modalidade Aposta
 
                   <span class="relative"
-
-                    data-tooltip="Com essa informa����o e o n��mero do concurso, voc�� ter�� a experi��ncia completa e poder�� receber detalhes futuramente.">
+                    data-tooltip="Com essa informação e o número do concurso, você terá a experiência completa e receber detalhes futuramente.">
 
                     <i class="fi fi-rr-info text-muted"></i>
 
@@ -171,7 +164,6 @@
                 </span>
 
                 <select id="lottery-select"
-
                   class="w-full appearance-none rounded-xl bg-surface-muted/60 px-4 py-3 text-sm text-white outline-none transition focus-border-accent focus:ring-2 focus-ring-accent/40">
 
                   <option value="">Selecione</option>
@@ -185,11 +177,10 @@
                 <label class="flex flex-col gap-2 text-sm" for="concurso-number">
 
                   <span class="text-xs font-semibold uppercase tracking-wide text-muted">Nº Concurso <span
-
                       class="text-danger">*</span></span>
 
-                  <input type="text" id="concurso-number" list="concurso-suggestions" placeholder="Informe o numero do concurso" inputmode="numeric"
-
+                  <input type="text" id="concurso-number" list="concurso-suggestions"
+                    placeholder="Informe o numero do concurso" inputmode="numeric"
                     class="w-full rounded-xl bg-surface-muted/60 px-4 py-3 text-sm text-white shadow-inner-sm outline-none transition focus-border-accent focus:ring-2 focus-ring-accent/40">
 
                 </label>
@@ -208,29 +199,29 @@
 
             </div>
 
-              <label class="flex items-center gap-2 text-sm md:self-end">
+            <label class="flex items-center gap-2 text-sm md:self-end">
 
-                <input type="checkbox" id="toggle-concurso" class="h-4 w-4 rounded accent-accent">
+              <input type="checkbox" id="toggle-concurso" class="h-4 w-4 rounded accent-accent">
 
-                <span class="leading-relaxed text-muted">Não informar</span>
+              <span class="leading-relaxed text-muted">Não informar</span>
 
-              </label>
-
-            </div>
-
-              </div>
-
-            </div>
-
-            <p class="text-xs text-muted">Preencha a data e a modalidade para habilitar as próximas etapas
-
-              automaticamente.
-
-            </p>
+            </label>
 
           </div>
 
-        </fieldset>
+      </div>
+
+      </div>
+
+      <p class="text-xs text-muted">Preencha a data e a modalidade para habilitar as próximas etapas
+
+        automaticamente.
+
+      </p>
+
+      </div>
+
+      </fieldset>
 
 
 
@@ -238,16 +229,14 @@
 
       <!-- step 2  -->
 
-      <div class="wizard-step hidden space-y-6" data-wizard-step="2" id="oculto-ate-preencher-concurso-input-wrapper" hidden
-
-        aria-hidden="true">
+      <div class="wizard-step hidden space-y-6" data-wizard-step="2" id="oculto-ate-preencher-concurso-input-wrapper"
+        hidden aria-hidden="true">
 
         <div class="flex flex-col gap-6 xl:flex-row xl:items-start">
 
           <fieldset class="rounded-2xl bg-surface shadow-card xl:w-2/5 xl:max-w-[40%]" data-accordion data-open>
 
             <legend
-
               class="flex items-center justify-between gap-2 px-6 py-4 text-sm font-semibold uppercase tracking-wide text-muted">
 
               <span class="flex items-center gap-2">
@@ -259,7 +248,6 @@
               </span>
 
               <button type="button" class="accordion-toggle text-muted transition hover:text-muted"
-
                 aria-expanded="true">
 
                 <span class="sr-only">Alternar exibição</span>
@@ -279,15 +267,12 @@
                   NÚMEROS APOSTADOS
 
                   <span class="text-xs font-medium leading-relaxed text-muted flex flex-col"
-
                     id="bets-input-format">Formato
 
                     padrão "#01:10-20-30-40-50"</span></span>
 
                 <textarea id="bets-input" rows="2" inputmode="numeric" autocomplete="off"
-
                   placeholder="Cole ou digite aqui suas apostas"
-
                   class="min-h-[112px] w-full resize-y rounded-xl bg-surface-muted/60 px-4 py-3 text-sm text-white outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/40"></textarea>
 
               </label>
@@ -311,7 +296,6 @@
           <fieldset id="bets-card" class="hidden rounded-2xl bg-surface shadow-card xl:flex-1" data-accordion>
 
             <legend
-
               class="flex items-center justify-between gap-2 px-6 py-4 text-sm font-semibold uppercase tracking-wide text-muted">
 
               <span class="flex items-center gap-2">
@@ -323,7 +307,6 @@
               </span>
 
               <button type="button" class="accordion-toggle text-muted transition hover:text-muted"
-
                 aria-expanded="false">
 
                 <span class="sr-only">Alternar exibição</span>
@@ -340,7 +323,8 @@
 
                 <p class="text-xs leading-relaxed text-muted max-w-md">
 
-                  Finalize esta etapa gerando a tabela e o link. Também poderá analisar os jogos antes de avaçar para a próxima etapa..</p>
+                  Finalize esta etapa gerando a tabela e o link. Também poderá analisar os jogos antes de avaçar para a
+                  próxima etapa..</p>
 
                 <div class="w-full ml-auto flex flex-wrap flex-col justify-center items-center gap-3">
 
@@ -407,7 +391,6 @@
           <div class="flex flex-col gap-3 md:flex-row md:items-center">
 
             <input type="text" readonly value="" aria-label="Link gerado"
-
               class="flex-1 rounded-xl bg-surface px-4 py-2 text-sm text-white outline-none">
 
             <div class="flex gap-2">
@@ -437,7 +420,6 @@
         <details class="rounded-2xl bg-surface shadow-card" id="bets-accordion" hidden>
 
           <summary
-
             class="flex cursor-pointer items-center justify-between gap-4 px-6 py-4 text-sm font-semibold uppercase tracking-wide text-muted">
 
             <span class="flex items-center gap-2"><i class="fi fi-rr-list-check text-accent"></i>Tabela de
@@ -491,7 +473,6 @@
           <details class="rounded-2xl bg-surface shadow-card" id="results-accordion" open>
 
             <summary
-
               class="flex cursor-pointer items-center justify-between gap-4 px-6 py-4 text-sm font-semibold uppercase tracking-wide text-muted">
 
               <span class="flex items-center gap-2"><i class="fi fi-rr-star text-accent"></i>Inserir resultado do
@@ -509,7 +490,6 @@
                 <span class="text-xs font-semibold uppercase tracking-wide text-muted">Números sorteados</span>
 
                 <input id="drawn" type="text" placeholder="Ex: 02,16,31,54,78" inputmode="numeric" autocomplete="off"
-
                   class="w-full rounded-xl bg-surface-muted/60 px-4 py-3 text-sm text-white outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/40">
 
               </label>
@@ -541,7 +521,6 @@
                 </button> -->
 
               <span id="summary"
-
                 class="inline-flex items-center gap-2 rounded-full border-accent/40 bg-accent/10 px-3 py-1 text-xs font-medium text-accent">Aguardando...</span>
 
             </div>
@@ -555,11 +534,13 @@
 
 
       <section id="navegar" class="w-full flex justify-center items-center gap-4 px-2">
-        <button type="button" id="criar-acao-voltar" class="btn btn--ghost inline-flex items-center gap-2" disabled aria-disabled="true">
+        <button type="button" id="criar-acao-voltar" class="btn btn--ghost inline-flex items-center gap-2" disabled
+          aria-disabled="true">
           <i class="fi fi-rr-arrow-small-left"></i>
           <span>Voltar</span>
         </button>
-        <button type="button" id="wizard-next" class="btn btn--accent inline-flex items-center gap-2" disabled aria-disabled="true">
+        <button type="button" id="wizard-next" class="btn btn--accent inline-flex items-center gap-2" disabled
+          aria-disabled="true">
           <span>Prosseguir</span>
           <i class="fi fi-rr-arrow-small-right"></i>
         </button>
@@ -2511,8 +2492,3 @@
 
 
 </html>
-
-
-
-
-
